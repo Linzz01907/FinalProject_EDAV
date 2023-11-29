@@ -1,0 +1,90 @@
+# Data
+```{r}
+library(ggplot2)
+library(dplyr)
+library(tidyverse)
+library(heatmaply)
+
+
+salary=read.csv('Citywide_Payroll_Data__Fiscal_Year_ (1).csv')
+head(salary)
+```
+
+## Description
+Data sources: The Citywide Payroll dataset is from NYC OpenData website. https://data.cityofnewyork.us/City-Government/Citywide-Payroll-Data-Fiscal-Year-/k397-673e/data
+
+Data collection: Data Provided by Office of Payroll Administration (OPA). Data is input into the City's Personnel Management System (“PMS”) by the respective user Agencies. It includes the agency information, salary and overtimepay for all municipal employees in New York.
+
+Data description:
+Data is collected because of public interest in how the City’s budget is being spent on salary and overtime pay for all municipal employees.
+
+1.format
+Each record represents the following statistics for every city employee: 
+```{r}
+des=read.csv('data_description.csv')
+print(des)
+```
+
+2.frequency of updates:   It is updated annually.
+
+3.dimension:   5662713*17
+```{r}
+dim(salary)
+```
+
+4.data range: 
+For numerical data:
+    Fiscal Year: from 2014 to 2023
+		Payroll Number: 
+		Agency Name:
+		Agency Start Date:
+```{r}
+max_values <- apply(salary[c("Fiscal.Year","Agency.Start.Date","Base.Salary","Regular.Hours","Regular.Gross.Paid","OT.Hours","Total.OT.Paid")], 2, max)
+min_values <- apply(salary[c("Fiscal.Year","Agency.Start.Date","Base.Salary","Regular.Hours","Regular.Gross.Paid","OT.Hours","Total.OT.Paid")], 2, min)
+print('upper bound')
+print(max_values)
+print('lower bound')
+print(min_values)
+```
+For categorical data:
+```{r}
+#table(salary[c("Agency.Name")])
+table(salary[c("Work.Location.Borough")])
+#table(salary[c("Title.Description")])
+table(salary[c("Leave.Status.as.of.June.30")])
+
+```
+
+5.Issues / problems with the data
+i.There exists negative Regular Hours.
+
+6.how to impute data
+We download Citywide Payroll dataset on NYC OpenData website in 'csv' format and impute it by read.csv function directly.
+https://data.cityofnewyork.us/City-Government/Citywide-Payroll-Data-Fiscal-Year-/k397-673e/data
+
+## Missing value analysis
+```{r}
+
+# Counting missing values per column
+missing_values <- sapply(salary, function(x) sum(is.na(x)))
+
+# Creating the bar chart
+ggplot(data = data.frame(Column = names(missing_values), MissingValues = missing_values), 
+       aes(x = Column, y = MissingValues)) +
+    geom_bar(stat = "identity") +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+    labs(x = "Column Name", y = "Number of Missing Values", title = "Missing Values per Column")
+
+
+missing_values_heatmap <- is.na(salary)
+
+# Converting the logical matrix to numeric
+numeric_missing_values <- +missing_values_heatmap
+
+# Creating the heatmap with numeric values
+heatmaply(numeric_missing_values, 
+          xlab = "Columns", 
+          ylab = "Rows", 
+          main = "Heatmap of Missing Values in Data",
+          colors = c("white", "red"))
+```
