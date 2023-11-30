@@ -66,13 +66,17 @@ ii.Agency start date exists 12/31/9999.
 We download Citywide Payroll dataset on NYC OpenData website in 'csv' format and impute it by read.csv function directly.
 https://data.cityofnewyork.us/City-Government/Citywide-Payroll-Data-Fiscal-Year-/k397-673e/data
 
+
 ## Research Plan
-Core Topic:
-The Impact of Agency Characteristics on Employee Compensation and Work Patterns.
+Core Topic: The Impact of Agency Characteristics on Employee Compensation and Work Patterns.
 We will introduce our research questions from the introduction into 3 parts:
-1.
 
+1. Factor Analysis
+First, we aim to examine the factors that influence salary. These factors encompass year, agency, agency start date, work location, job title, pay basis, and leave status at the end of the fiscal year. Additionally, base salary, and regular gross paid are considered. Altogether, we have nine influencing factors. Our goal is to understand not only the impact of each individual factor on salary but also the combined effect of multiple factors on salary.
 
+We begin by analyzing the individual factors affecting salary. Concerning year trends and patterns, we aim to understand how salaries have evolved over the past ten years and identify any noticeable trends in employee compensation during specific periods, such as economic downturns or budget cuts. The 'Year' field allows for a temporal analysis, facilitating year-over-year comparisons of salaries, thereby revealing trends and patterns over time. Next, we will conduct an agency-specific analysis. Given the potential for significant salary differences across agencies, we seek to determine which agencies have the highest and lowest salaries and understand the reasons behind these disparities. The 'Agency Name' field will be used to group data by agency, enabling comparisons of salaries across different departments or units. Regarding the impact of agency start time, we will explore whether the length of time an agency has been operational affects its employees' salaries. Analysis of the 'Agency Start Date' will help investigate if newer agencies offer different pay scales compared to well-established ones.
+
+We will also examine geographical disparities, job title, and compensation analysis, as well as the impact of leave status and pay basis on compensation. We will explore how factors like work location, job title, leave status, and pay basis affect salaries. The 'Work Location Borough' field will assist in examining if geographic factors influence compensation, considering cost-of-living variations across different boroughs. 'Job Title Description' allows for an analysis of salary and overtime payments by role, identifying positions with higher compensation and the reasons behind it. 'Leave Status' at the fiscal year's end will be correlated with total compensation to understand how leave impacts an employee's overall earnings. 'Pay Basis' (monthly, yearly, hourly) will be correlated with overall compensation to understand how different payment structures affect total earnings.
 
 
 2. Overtime Analysis(OT column)
@@ -84,6 +88,11 @@ ii. Determine if overtime is the norm. Analyze the ratio of regular hours to ove
 
 3. Multi-factor mixed analysis 
 Analyzing the relationship between employment duration, salary, and rank within agencies. Here we plan to choose mosaic and slope graph as analysis tool.
+
+Finally, we will conduct an analysis of salary encompassing multiple elements. Concerning base salary and other factors, we aim to explore trends in base salaries across various job titles and agencies. Key questions include how the base salary relates to the total amount paid during the fiscal year and how it correlates with total compensation. To investigate this, we will employ data from multiple columns using methods such as group by. The 'Base Salary' field is essential for analyzing salary trends across different roles and agencies and understanding its relationship with total compensation. By examining both 'Base Salary' and 'Total Gross Paid', we can discern the proportion of earnings derived from base pay as opposed to overtime and other forms of compensation.
+
+
+
 
 
 ## Missing value analysis
