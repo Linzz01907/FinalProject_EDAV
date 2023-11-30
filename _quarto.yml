@@ -6,7 +6,7 @@ execute:
   echo: true
 
 book:
-  title: "YOUR PROJECT TITLE 记得改"
+  title: "Impact on Salary"
   author:
     - Lin Zhu (lz2926)
     - Simu Zhu (sz3211)
