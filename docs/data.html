@@ -193,8 +193,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#description" id="toc-description" class="nav-link active" data-scroll-target="#description"><span class="toc-section-number">2.1</span>  Description</a></li>
-  <li><a href="#research-plan" id="toc-research-plan" class="nav-link" data-scroll-target="#research-plan"><span class="toc-section-number">2.2</span>  Research Plan</a></li>
+  <li><a href="#description" id="toc-description" class="nav-link active" data-scroll-target="#description"><span class="toc-section-number">2.1</span>  Description</a>
+  <ul class="collapse">
+  <li><a href="#data-format" id="toc-data-format" class="nav-link" data-scroll-target="#data-format"><span class="toc-section-number">2.1.1</span>  Data Format</a></li>
+  <li><a href="#frequency-of-updates" id="toc-frequency-of-updates" class="nav-link" data-scroll-target="#frequency-of-updates"><span class="toc-section-number">2.1.2</span>  Frequency of updates</a></li>
+  <li><a href="#dimension" id="toc-dimension" class="nav-link" data-scroll-target="#dimension"><span class="toc-section-number">2.1.3</span>  Dimension</a></li>
+  <li><a href="#data-range" id="toc-data-range" class="nav-link" data-scroll-target="#data-range"><span class="toc-section-number">2.1.4</span>  Data range</a></li>
+  <li><a href="#issuesproblems-with-the-data" id="toc-issuesproblems-with-the-data" class="nav-link" data-scroll-target="#issuesproblems-with-the-data"><span class="toc-section-number">2.1.5</span>  Issues/problems with the data</a></li>
+  <li><a href="#how-to-impute-data" id="toc-how-to-impute-data" class="nav-link" data-scroll-target="#how-to-impute-data"><span class="toc-section-number">2.1.6</span>  How to impute data</a></li>
+  </ul></li>
+  <li><a href="#research-plan" id="toc-research-plan" class="nav-link" data-scroll-target="#research-plan"><span class="toc-section-number">2.2</span>  Research Plan</a>
+  <ul class="collapse">
+  <li><a href="#individual-factor-analysis" id="toc-individual-factor-analysis" class="nav-link" data-scroll-target="#individual-factor-analysis"><span class="toc-section-number">2.2.1</span>  Individual Factor Analysis</a></li>
+  <li><a href="#multi-factor-mixed-analysis" id="toc-multi-factor-mixed-analysis" class="nav-link" data-scroll-target="#multi-factor-mixed-analysis"><span class="toc-section-number">2.2.2</span>  Multi-Factor Mixed Analysis</a></li>
+  <li><a href="#overtime-analysis" id="toc-overtime-analysis" class="nav-link" data-scroll-target="#overtime-analysis"><span class="toc-section-number">2.2.3</span>  Overtime Analysis</a></li>
+  </ul></li>
   <li><a href="#missing-value-analysis" id="toc-missing-value-analysis" class="nav-link" data-scroll-target="#missing-value-analysis"><span class="toc-section-number">2.3</span>  Missing value analysis</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/linzz01907/FinalProject_EDAV/edit/main/data.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/linzz01907/FinalProject_EDAV/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -222,209 +235,159 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(heatmaply)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'dplyr'</code></pre>
 </div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:stats':
+<div class="cell">
 
-    filter, lag</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:base':
-
-    intersect, setdiff, setequal, union</code></pre>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ forcats   1.0.0     ✔ stringr   1.5.0
-✔ lubridate 1.9.2     ✔ tibble    3.2.1
-✔ purrr     1.0.2     ✔ tidyr     1.3.0
-✔ readr     2.1.4     </code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(heatmaply)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: plotly
-
-Attaching package: 'plotly'
-
-The following object is masked from 'package:ggplot2':
-
-    last_plot
-
-The following object is masked from 'package:stats':
-
-    filter
-
-The following object is masked from 'package:graphics':
-
-    layout
-
-Loading required package: viridis
-Loading required package: viridisLite
-
-======================
-Welcome to heatmaply version 1.5.0
-
-Type citation('heatmaply') for how to cite the package.
-Type ?heatmaply for the main documentation.
-
-The github page is: https://github.com/talgalili/heatmaply/
-Please submit your suggestions and bug-reports at: https://github.com/talgalili/heatmaply/issues
-You may ask questions at stackoverflow, use the r and heatmaply tags: 
-     https://stackoverflow.com/questions/tagged/heatmaply
-======================</code></pre>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>salary<span class="ot">=</span><span class="fu">read.csv</span>(<span class="st">'Citywide_Payroll_Data__Fiscal_Year_ (1).csv'</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#delete meaningless data</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>salary<span class="ot">=</span>salary[, <span class="sc">-</span><span class="fu">which</span>(<span class="fu">colnames</span>(salary) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Payroll.Number"</span>,<span class="st">"Last.Name"</span>,<span class="st">"First.Name"</span>,<span class="st">"Mid.Init"</span>))]</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(salary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>  Fiscal.Year                    Agency.Name Agency.Start.Date
-1        2020 OFFICE OF EMERGENCY MANAGEMENT        08/10/2015
-2        2020 OFFICE OF EMERGENCY MANAGEMENT        09/12/2016
-3        2020 OFFICE OF EMERGENCY MANAGEMENT        02/22/2016
-4        2020 OFFICE OF EMERGENCY MANAGEMENT        09/16/2013
-5        2020 OFFICE OF EMERGENCY MANAGEMENT        04/30/2018
-6        2020 OFFICE OF EMERGENCY MANAGEMENT        03/18/2019
-  Work.Location.Borough              Title.Description
-1              BROOKLYN EMERGENCY PREPAREDNESS MANAGER
-2              BROOKLYN EMERGENCY PREPAREDNESS MANAGER
-3              BROOKLYN EMERGENCY PREPAREDNESS MANAGER
-4              BROOKLYN EMERGENCY PREPAREDNESS MANAGER
-5              BROOKLYN EMERGENCY PREPAREDNESS MANAGER
-6              BROOKLYN EMERGENCY PREPAREDNESS MANAGER
-  Leave.Status.as.of.June.30 Base.Salary Pay.Basis Regular.Hours
-1                     ACTIVE       86005 per Annum          1820
-2                     ACTIVE       86005 per Annum          1820
-3                     ACTIVE       86005 per Annum          1820
-4                     ACTIVE       86005 per Annum          1820
-5                     ACTIVE       86005 per Annum          1820
-6                     ACTIVE       86005 per Annum          1820
-  Regular.Gross.Paid OT.Hours Total.OT.Paid Total.Other.Pay
-1           84698.21        0             0            0.00
-2           84698.21        0             0            0.00
-3           84698.21        0             0            0.00
-4           84698.21        0             0            0.00
-5           84698.21        0             0            0.00
-6           87900.95        0             0        -3202.74</code></pre>
-</div>
 </div>
 <section id="description" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="description"><span class="header-section-number">2.1</span> Description</h2>
 <p>Data sources: The Citywide Payroll dataset is from NYC OpenData website. https://data.cityofnewyork.us/City-Government/Citywide-Payroll-Data-Fiscal-Year-/k397-673e/data</p>
 <p>Data collection: Data Provided by Office of Payroll Administration (OPA). Data is input into the City’s Personnel Management System (“PMS”) by the respective user Agencies. It includes the agency information, salary and overtimepay for all municipal employees in New York.</p>
-<p>Data description: Data is collected because of public interest in how the City’s budget is being spent on salary and overtime pay for all municipal employees.</p>
-<p>1.format We summarize it by a csv file.</p>
+<p>Data description: Data is collected because of public interest in how the City’s budget is being spent on salary and overtime pay for all municipal employees. We will describe it in 6 parts.</p>
+<section id="data-format" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="data-format"><span class="header-section-number">2.1.1</span> Data Format</h3>
+<p>We summarize it by a csv file.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>des<span class="ot">=</span><span class="fu">read.csv</span>(<span class="st">'data_description.csv'</span>)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(des)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>description<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">'data_description.csv'</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(description)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>                  Column.Name
-1                 Fiscal Year
-2              Payroll Number
-3                 Agency Name
-4                   Last Name
-5                  First Name
-6                    Mid Init
-7           Agency Start Date
-8       Work Location Borough
-9           Title Description
-10 Leave Status as of June 30
-11                Base Salary
-12                  Pay Basis
-13              Regular Hours
-14         Regular Gross Paid
-15                   OT Hours
-16              Total OT Paid
-17            Total Other Pay
-                                                                                                                                                                                                            Description
-1                                                                                                                                                                                                           Fiscal Year
-2                                                                                                                                                                                                        Payroll Number
-3                                                                                                                                                                        The Payroll agency that the employee works for
-4                                                                                                                                                                                                 Last name of employee
-5                                                                                                                                                                                                First name of employee
-6                                                                                                                                                                                            Middle initial of employee
-7                                                                                                                                                            Date which employee began working for their current agency
-8                                                                                                                                                                           Borough of employee's primary work location
-9                                                                                                                                                                       Civil service title description of the employee
-10                                                                                                                          Status of employee as of the close of the relevant fiscal year: Active, Ceased, or On Leave
-11                                                                                                                                                                                 Base Salary assigned to the employee
-12                                                                                                                                            Lists whether the employee is paid on an hourly, per diem or annual basis
-13                                                                                                                                                           Number of regular hours employee worked in the fiscal year
-14                                                                                                                                               The amount paid to the employee for base salary during the fiscal year
-15                                                                                                                                                                 Overtime Hours worked by employee in the fiscal year
-16                                                                                                                                                           Total overtime pay paid to the employee in the fiscal year
-17 Includes any compensation in addition to gross salary and overtime pay, ie Differentials, lump sums, uniform allowance, meal allowance, retroactive pay increases, settlement amounts, and bonus pay, if applicable.
-                   Type
-1     Discrete variable
-2     Discrete variable
-3  Categorical variable
-4            Plain Text
-5            Plain Text
-6            Plain Text
-7           Date &amp; Time
-8  Categorical variable
-9  Categorical variable
-10 Categorical variable
-11  Continuous variable
-12           Plain Text
-13  Continuous variable
-14  Continuous variable
-15  Continuous variable
-16  Continuous variable
-17  Continuous variable</code></pre>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 22%">
+<col style="width: 60%">
+<col style="width: 17%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Column Name</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Fiscal Year</td>
+<td style="text-align: left;">Fiscal Year</td>
+<td style="text-align: left;">Discrete variable</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Payroll Number</td>
+<td style="text-align: left;">Payroll Number</td>
+<td style="text-align: left;">Discrete variable</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Agency Name</td>
+<td style="text-align: left;">The Payroll agency that the employee works for</td>
+<td style="text-align: left;">Categorical variable</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Last Name</td>
+<td style="text-align: left;">Last name of employee</td>
+<td style="text-align: left;">Plain Text</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">First Name</td>
+<td style="text-align: left;">First name of employee</td>
+<td style="text-align: left;">Plain Text</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mid Init</td>
+<td style="text-align: left;">Middle initial of employee</td>
+<td style="text-align: left;">Plain Text</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Agency Start Date</td>
+<td style="text-align: left;">Date which employee began working for their current agency</td>
+<td style="text-align: left;">Date &amp; Time</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Work Location Borough</td>
+<td style="text-align: left;">Borough of employee’s primary work location</td>
+<td style="text-align: left;">Categorical variable</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Title Description</td>
+<td style="text-align: left;">Civil service title description of the employee</td>
+<td style="text-align: left;">Categorical variable</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Leave Status as of June 30</td>
+<td style="text-align: left;">Status of employee as of the close of the relevant fiscal year</td>
+<td style="text-align: left;">Categorical variable</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Base Salary</td>
+<td style="text-align: left;">Base Salary assigned to the employee</td>
+<td style="text-align: left;">Continuous variable</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Pay Basis</td>
+<td style="text-align: left;">Lists whether the employee is paid on an hourly, per diem or annual basis</td>
+<td style="text-align: left;">Plain Text</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Regular Hours</td>
+<td style="text-align: left;">Number of regular hours employee worked in the fiscal year</td>
+<td style="text-align: left;">Continuous variable</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Regular Gross Paid</td>
+<td style="text-align: left;">The amount paid to the employee for base salary during the fiscal year</td>
+<td style="text-align: left;">Continuous variable</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">OT Hours</td>
+<td style="text-align: left;">Overtime Hours worked by employee in the fiscal year</td>
+<td style="text-align: left;">Continuous variable</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Total OT Paid</td>
+<td style="text-align: left;">Total overtime pay paid to the employee in the fiscal year</td>
+<td style="text-align: left;">Continuous variable</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Total Other Pay</td>
+<td style="text-align: left;">Includes any compensation in addition to gross salary and overtime pay</td>
+<td style="text-align: left;">Continuous variable</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
-<p>2.frequency of updates: It is updated annually.</p>
-<p>3.dimension: 5662713*13</p>
+</section>
+<section id="frequency-of-updates" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="frequency-of-updates"><span class="header-section-number">2.1.2</span> Frequency of updates</h3>
+<p>It is updated annually.</p>
+</section>
+<section id="dimension" class="level3" data-number="2.1.3">
+<h3 data-number="2.1.3" class="anchored" data-anchor-id="dimension"><span class="header-section-number">2.1.3</span> Dimension</h3>
+<p>5662713*13</p>
+</section>
+<section id="data-range" class="level3" data-number="2.1.4">
+<h3 data-number="2.1.4" class="anchored" data-anchor-id="data-range"><span class="header-section-number">2.1.4</span> Data range</h3>
+<p>For numerical data, we will show the upper bound and lower bound.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(salary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 5662713      13</code></pre>
-</div>
-</div>
-<p>4.data range: For numerical data: Fiscal.Year 2014 to 2023 Agency.Start.Date<br>
-Base.Salary 0.01 to 414707 Regular.Hours -1260.00 to 6666.00 Regular.Gross.Paid -117006.33 to 672308.86<br>
-OT.Hours -127.00 to 3692.90 Total.OT.Paid -14811.51 to 255999.85</p>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>max_values <span class="ot">&lt;-</span> <span class="fu">apply</span>(salary[<span class="fu">c</span>(<span class="st">"Fiscal.Year"</span>,<span class="st">"Base.Salary"</span>,<span class="st">"Regular.Hours"</span>,<span class="st">"Regular.Gross.Paid"</span>,<span class="st">"OT.Hours"</span>,<span class="st">"Total.OT.Paid"</span>)], <span class="dv">2</span>, max)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>min_values <span class="ot">&lt;-</span> <span class="fu">apply</span>(salary[<span class="fu">c</span>(<span class="st">"Fiscal.Year"</span>,<span class="st">"Base.Salary"</span>,<span class="st">"Regular.Hours"</span>,<span class="st">"Regular.Gross.Paid"</span>,<span class="st">"OT.Hours"</span>,<span class="st">"Total.OT.Paid"</span>)], <span class="dv">2</span>, min)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'upper bound'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>max_values <span class="ot">&lt;-</span> <span class="fu">apply</span>(salary[<span class="fu">c</span>(<span class="st">"Fiscal.Year"</span>,<span class="st">"Base.Salary"</span>,<span class="st">"Regular.Hours"</span>,<span class="st">"Regular.Gross.Paid"</span>,<span class="st">"OT.Hours"</span>,<span class="st">"Total.OT.Paid"</span>)], <span class="dv">2</span>, max)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>min_values <span class="ot">&lt;-</span> <span class="fu">apply</span>(salary[<span class="fu">c</span>(<span class="st">"Fiscal.Year"</span>,<span class="st">"Base.Salary"</span>,<span class="st">"Regular.Hours"</span>,<span class="st">"Regular.Gross.Paid"</span>,<span class="st">"OT.Hours"</span>,<span class="st">"Total.OT.Paid"</span>)], <span class="dv">2</span>, min)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'upper bound'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "upper bound"</code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(max_values)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(max_values)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>       Fiscal.Year        Base.Salary      Regular.Hours Regular.Gross.Paid 
@@ -434,14 +397,14 @@ OT.Hours -127.00 to 3692.90 Total.OT.Paid -14811.51 to 255999.85</p>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'lower bound'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'lower bound'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "lower bound"</code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(min_values)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(min_values)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>       Fiscal.Year        Base.Salary      Regular.Hours Regular.Gross.Paid 
@@ -450,30 +413,29 @@ OT.Hours -127.00 to 3692.90 Total.OT.Paid -14811.51 to 255999.85</p>
            -209.00          -26493.88 </code></pre>
 </div>
 </div>
-<p>For categorical data:</p>
+<p>For categorical data, we will show all labels and counts.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#table(salary[c("Agency.Name")])</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(salary[<span class="fu">c</span>(<span class="st">"Work.Location.Borough"</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#table(salary[c("Agency.Name")])</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>salary<span class="sc">$</span>Work.Location.Borough <span class="ot">&lt;-</span> <span class="fu">toupper</span>(salary<span class="sc">$</span>Work.Location.Borough)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(salary[<span class="fu">c</span>(<span class="st">"Work.Location.Borough"</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Work.Location.Borough
-                     ALBANY         Bronx         BRONX      BROOKLYN 
-       506233           143           935        260086        473638 
-     DELAWARE      DUTCHESS        GREENE     Manhattan     MANHATTAN 
-          802           231            89          1622       3663939 
-       NASSAU        ORANGE         OTHER        PUTNAM        Queens 
-          361            25        112598           360           660 
-       QUEENS      Richmond      RICHMOND     SCHOHARIE      SULLIVAN 
-       562088           112         69256           262          1214 
-       ULSTER WASHINGTON DC   WESTCHESTER 
-         2925            64          5070 </code></pre>
+                     ALBANY         BRONX      BROOKLYN      DELAWARE 
+       506233           143        261021        473638           802 
+     DUTCHESS        GREENE     MANHATTAN        NASSAU        ORANGE 
+          231            89       3665561           361            25 
+        OTHER        PUTNAM        QUEENS      RICHMOND     SCHOHARIE 
+       112598           360        562748         69368           262 
+     SULLIVAN        ULSTER WASHINGTON DC   WESTCHESTER 
+         1214          2925            64          5070 </code></pre>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#table(salary[c("Title.Description")])</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(salary[<span class="fu">c</span>(<span class="st">"Leave.Status.as.of.June.30"</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#table(salary[c("Title.Description")])</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(salary[<span class="fu">c</span>(<span class="st">"Leave.Status.as.of.June.30"</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Leave.Status.as.of.June.30
@@ -483,48 +445,55 @@ OT.Hours -127.00 to 3692.90 Total.OT.Paid -14811.51 to 255999.85</p>
               46844 </code></pre>
 </div>
 </div>
-<p>5.Issues / problems with the data i.There exists negative Regular Hours and OT hours. ii.Agency start date exists 12/31/9999.</p>
-<p>6.how to impute data We download Citywide Payroll dataset on NYC OpenData website in ‘csv’ format and impute it by read.csv function directly. https://data.cityofnewyork.us/City-Government/Citywide-Payroll-Data-Fiscal-Year-/k397-673e/data</p>
+</section>
+<section id="issuesproblems-with-the-data" class="level3" data-number="2.1.5">
+<h3 data-number="2.1.5" class="anchored" data-anchor-id="issuesproblems-with-the-data"><span class="header-section-number">2.1.5</span> Issues/problems with the data</h3>
+<p>There exists negative regular hours and OT hours and agency start date exists 12/31/9999.</p>
+</section>
+<section id="how-to-impute-data" class="level3" data-number="2.1.6">
+<h3 data-number="2.1.6" class="anchored" data-anchor-id="how-to-impute-data"><span class="header-section-number">2.1.6</span> How to impute data</h3>
+<p>We download Citywide Payroll dataset on NYC OpenData website in ‘csv’ format and impute it by read.csv function directly and the link of our data source is https://data.cityofnewyork.us/City-Government/Citywide-Payroll-Data-Fiscal-Year-/k397-673e/data</p>
+</section>
 </section>
 <section id="research-plan" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="research-plan"><span class="header-section-number">2.2</span> Research Plan</h2>
-<p>Core Topic: The Impact of Agency Characteristics on Employee Compensation and Work Patterns. We will introduce our research questions from the introduction into 3 parts:</p>
-<ol type="1">
-<li>Factor Analysis First, we aim to examine the factors that influence salary. These factors encompass year, agency, agency start date, work location, job title, pay basis, and leave status at the end of the fiscal year. Additionally, base salary, and regular gross paid are considered. Altogether, we have nine influencing factors. Our goal is to understand not only the impact of each individual factor on salary but also the combined effect of multiple factors on salary.</li>
-</ol>
+<p>Based on our research questions regarding various factors influencing salary levels and overtime situations in the workplace, we will divide our project into three parts, including individual factor analysis, multi-factor mixed analysis and overtime analysis.</p>
+<section id="individual-factor-analysis" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="individual-factor-analysis"><span class="header-section-number">2.2.1</span> Individual Factor Analysis</h3>
+<p>First, we aim to examine the factors that influence salary. These factors encompass year, agency, agency start date, work location, job title, pay basis, and leave status at the end of the fiscal year. Additionally, base salary, and regular gross paid are considered. Altogether, we have nine influencing factors. Our goal is to understand not only the impact of each individual factor on salary but also the combined effect of multiple factors on salary.</p>
 <p>We begin by analyzing the individual factors affecting salary. Concerning year trends and patterns, we aim to understand how salaries have evolved over the past ten years and identify any noticeable trends in employee compensation during specific periods, such as economic downturns or budget cuts. The ‘Year’ field allows for a temporal analysis, facilitating year-over-year comparisons of salaries, thereby revealing trends and patterns over time. Next, we will conduct an agency-specific analysis. Given the potential for significant salary differences across agencies, we seek to determine which agencies have the highest and lowest salaries and understand the reasons behind these disparities. The ‘Agency Name’ field will be used to group data by agency, enabling comparisons of salaries across different departments or units. Regarding the impact of agency start time, we will explore whether the length of time an agency has been operational affects its employees’ salaries. Analysis of the ‘Agency Start Date’ will help investigate if newer agencies offer different pay scales compared to well-established ones.</p>
 <p>We will also examine geographical disparities, job title, and compensation analysis, as well as the impact of leave status and pay basis on compensation. We will explore how factors like work location, job title, leave status, and pay basis affect salaries. The ‘Work Location Borough’ field will assist in examining if geographic factors influence compensation, considering cost-of-living variations across different boroughs. ‘Job Title Description’ allows for an analysis of salary and overtime payments by role, identifying positions with higher compensation and the reasons behind it. ‘Leave Status’ at the fiscal year’s end will be correlated with total compensation to understand how leave impacts an employee’s overall earnings. ‘Pay Basis’ (monthly, yearly, hourly) will be correlated with overall compensation to understand how different payment structures affect total earnings.</p>
-<ol start="2" type="1">
-<li>Overtime Analysis(OT column)</li>
-</ol>
-<ol type="i">
-<li><p>Identify patterns and causes of overtime across agencies and job titles by detecting the relationship between agency,Agency start time,year,Work location,job Title and overtime respectively. Once the main causes are found, we search for the prevalent characters in these causes. (From our guess, it should include job titles or agencies)</p></li>
-<li><p>Determine if overtime is the norm. Analyze the ratio of regular hours to overtime hours across different agencies.</p></li>
-</ol>
-<ol start="3" type="1">
-<li>Multi-factor mixed analysis Analyzing the relationship between employment duration, salary, and rank within agencies. Here we plan to choose mosaic and slope graph as analysis tool.</li>
-</ol>
-<p>Finally, we will conduct an analysis of salary encompassing multiple elements. Concerning base salary and other factors, we aim to explore trends in base salaries across various job titles and agencies. Key questions include how the base salary relates to the total amount paid during the fiscal year and how it correlates with total compensation. To investigate this, we will employ data from multiple columns using methods such as group by. The ‘Base Salary’ field is essential for analyzing salary trends across different roles and agencies and understanding its relationship with total compensation. By examining both ‘Base Salary’ and ‘Total Gross Paid’, we can discern the proportion of earnings derived from base pay as opposed to overtime and other forms of compensation.</p>
+</section>
+<section id="multi-factor-mixed-analysis" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="multi-factor-mixed-analysis"><span class="header-section-number">2.2.2</span> Multi-Factor Mixed Analysis</h3>
+<p>Finally, we will conduct an analysis of salary encompassing multiple elements. Concerning base salary and other factors, we aim to explore trends in base salaries across various job titles and agencies. Key questions include how the base salary relates to the total amount paid during the fiscal year and how it correlates with total compensation. To investigate this, we will employ data from multiple columns using methods such as group by. The ‘Base Salary’ field is essential for analyzing salary trends across different roles and agencies and understanding its relationship with total compensation. By examining both ‘Base Salary’ and ‘Total Gross Paid’, we can discern the proportion of earnings derived from base pay as opposed to overtime and other forms of compensation. Here we plan to choose mosaic and slope graph as analysis tool.</p>
+</section>
+<section id="overtime-analysis" class="level3" data-number="2.2.3">
+<h3 data-number="2.2.3" class="anchored" data-anchor-id="overtime-analysis"><span class="header-section-number">2.2.3</span> Overtime Analysis</h3>
+<p>In this part, we are curious that this overtime work module in different work field or work year. Here we will create a new column called ‘agency size’ based on calculating the number of staffs in different agencies and we will add it into our influence factor test as well. To solve it, we identify patterns and causes of overtime across agencies and job titles by aggregating overtime hours by job title and agency(agency field, agency start time,year,Work location, agency size), we can highlight where overtime is most common. As for trends in overtime hours: By analyzing ‘OT Hours’ across different fiscal years, we can detect any increasing or decreasing trends in overtime. Line graph for overtime hours is the optimal method to identify the trends over time.</p>
+<p>We also explore the ratio of regular to overtime hours across different agencies. We can calculate this ratio for each agency by aggregating ‘Regular Hours’ and ‘OT Hours’ and then compare across agencies. Heatmap is one of our methods to demonstrate the distribution and prevalence of overtime across different job titles and agencies, identifying hotspots. After finishing it, we can compare the consistence of high ration and high overtime hours by bubble chart where the position on the x-axis can represent overtime hours, the y-axis for the overtime ratio, and the bubble size for agencies or job titles.</p>
+</section>
 </section>
 <section id="missing-value-analysis" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="missing-value-analysis"><span class="header-section-number">2.3</span> Missing value analysis</h2>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Counting missing values per column</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>missing_values <span class="ot">&lt;-</span> <span class="fu">sapply</span>(salary, <span class="cf">function</span>(x) <span class="fu">sum</span>(<span class="fu">is.na</span>(x)))</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating the bar chart</span></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">Column =</span> <span class="fu">names</span>(missing_values), <span class="at">MissingValues =</span> missing_values), </span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Column, <span class="at">y =</span> MissingValues)) <span class="sc">+</span></span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Column Name"</span>, <span class="at">y =</span> <span class="st">"Number of Missing Values"</span>, <span class="at">title =</span> <span class="st">"Missing Values per Column"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Counting missing values per column</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>missing_values <span class="ot">&lt;-</span> <span class="fu">sapply</span>(salary, <span class="cf">function</span>(x) <span class="fu">sum</span>(<span class="fu">is.na</span>(x)))</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating the bar chart</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">Column =</span> <span class="fu">names</span>(missing_values), <span class="at">MissingValues =</span> missing_values), </span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Column, <span class="at">y =</span> MissingValues)) <span class="sc">+</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Column Name"</span>, <span class="at">y =</span> <span class="st">"Number of Missing Values"</span>, <span class="at">title =</span> <span class="st">"Missing Values per Column"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="data_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>After we delete meaningless data like “Payroll.Number”, “Last.Name”, “First.Name”, “Mid.Init”, there is no missing data in our data set.</p>
 
 
 </section>
