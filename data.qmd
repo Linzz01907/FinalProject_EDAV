@@ -1,6 +1,64 @@
 # Data
+```{r message=FALSE, warning=FALSE}
+library(ggplot2)
+library(dplyr)
+library(tidyverse)
+library(heatmaply)
+library(readxl)
+library(knitr)
+```
 
+```{r echo=FALSE}
+salary=read.csv('Citywide_Payroll_Data__Fiscal_Year_ (1).csv')
+#delete meaningless data
+salary=salary[, -which(colnames(salary) %in% c("Payroll.Number","Last.Name","First.Name","Mid.Init"))]
+```
 ## Description
+Data sources: The Citywide Payroll dataset is from NYC OpenData website. https://data.cityofnewyork.us/City-Government/Citywide-Payroll-Data-Fiscal-Year-/k397-673e/data
+
+Data collection: Data Provided by Office of Payroll Administration (OPA). Data is input into the City's Personnel Management System (“PMS”) by the respective user Agencies. It includes the agency information, salary and overtimepay for all municipal employees in New York.
+
+Data description:
+Data is collected because of public interest in how the City’s budget is being spent on salary and overtime pay for all municipal employees. We will describe it in 6 parts.
+
+### Data Format
+We summarize it by a csv file.
+```{r message=FALSE, warning=FALSE}
+description<-read_csv('data_description.csv')
+kable(description)
+```
+### Frequency of updates
+It is updated annually.
+
+### Dimension
+5662713*13
+
+### Data range
+For numerical data, we will show the upper bound and lower bound.
+```{r}
+max_values <- apply(salary[c("Fiscal.Year","Base.Salary","Regular.Hours","Regular.Gross.Paid","OT.Hours","Total.OT.Paid")], 2, max)
+min_values <- apply(salary[c("Fiscal.Year","Base.Salary","Regular.Hours","Regular.Gross.Paid","OT.Hours","Total.OT.Paid")], 2, min)
+print('upper bound')
+print(max_values)
+print('lower bound')
+print(min_values)
+```
+
+For categorical data, we will show all labels and counts.
+```{r}
+#table(salary[c("Agency.Name")])
+salary$Work.Location.Borough <- toupper(salary$Work.Location.Borough)
+table(salary[c("Work.Location.Borough")])
+#table(salary[c("Title.Description")])
+table(salary[c("Leave.Status.as.of.June.30")])
+
+```
+
+### Issues/problems with the data 
+There exists negative regular hours and OT hours and agency start date exists 12/31/9999.
+
+### How to impute data
+We download Citywide Payroll dataset on NYC OpenData website in 'csv' format and impute it by read.csv function directly and the link of our data source is https://data.cityofnewyork.us/City-Government/Citywide-Payroll-Data-Fiscal-Year-/k397-673e/data
 
 ## Research Plan
 
