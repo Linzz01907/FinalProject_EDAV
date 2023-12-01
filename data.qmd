@@ -79,4 +79,16 @@ In this part, we are curious that this overtime work module in different work fi
 We also explore the ratio of regular to overtime hours&salaries across different agencies. We can calculate this ratio for each agency by aggregating 'Regular Hours'&'Base Salary' and 'OT Hours'&'OT Paid' and then compare across agencies. Heatmap is one of our methods to demonstrate the distribution and prevalence of overtime across different job titles and agencies, identifying hotspots. After finishing it, we can compare the consistence of high ration and high overtime hours&salaries by bubble chart where the position on the x-axis can represent overtime hours, the y-axis for the overtime ratio, and the bubble size for agencies or job titles.
 
 ## Missing value analysis
+```{r}
+# Counting missing values per column
+missing_values <- sapply(salary, function(x) sum(is.na(x)))
 
+# Creating the bar chart
+ggplot(data = data.frame(Column = names(missing_values), MissingValues = missing_values), 
+       aes(x = Column, y = MissingValues)) +
+    geom_bar(stat = "identity") +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+    labs(x = "Column Name", y = "Number of Missing Values", title = "Missing Values per Column")
+
+```
+After we delete meaningless data like "Payroll.Number", "Last.Name", "First.Name", "Mid.Init", there is no missing data in our data set.
