@@ -94,3 +94,5 @@ ggplot(data = data.frame(Column = names(missing_values), MissingValues = missing
 
 ```
 After we delete meaningless data like "Payroll.Number", "Last.Name", "First.Name", "Mid.Init", there is no missing data in our data set.
+
+test
