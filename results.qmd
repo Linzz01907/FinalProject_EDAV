@@ -6,13 +6,24 @@ salary_df <- read.csv("Cleaned Dataset.csv")
 ```
 
 ```{r}
-salary_filtered <- salary_df |> 
-  select(Agency.Name)
+selected_agency <- salary_df |> 
+  filter(Agency.Name == c('DEPT OF ED PEDAGOGICAL','POLICE DEPARTMENT',
+'FIRE DEPARTMENT',
+'HRA/DEPT OF SOCIAL SERVICES',
+'NYC HOUSING AUTHORITY',
+ 'DEPARTMENT OF SANITATION',
+"ADMIN FOR CHILDREN'S SVCS",
+'DEPARTMENT OF FINANCE',
+'DEPT OF INFO TECH & TELECOMM',
+'TAXI & LIMOUSINE COMMISSION'))
+selected_agency
 ```
 
 
 ```{r}
-
+unique_values <- unique(selected_agency$Agency.Name)
+unique_values <- unique(selected_agency[["Agency.Name"]])
+print(unique_values)
 ```
 
 ```{r}
