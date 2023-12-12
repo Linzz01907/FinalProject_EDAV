@@ -6,7 +6,7 @@ salary_df <- read.csv("Cleaned Dataset.csv")
 ```
 
 ```{r}
-selected_agency <- salary_df |> 
+select_agency <- salary_df |> 
   filter(Agency.Name == c('DEPT OF ED PEDAGOGICAL','POLICE DEPARTMENT',
 'FIRE DEPARTMENT',
 'HRA/DEPT OF SOCIAL SERVICES',
@@ -16,14 +16,43 @@ selected_agency <- salary_df |>
 'DEPARTMENT OF FINANCE',
 'DEPT OF INFO TECH & TELECOMM',
 'TAXI & LIMOUSINE COMMISSION'))
-selected_agency
+select_agency
+```
+```{r}
+select_title <- select_agency |>  
+  filter(Title.Description %in% c("CHILD PROTECTIVE SPECIALIST",
+                                  "CHILD PROTECTIVE SPECIALIST SUPERVISOR",
+                                  "CITY TAX AUDITOR",
+                                  "CLERICAL ASSOCIATE",
+                                  "CALL CENTER REPRESENTATIVE",
+                                  "COMPUTER SPECIALIST",
+                                  "TAXI AND LIMOUSINE INSPECTOR",
+                                  "COMMUNITY ASSOCIATE",
+                                  "TEACHER",
+                                  "TEACHER SPECIAL EDUCATION",
+                                  "POLICE OFFICER",
+                                  "SCHOOL SAFETY AGENT",
+                                  "FIREFIGHTER",
+                                  "EMERGENCY MEDICAL SPECIALIST-EMT",
+                                  "ELIGIBILITY SPECIALIST",
+                                  "JOB OPPORTUNITY SPECIALIST",
+                                  "CARETAKER",
+                                  "MAINTENANCE WORKER",
+                                  "SANITATION WORKER",
+                                  "CITY SEASONAL AIDE"))
 ```
 
-
 ```{r}
-unique_values <- unique(selected_agency$Agency.Name)
-unique_values <- unique(selected_agency[["Agency.Name"]])
-print(unique_values)
+library(dplyr)
+select_title$new_salary= 1:row(select_title)
+salary_new <- select_title %>%
+  mutate(salary_new = case_when(
+    Pay.Basis == 'per Annum ' ~ new_salary * 1,
+    Pay.Basis == 'per Day' ~ new_salary * 260,
+    Pay.Basis == 'per Hour' ~ new_salary * 260*8,
+    TRUE ~ new_salary   # Default case
+  ))
+View(salary_new)
 ```
 
 ```{r}
@@ -31,7 +60,7 @@ str(data)
 ```
 
 ```{r}
-unique_values <- unique(data$Agency.Name)
-unique_values <- unique(data[["Work.Location.Borough"]])
+unique_values <- unique(select_title$Pay.Basis)
+unique_values <- unique(select_title[["Pay.Basis"]])
 print(unique_values)
 ```
