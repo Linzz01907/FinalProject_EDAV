@@ -6,7 +6,8 @@ salary_df <- read.csv("Cleaned Dataset.csv")
 ```
 
 ```{r}
-salary_df
+salary_filtered <- salary_df |> 
+  select(Agency.Name)
 ```
 
 
