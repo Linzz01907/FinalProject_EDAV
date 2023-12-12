@@ -1,1 +1,25 @@
 # Results
+
+```{r}
+library(tidyverse)
+salary_df <- read.csv("Cleaned Dataset.csv")
+```
+
+```{r}
+salary_df
+```
+
+
+```{r}
+
+```
+
+```{r}
+str(data)
+```
+
+```{r}
+unique_values <- unique(data$Agency.Name)
+unique_values <- unique(data[["Work.Location.Borough"]])
+print(unique_values)
+```
