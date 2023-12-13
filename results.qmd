@@ -83,9 +83,9 @@ salary_new$days_difference <- as.numeric(salary_new$days_difference)
 
 # View(salary_new)
 salary_new$OT.Hours[salary_new$OT.Hours<0]<-0
-# salary_new$Regular.Hours[salary_new$Regular.Hours<0]<-0
+salary_new$Regular.Hours[salary_new$Regular.Hours<0]<-0
 salary_new$pay_per_hour<-salary_new$Total.OT.Paid/salary_new$OT.Hours
-salary_new$pay_per_hour[is.infinite(salary_new$pay_per_hour)| is.na(salary_new$pay_per_hour)] <- 0 
+salary_new$pay_per_hour[is.infinite(salary_new$pay_per_hour)| is.na(salary_new$pay_per_hour) |salary_new$pay_per_hour<0] <- 0 
 salary_new$job_type <- ifelse(as.numeric(salary_new$Regular.Hours) <= 1000 & as.numeric(salary_new$Regular.Hours) > 0, "part_time", "full_time")
 
 agency_size <- as.data.frame(table(salary_new$Agency.Name))
@@ -174,21 +174,39 @@ ggplot(salary, aes(x = Title.Description, y = OT.Hours)) +
        x = "Title Description",
        y = "OT Hours")
 
-
-
-ggplot(salary, aes(x = Agency.Name, y = Total.OT.Paid)) +
+ggplot(salary, aes(x = job_type, y = OT.Hours)) +
   geom_boxplot() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  labs(title = "Box Plot of Total.OT.Paid across Different Agencies",
+  labs(title = "Box Plot of OT.Hours across Different Titles",
+       x = "Job_type",
+       y = "OT Hours")
+
+
+salary_tep2<-salary
+salary_tep2<-salary_tep2[salary_tep2$pay_per_hour > 0 & salary_tep2$pay_per_hour <500, ]
+
+
+
+ggplot(salary_tep2, aes(x = Agency.Name, y = pay_per_hour)) +
+  geom_boxplot() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(title = "Box Plot of pay_per_hour across Different Agencies",
        x = "Agency Name",
-       y = "OT Hours")
+       y = "OT Pay per Hours")
 
-ggplot(salary, aes(x = Title.Description, y = Total.OT.Paid)) +
+ggplot(salary_tep2, aes(x = Title.Description, y = pay_per_hour)) +
   geom_boxplot() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  labs(title = "Box Plot of Total.OT.Paid across Different Titles",
+  labs(title = "Box Plot of pay_per_hour across Different Titles",
        x = "Title Description",
-       y = "OT Hours")
+       y = "OT Pay per Hours")
+
+ggplot(salary_tep2, aes(x = job_type, y = pay_per_hour)) +
+  geom_boxplot() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(title = "Box Plot of pay_per_hour across Different Titles",
+       x = "Job_type",
+       y = "OT Pay per Hours")
 
 
 # ANOVA for Agency.Name and OT.Hours
@@ -199,13 +217,21 @@ summary(anova_agency)
 anova_title <- aov(OT.Hours ~ Title.Description, data = salary)
 summary(anova_title)
 
+# ANOVA for job_type and OT.Hours
+anova_title <- aov(OT.Hours ~ job_type, data = salary)
+summary(anova_title)
+
 
 # ANOVA for Agency.Name and Total.OT.Paid
-anova_agency <- aov(Total.OT.Paid ~ Agency.Name, data = salary)
+anova_agency <- aov(pay_per_hour ~ Agency.Name, data = salary_tep2)
 summary(anova_agency)
 
 # ANOVA for Title.Description and Total.OT.Paid
-anova_title <- aov(Total.OT.Paid ~ Title.Description, data = salary)
+anova_title <- aov(pay_per_hour ~ Title.Description, data = salary_tep2)
+summary(anova_title)
+
+# ANOVA for job_title and Total.OT.Paid
+anova_title <- aov(pay_per_hour ~ job_type, data = salary_tep2)
 summary(anova_title)
 
 ```
@@ -218,4 +244,140 @@ ggparcoord(salary,
            scale='globalminmax',
            title = "Parallel Coordinate Plot for salary Data",
            alphaLines = 0.6)
+```
+
+```{r}
+library(ggridges)
+
+ggplot(salary, aes(x = OT.Hours, y = Agency.Name, fill = Agency.Name)) +
+  stat_density_ridges() +
+  theme_ridges() +
+  labs(title = "Ridgeline Plot of OT Hours by Agency", x = "OT Hours", y = "Agency Name")+
+    theme(
+    text = element_text(size = 8),
+    axis.title = element_text(size = 10),
+    axis.text = element_text(size = 8),
+    plot.title = element_text(size = 12)
+  )
+
+ggplot(salary, aes(x = Total.OT.Paid, y = Agency.Name, fill = Agency.Name)) +
+  stat_density_ridges() +
+  theme_ridges() +
+  labs(title = "Ridgeline Plot of OT Hours Paid by Agency", x = "OT Hours Paid", y = "Agency Name")+
+    theme(
+    text = element_text(size = 8),
+    axis.title = element_text(size = 10),
+    axis.text = element_text(size = 8),
+    plot.title = element_text(size = 12)
+  )
+
+
+salary_tep<-salary
+salary_tep<-salary_tep[salary_tep$Regular.Hours != 0, ]
+salary_tep$OT_per_Regular_Time<-salary_tep$OT.Hours/salary_tep$Regular.Hours
+
+
+
+ggplot(salary_tep, aes(x = OT_per_Regular_Time, y = Agency.Name, fill = Agency.Name)) +
+  stat_density_ridges() +
+  theme_ridges() +
+  labs(title = "Ridgeline Plot of OT Hours rate by Agency", x = "OT Hours rate", y = "Agency Name")+
+    theme(
+    text = element_text(size = 8),
+    axis.title = element_text(size = 10),
+    axis.text = element_text(size = 8),
+    plot.title = element_text(size = 12)
+  )
+
+```
+
+```{r}
+
+salary_tep2<-salary
+salary_tep2<-salary_tep2[salary_tep2$pay_per_hour > 0 & salary_tep2$pay_per_hour <1000, ]
+
+set.seed(123)
+sampled_indices <- sample(nrow(salary_tep2),150)
+sampled_df <- salary_tep2[sampled_indices, ]
+
+sampled_df %>%
+  arrange(desc(days_difference)) %>%
+  ggplot(aes(x=OT.Hours, y=pay_per_hour, size=days_difference, color=Title.Description)) +
+    geom_point(alpha=0.5) +
+    scale_size_continuous(range = c(.1, 10), name="days_difference")
+
+sampled_df %>%
+  arrange(desc(days_difference)) %>%
+  ggplot(aes(x=AnnualSalary, y=OT.Hours, size=days_difference, color=Title.Description)) +
+    geom_point(alpha=0.5) +
+    scale_size_continuous(range = c(.1, 10), name="days_difference")
+
+sampled_df %>%
+  arrange(desc(days_difference)) %>%
+  ggplot(aes(x=AnnualSalary, y=pay_per_hour, size=days_difference, color=Title.Description)) +
+    geom_point(alpha=0.5) +
+    scale_size_continuous(range = c(.1, 10), name="days_difference")
+
+```
+
+```{r}
+
+library(sf)
+library(tigris)
+
+
+# Obtain geospatial data for New York counties
+nyc_counties <- tigris::counties(state = "NY", cb = TRUE) %>% 
+  filter(COUNTYFP %in% c("005", "047", "061", "081", "085"))  # FIPS codes for NYC boroughs
+
+
+nyc_counties$BoroName <- factor(nyc_counties$NAME,
+                                levels = c("Bronx", "Kings", "New York", "Queens", "Richmond"),
+                                labels = c("BRONX", "BROOKLYN", "MANHATTAN", "QUEENS", "RICHMOND"))
+
+OThour_data <- salary %>%
+  group_by(Work.Location.Borough) %>%
+  summarize(Average_hour = mean(OT.Hours, na.rm = TRUE))
+
+
+nyc_OThour_map <- merge(nyc_counties, OThour_data, by.x = "BoroName", by.y = "Work.Location.Borough")
+View(nyc_OThour_map) 
+
+# Create the map visualization
+ggplot(data = nyc_OThour_map) +
+  geom_sf(aes(fill = Average_hour), color = "white", size = 0.5) +
+  geom_sf_text(aes(label = BoroName), size = 3, check_overlap = TRUE) +
+  scale_fill_viridis_c(name = "Average Hour") +
+  labs(title = "Average Hour by NYC Borough") +
+  theme_minimal()
+```
+
+
+```{r}
+library(ggalluvial)
+frequency_df <- salary %>%
+  group_by(Agency.Name, Title.Description, job_type, Work.Location.Borough,SalaryLevel) %>%
+  summarize(Frequency = n(), .groups = 'drop')
+frequency_df
+
+# ggplot(frequency_df, aes(axis1 = Agency.Name, axis2 = Title.Description, axis3 = job_type, axis4 = Work.Location.Borough,axis5=SalaryLevel,
+#                 y = Frequency)) +
+#   geom_alluvium(aes(fill = c(Agency.Name, Title.Description, job_type, Work.Location.Borough,SalaryLevel))) +
+#   geom_stratum() +
+#   # geom_text(stat = "stratum", aes(label = after_stat(stratum))) +
+#   scale_x_discrete(limits = c("Agency.Name", "Title.Description", "job_type","Work.Location.Borough","SalaryLevel")) +
+#   guides(fill = "none")
+
+
+
+ggplot(frequency_df, aes(axis1 = Agency.Name, axis2 = Title.Description, axis3 = job_type, axis4 = Work.Location.Borough, axis5 = SalaryLevel, y = Frequency)) +
+  geom_alluvium(aes(fill = Agency.Name)) +  # Using one variable for fill, you can change it as per your need
+  geom_stratum(aes(fill = Agency.Name)) +  # Optional: Add color to stratum
+  geom_text(stat = "stratum", aes(label = after_stat(stratum)),size=2) +
+  scale_x_discrete(limits = c("Agency.Name", "Title.Description", "job_type", "Work.Location.Borough", "SalaryLevel")) +
+  guides(fill = "none")  # If you want a legend for the colors, remove this line
+
+
+
+
 ```
