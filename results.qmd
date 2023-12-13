@@ -42,25 +42,73 @@ select_title <- select_agency |>
                                   "CITY SEASONAL AIDE"))
 ```
 
-```{r}
+```{r Salary Level}
 library(dplyr)
-select_title$new_salary= 1:row(select_title)
-salary_new <- select_title %>%
-  mutate(salary_new = case_when(
-    Pay.Basis == 'per Annum ' ~ new_salary * 1,
-    Pay.Basis == 'per Day' ~ new_salary * 260,
-    Pay.Basis == 'per Hour' ~ new_salary * 260*8,
-    TRUE ~ new_salary   # Default case
+df <- select_title |>  
+  mutate(AnnualSalary = case_when(
+    Pay.Basis == "per Annum" ~ 1,
+    Pay.Basis == "per Day" ~ 260,
+    Pay.Basis == "per Hour" ~ 260 * 8,
+    Pay.Basis == "Prorated Annual" ~ 1
   ))
-View(salary_new)
+
+salary_new <- df |> 
+  mutate(AnnualSalary = AnnualSalary * Base.Salary)
+
+fivenum(salary_new$AnnualSalary)
+# 6461  58692  80788  95105 143858
+
+salary_new <- salary_new |>
+  mutate(SalaryLevel = case_when(
+    AnnualSalary >= 6461 & AnnualSalary <= 58692 ~ "LOW",
+    AnnualSalary > 58692 & AnnualSalary <= 80788 ~ "MOD",
+    AnnualSalary > 80788 & AnnualSalary <= 95105 ~ "HIGH",
+    AnnualSalary > 95105 & AnnualSalary <= 143858 ~ "VHIGH"))
 ```
 
-```{r}
-str(data)
+
+
+```{r Correlation Plot}
+# library(dplyr)
+# library(GGally)
+# p <- select_title[, c(2, 4:6, 8)]
+# library(ggcorrplot)
+# model.matrix(~0+., data=p) %>% 
+#   cor(use="pairwise.complete.obs") %>% 
+#   ggcorrplot(show.diag=FALSE, type="lower", lab=TRUE, lab_size=2)+
+#   theme(axis.text.x = element_text(size = 5),  # Adjust size as needed for x axis labels
+#         axis.text.y = element_text(size = 5)) 
+p <- salary_new[, c(2, 4:6, 8, 15)]
+ggparcoord(p, columns=1:6)
 ```
 
-```{r}
-unique_values <- unique(select_title$Pay.Basis)
-unique_values <- unique(select_title[["Pay.Basis"]])
-print(unique_values)
+```{r Lollipop}
+# create scattor pair plot 
+# ggpairs( sample_data )
+q <- salary_new[, c(2, 5, 14)]
+mean_salary_agency <- q %>%
+    group_by(Agency.Name) %>%
+    summarise(mean_value_agency = mean(AnnualSalary, na.rm = TRUE))
+
+mean_salary_title <- q %>%
+    group_by(Title.Description) %>%
+    summarise(mean_value_title = mean(AnnualSalary, na.rm = TRUE))
+
+p1 <- ggplot(mean_salary_agency, aes(x=Agency.Name, y=mean_value_agency)) +
+  geom_segment( aes(x=Agency.Name, xend=Agency.Name, y=0, yend=mean_value_agency)) +
+  geom_point( size=5, color="red", fill=alpha("orange", 0.3), alpha=0.7, shape=21, stroke=2)+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+p2 <- ggplot(mean_salary_title, aes(x=Title.Description, y=mean_value_title)) +
+  geom_segment( aes(x=Title.Description, xend=Title.Description, y=0, yend=mean_value_title)) +
+  geom_point( size=5, color="red", fill=alpha("orange", 0.3), alpha=0.7, shape=21, stroke=2)+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+if (!requireNamespace("gridExtra", quietly = TRUE)) {
+    install.packages("gridExtra")
+}
+grid.arrange(p1, p2, ncol = 2, widths = c(1, 1))
+```
+```{r Time Series}
+
 ```
