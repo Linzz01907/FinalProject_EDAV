@@ -79,47 +79,45 @@ salary_new$days_difference <- as.Date(salary_new$CorrentDate) - as.Date(salary_n
 salary_new$days_difference <- as.numeric(salary_new$days_difference)
 ```
 
-```{r total pay_per_hour}
-# agency_size <- salary_new %>%
-#   group_by(Agency.Name) %>%
-#   summarise(AgencyCount = n())
-# 
-# salary_new <- salary_new %>%
-#   left_join(agency_size, by = "Agency.Name")
+```{r total pay_per_hour and agency_size}
+
 # View(salary_new)
 salary_new$OT.Hours[salary_new$OT.Hours<0]<-0
 # salary_new$Regular.Hours[salary_new$Regular.Hours<0]<-0
 salary_new$pay_per_hour<-salary_new$Total.OT.Paid/salary_new$OT.Hours
-salary_new$pay_per_hour[is.infinite(salary_new$pay_per_hour)] <- 0 
-salary_new$job_type <- ifelse(as.numeric(salary_new$Regular.Hours) <= 100, "part_time", "full_time")
-count_by_columnB <- salary_new %>%
-  group_by(job_type) %>%
-  summarise(Count = n())
-count_by_columnB
+salary_new$pay_per_hour[is.infinite(salary_new$pay_per_hour)| is.na(salary_new$pay_per_hour)] <- 0 
+salary_new$job_type <- ifelse(as.numeric(salary_new$Regular.Hours) <= 1000 & as.numeric(salary_new$Regular.Hours) > 0, "part_time", "full_time")
+
+agency_size <- as.data.frame(table(salary_new$Agency.Name))
+colnames(agency_size) <- c("Agency.Name", "Agency.Size")
+salary <- left_join(salary_new, agency_size, by = join_by(Agency.Name))
 ```
-  
 
 ```{r}
-
+count_by_columnB <- salary %>%
+  group_by(job_type) %>%
+  summarise(Count = n())
+print(count_by_columnB)
 ```
-
-```{r Correlation Plot}
+  
+  
+  
+  
+```{r Correlation Heatmap Plot}
 # library(dplyr)
-# library(GGally)
-# p <- select_title[, c(2, 4:6, 8)]
-# library(ggcorrplot)
-# model.matrix(~0+., data=p) %>% 
-#   cor(use="pairwise.complete.obs") %>% 
-#   ggcorrplot(show.diag=FALSE, type="lower", lab=TRUE, lab_size=2)+
-#   theme(axis.text.x = element_text(size = 5),  # Adjust size as needed for x axis labels
-#         axis.text.y = element_text(size = 5)) 
+library(GGally)
 p <- salary_new[, c(2, 4:6, 8, 15)]
-ggparcoord(p, columns=1:6)
+library(ggcorrplot)
+model.matrix(~0+., data=p) %>%
+  cor(use="pairwise.complete.obs") %>%
+  ggcorrplot(show.diag=FALSE, type="lower", lab=FALSE, lab_size=2)+
+  theme(axis.text.x = element_text(size = 5),  # Adjust size as needed for x axis labels
+        axis.text.y = element_text(size = 5))
+# p <- salary_new[, c(2, 4:6, 8, 15)]
+# ggparcoord(p, columns=1:6)
 ```
 
 ```{r Lollipop}
-# create scattor pair plot 
-# ggpairs( sample_data )
 library(gridExtra)
 q <- salary_new[, c(2, 5, 14)]
 mean_salary_agency <- q %>%
@@ -145,25 +143,31 @@ if (!requireNamespace("gridExtra", quietly = TRUE)) {
 }
 grid.arrange(p1, p2, ncol = 2, widths = c(1, 1))
 ```
+
+
+```{r Scattor Pair Plot}
+ggpairs(select(salary, Agency.Size, days_difference, AnnualSalary), 
+        mapping = ggplot2::aes(alpha = 0.5),
+        lower = list(continuous = wrap("points", size = 0.1)))
+```
+
+
 ```{r Time Series}
 
 ```
 
 
 
-
-
-
 ```{r}
 library(ggplot2)
-ggplot(salary_new, aes(x = Agency.Name, y = OT.Hours)) +
+ggplot(salary, aes(x = Agency.Name, y = OT.Hours)) +
   geom_boxplot() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
   labs(title = "Box Plot of OT.Hours across Different Agencies",
        x = "Agency Name",
        y = "OT Hours")
 
-ggplot(salary_new, aes(x = Title.Description, y = OT.Hours)) +
+ggplot(salary, aes(x = Title.Description, y = OT.Hours)) +
   geom_boxplot() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
   labs(title = "Box Plot of OT.Hours across Different Titles",
@@ -172,14 +176,14 @@ ggplot(salary_new, aes(x = Title.Description, y = OT.Hours)) +
 
 
 
-ggplot(salary_new, aes(x = Agency.Name, y = Total.OT.Paid)) +
+ggplot(salary, aes(x = Agency.Name, y = Total.OT.Paid)) +
   geom_boxplot() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
   labs(title = "Box Plot of Total.OT.Paid across Different Agencies",
        x = "Agency Name",
        y = "OT Hours")
 
-ggplot(salary_new, aes(x = Title.Description, y = Total.OT.Paid)) +
+ggplot(salary, aes(x = Title.Description, y = Total.OT.Paid)) +
   geom_boxplot() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
   labs(title = "Box Plot of Total.OT.Paid across Different Titles",
@@ -188,20 +192,20 @@ ggplot(salary_new, aes(x = Title.Description, y = Total.OT.Paid)) +
 
 
 # ANOVA for Agency.Name and OT.Hours
-anova_agency <- aov(OT.Hours ~ Agency.Name, data = salary_new)
+anova_agency <- aov(OT.Hours ~ Agency.Name, data = salary)
 summary(anova_agency)
 
 # ANOVA for Title.Description and OT.Hours
-anova_title <- aov(OT.Hours ~ Title.Description, data = salary_new)
+anova_title <- aov(OT.Hours ~ Title.Description, data = salary)
 summary(anova_title)
 
 
 # ANOVA for Agency.Name and Total.OT.Paid
-anova_agency <- aov(Total.OT.Paid ~ Agency.Name, data = salary_new)
+anova_agency <- aov(Total.OT.Paid ~ Agency.Name, data = salary)
 summary(anova_agency)
 
 # ANOVA for Title.Description and Total.OT.Paid
-anova_title <- aov(Total.OT.Paid ~ Title.Description, data = salary_new)
+anova_title <- aov(Total.OT.Paid ~ Title.Description, data = salary)
 summary(anova_title)
 
 ```
@@ -209,7 +213,7 @@ summary(anova_title)
 
 ```{r parallell}
 library(GGally)
-ggparcoord(salary_new,
+ggparcoord(salary,
            columns = c(11,18,17),  groupColumn = 5,
            scale='globalminmax',
            title = "Parallel Coordinate Plot for salary Data",
