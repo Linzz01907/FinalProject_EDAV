@@ -64,9 +64,44 @@ salary_new <- salary_new |>
     AnnualSalary > 58692 & AnnualSalary <= 80788 ~ "MOD",
     AnnualSalary > 80788 & AnnualSalary <= 95105 ~ "HIGH",
     AnnualSalary > 95105 & AnnualSalary <= 143858 ~ "VHIGH"))
+
+```
+```{r Agency Start Time}
+
+
+salary_new$Agency.Start.Date <- trimws(salary_new$Agency.Start.Date)
+salary_new$Agency.Start.Date <- as.Date(salary_new$Agency.Start.Date, format="%m/%d/%Y")
+salary_new$CorrentDate <- as.Date("2023-12-01")
+
+salary_new$Agency.Start.Date[salary_new$Agency.Start.Date == as.Date("9999-12-31")] <- as.Date("1999-12-31")
+
+salary_new$days_difference <- as.Date(salary_new$CorrentDate) - as.Date(salary_new$Agency.Start.Date)
+salary_new$days_difference <- as.numeric(salary_new$days_difference)
 ```
 
+```{r total pay_per_hour}
+# agency_size <- salary_new %>%
+#   group_by(Agency.Name) %>%
+#   summarise(AgencyCount = n())
+# 
+# salary_new <- salary_new %>%
+#   left_join(agency_size, by = "Agency.Name")
+# View(salary_new)
+salary_new$OT.Hours[salary_new$OT.Hours<0]<-0
+# salary_new$Regular.Hours[salary_new$Regular.Hours<0]<-0
+salary_new$pay_per_hour<-salary_new$Total.OT.Paid/salary_new$OT.Hours
+salary_new$pay_per_hour[is.infinite(salary_new$pay_per_hour)] <- 0 
+salary_new$job_type <- ifelse(as.numeric(salary_new$Regular.Hours) <= 100, "part_time", "full_time")
+count_by_columnB <- salary_new %>%
+  group_by(job_type) %>%
+  summarise(Count = n())
+count_by_columnB
+```
+  
 
+```{r}
+
+```
 
 ```{r Correlation Plot}
 # library(dplyr)
@@ -85,6 +120,7 @@ ggparcoord(p, columns=1:6)
 ```{r Lollipop}
 # create scattor pair plot 
 # ggpairs( sample_data )
+library(gridExtra)
 q <- salary_new[, c(2, 5, 14)]
 mean_salary_agency <- q %>%
     group_by(Agency.Name) %>%
@@ -111,4 +147,71 @@ grid.arrange(p1, p2, ncol = 2, widths = c(1, 1))
 ```
 ```{r Time Series}
 
+```
+
+
+
+
+
+
+```{r}
+library(ggplot2)
+ggplot(salary_new, aes(x = Agency.Name, y = OT.Hours)) +
+  geom_boxplot() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(title = "Box Plot of OT.Hours across Different Agencies",
+       x = "Agency Name",
+       y = "OT Hours")
+
+ggplot(salary_new, aes(x = Title.Description, y = OT.Hours)) +
+  geom_boxplot() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(title = "Box Plot of OT.Hours across Different Titles",
+       x = "Title Description",
+       y = "OT Hours")
+
+
+
+ggplot(salary_new, aes(x = Agency.Name, y = Total.OT.Paid)) +
+  geom_boxplot() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(title = "Box Plot of Total.OT.Paid across Different Agencies",
+       x = "Agency Name",
+       y = "OT Hours")
+
+ggplot(salary_new, aes(x = Title.Description, y = Total.OT.Paid)) +
+  geom_boxplot() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(title = "Box Plot of Total.OT.Paid across Different Titles",
+       x = "Title Description",
+       y = "OT Hours")
+
+
+# ANOVA for Agency.Name and OT.Hours
+anova_agency <- aov(OT.Hours ~ Agency.Name, data = salary_new)
+summary(anova_agency)
+
+# ANOVA for Title.Description and OT.Hours
+anova_title <- aov(OT.Hours ~ Title.Description, data = salary_new)
+summary(anova_title)
+
+
+# ANOVA for Agency.Name and Total.OT.Paid
+anova_agency <- aov(Total.OT.Paid ~ Agency.Name, data = salary_new)
+summary(anova_agency)
+
+# ANOVA for Title.Description and Total.OT.Paid
+anova_title <- aov(Total.OT.Paid ~ Title.Description, data = salary_new)
+summary(anova_title)
+
+```
+
+
+```{r parallell}
+library(GGally)
+ggparcoord(salary_new,
+           columns = c(11,18,17),  groupColumn = 5,
+           scale='globalminmax',
+           title = "Parallel Coordinate Plot for salary Data",
+           alphaLines = 0.6)
 ```
