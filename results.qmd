@@ -84,8 +84,11 @@ salary_new$days_difference <- as.numeric(salary_new$days_difference)
 # View(salary_new)
 salary_new$OT.Hours[salary_new$OT.Hours<0]<-0
 salary_new$Regular.Hours[salary_new$Regular.Hours<0]<-0
+
 salary_new$pay_per_hour<-salary_new$Total.OT.Paid/salary_new$OT.Hours
 salary_new$pay_per_hour[is.infinite(salary_new$pay_per_hour)| is.na(salary_new$pay_per_hour) |salary_new$pay_per_hour<0] <- 0 
+
+
 salary_new$job_type <- ifelse(as.numeric(salary_new$Regular.Hours) <= 1000 & as.numeric(salary_new$Regular.Hours) > 0, "part_time", "full_time")
 
 agency_size <- as.data.frame(table(salary_new$Agency.Name))
@@ -153,12 +156,83 @@ ggpairs(select(salary, Agency.Size, days_difference, AnnualSalary),
 
 
 ```{r Time Series}
+average_salary_agency <- salary %>%
+  group_by(Agency.Name, Fiscal.Year) %>%
+  summarise(average_salary = mean(AnnualSalary, na.rm = TRUE), .groups = 'drop')
 
+average_salary_agency |>
+  ggplot(aes(x=Fiscal.Year, y=average_salary, group=Agency.Name, color=Agency.Name)) +
+    geom_line()
+
+average_salary_title <- salary %>%
+  group_by(Title.Description, Fiscal.Year) %>%
+  summarise(average_salary = mean(AnnualSalary, na.rm = TRUE), .groups = 'drop')
+
+average_salary_title |> 
+  ggplot(aes(x=Fiscal.Year, y=average_salary, group=Title.Description, color=Title.Description)) +
+    geom_line()
+```
+```{r Histogram}
+ggplot(average_salary_agency, aes(x = average_salary)) +
+  geom_histogram(binwidth = 5000, fill = "lightblue", color = "black") +
+  facet_wrap(~Agency.Name) + 
+  theme(strip.text.x = element_text(size = 7))+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+ggplot(average_salary_title, aes(x = average_salary)) +
+  geom_histogram(binwidth = 5000, fill = "lightblue", color = "black") +
+  facet_wrap(~Title.Description) + 
+  theme(strip.text.x = element_text(size = 7))+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 ```
 
+```{r Map}
+library(sf)
+library(tigris)
+
+nyc_counties <- tigris::counties(state = "NY", cb = TRUE) %>% 
+  filter(COUNTYFP %in% c("005", "047", "061", "081", "085"))  # FIPS codes for NYC boroughs
 
 
-```{r}
+nyc_counties$BoroName <- factor(nyc_counties$NAME,
+                                levels = c("Bronx", "Kings", "New York", "Queens", "Richmond"),
+                                labels = c("BRONX", "BROOKLYN", "MANHATTAN", "QUEENS", "RICHMOND"))
+
+OThour_data <- salary %>%
+  group_by(Work.Location.Borough) %>%
+  summarize(Average_salary = mean(AnnualSalary, na.rm = TRUE))
+
+
+nyc_OThour_map <- merge(nyc_counties, OThour_data, by.x = "BoroName", by.y = "Work.Location.Borough")
+
+# Create the map visualization
+ggplot(data = nyc_OThour_map) +
+  geom_sf(aes(fill = Average_salary), color = "white", size = 0.5) +
+  geom_sf_text(aes(label = BoroName), size = 3, check_overlap = TRUE) +
+  scale_fill_viridis_c(name = "Average Hour") +
+  labs(title = "Average Hour by NYC Borough") +
+  theme_minimal()
+
+
+df_aggregated <- aggregate(AnnualSalary ~ Work.Location.Borough, data = salary, mean)
+
+coordinates <- data.frame(
+  Work.Location.Borough = c("MANHATTAN", "BROOKLYN", "BRONX", "QUEENS", "RICHMOND", "OTHER"),
+  x = c(-73.9712, -73.9442, -73.8648, -73.7949, -74.1502, -74.0060),  # Longitude
+  y = c(40.7831, 40.6782, 40.8448, 40.7282, 40.5795, 40.7128)         # Latitude
+)
+
+df_merged <- merge(df_aggregated, coordinates, by = "Work.Location.Borough")
+
+ggplot(df_merged, aes(x = x, y = y, size = AnnualSalary)) +
+    geom_point(alpha = 0.5, color = "pink") +
+    geom_text(aes(label = Work.Location.Borough), vjust = -1.5, size = 3.5) +  # Place text above the circles
+    scale_size(range = c(10, 35)) +
+    theme_void() +
+    labs(title = "Average Salary by NYC Borough")
+```
+
+```{r box_plot}
 library(ggplot2)
 ggplot(salary, aes(x = Agency.Name, y = OT.Hours)) +
   geom_boxplot() +
@@ -183,7 +257,7 @@ ggplot(salary, aes(x = job_type, y = OT.Hours)) +
 
 
 salary_tep2<-salary
-salary_tep2<-salary_tep2[salary_tep2$pay_per_hour > 0 & salary_tep2$pay_per_hour <500, ]
+salary_tep2<-salary_tep2[salary_tep2$pay_per_hour > 0 & salary_tep2$pay_per_hour <150, ]
 
 
 
@@ -244,7 +318,14 @@ ggparcoord(salary,
            scale='globalminmax',
            title = "Parallel Coordinate Plot for salary Data",
            alphaLines = 0.6)
+ggparcoord(salary,
+           columns = c(11,18,17),  groupColumn = 4,
+           scale='globalminmax',
+           title = "Parallel Coordinate Plot for salary Data",
+           alphaLines = 0.6)
 ```
+#police
+
 
 ```{r}
 library(ggridges)
@@ -291,10 +372,31 @@ ggplot(salary_tep, aes(x = OT_per_Regular_Time, y = Agency.Name, fill = Agency.N
 
 ```
 
-```{r}
+
+
+
+```{r time series}
+averageOThour_by_group  <- salary %>%
+  group_by(Agency.Name, Fiscal.Year) %>%
+  summarize(Average_hour = mean(OT.Hours, na.rm = TRUE))
+averageOThour_by_group |>
+  ggplot(aes(x=Fiscal.Year, y=Average_hour, group=Agency.Name, color=Agency.Name)) +
+    geom_line()
+
+
+averageOTpay_perhour_by_group  <- salary %>%
+  group_by(Agency.Name, Fiscal.Year) %>%
+  summarize(Average_OTpay = mean(pay_per_hour, na.rm = TRUE))
+averageOTpay_perhour_by_group |>
+  ggplot(aes(x=Fiscal.Year, y=Average_OTpay, group=Agency.Name, color=Agency.Name)) +
+    geom_line()
+
+```
+
+```{r bubble}
 
 salary_tep2<-salary
-salary_tep2<-salary_tep2[salary_tep2$pay_per_hour > 0 & salary_tep2$pay_per_hour <1000, ]
+salary_tep2<-salary_tep2[salary_tep2$pay_per_hour > 0 & salary_tep2$pay_per_hour <150, ]
 
 set.seed(123)
 sampled_indices <- sample(nrow(salary_tep2),150)
@@ -320,7 +422,7 @@ sampled_df %>%
 
 ```
 
-```{r}
+```{r map}
 
 library(sf)
 library(tigris)
@@ -341,7 +443,7 @@ OThour_data <- salary %>%
 
 
 nyc_OThour_map <- merge(nyc_counties, OThour_data, by.x = "BoroName", by.y = "Work.Location.Borough")
-View(nyc_OThour_map) 
+#View(nyc_OThour_map) 
 
 # Create the map visualization
 ggplot(data = nyc_OThour_map) +
@@ -350,30 +452,38 @@ ggplot(data = nyc_OThour_map) +
   scale_fill_viridis_c(name = "Average Hour") +
   labs(title = "Average Hour by NYC Borough") +
   theme_minimal()
+
+
+OTpay_perhour <- salary_tep2 %>%
+  group_by(Work.Location.Borough) %>%
+  summarize(Averagepay_perhour = mean(pay_per_hour, na.rm = TRUE))
+
+
+nyc_OTpay_perhour_map <- merge(nyc_counties, OTpay_perhour, by.x = "BoroName", by.y = "Work.Location.Borough")
+#View(nyc_OThour_map) 
+
+# Create the map visualization
+ggplot(data = nyc_OTpay_perhour_map ) +
+  geom_sf(aes(fill = Averagepay_perhour), color = "white", size = 0.5) +
+  geom_sf_text(aes(label = BoroName), size = 3, check_overlap = TRUE) +
+  scale_fill_viridis_c(name = "Average pay per Hour") +
+  labs(title = "Average pay per Hour by NYC Borough") +
+  theme_minimal()
 ```
 
 
-```{r}
+```{r ggalluvial}
 library(ggalluvial)
 frequency_df <- salary %>%
   group_by(Agency.Name, Title.Description, job_type, Work.Location.Borough,SalaryLevel) %>%
   summarize(Frequency = n(), .groups = 'drop')
 frequency_df
 
-# ggplot(frequency_df, aes(axis1 = Agency.Name, axis2 = Title.Description, axis3 = job_type, axis4 = Work.Location.Borough,axis5=SalaryLevel,
-#                 y = Frequency)) +
-#   geom_alluvium(aes(fill = c(Agency.Name, Title.Description, job_type, Work.Location.Borough,SalaryLevel))) +
-#   geom_stratum() +
-#   # geom_text(stat = "stratum", aes(label = after_stat(stratum))) +
-#   scale_x_discrete(limits = c("Agency.Name", "Title.Description", "job_type","Work.Location.Borough","SalaryLevel")) +
-#   guides(fill = "none")
-
-
 
 ggplot(frequency_df, aes(axis1 = Agency.Name, axis2 = Title.Description, axis3 = job_type, axis4 = Work.Location.Borough, axis5 = SalaryLevel, y = Frequency)) +
   geom_alluvium(aes(fill = Agency.Name)) +  # Using one variable for fill, you can change it as per your need
   geom_stratum(aes(fill = Agency.Name)) +  # Optional: Add color to stratum
-  geom_text(stat = "stratum", aes(label = after_stat(stratum)),size=2) +
+  geom_text(stat = "stratum", aes(label = after_stat(stratum)),size=1.5) +
   scale_x_discrete(limits = c("Agency.Name", "Title.Description", "job_type", "Work.Location.Borough", "SalaryLevel")) +
   guides(fill = "none")  # If you want a legend for the colors, remove this line
 

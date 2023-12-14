@@ -98,14 +98,22 @@ We also explore the ratio of regular to overtime hours&salaries across different
 
 ```{r}
 # Counting missing values per column
+salary <- salary %>%
+      mutate(across(where(is.character), ~na_if(., "")))
 missing_values <- sapply(salary, function(x) sum(is.na(x)))
+print(missing_values)
+# # Creating the bar chart
+# ggplot(data = data.frame(Column = names(missing_values), MissingValues = missing_values), 
+#        aes(x = Column, y = MissingValues)) +
+#     geom_bar(stat = "identity") +
+#     theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+#     labs(x = "Column Name", y = "Number of Missing Values", title = "Missing Values per Column")
+# 
 
-# Creating the bar chart
-ggplot(data = data.frame(Column = names(missing_values), MissingValues = missing_values), 
-       aes(x = Column, y = MissingValues)) +
-    geom_bar(stat = "identity") +
-    theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-    labs(x = "Column Name", y = "Number of Missing Values", title = "Missing Values per Column")
+# library(redav)
+# df<-salary
+# colnames(df) <- substr(colnames(df), 1, 4)
+# plot_missing(df)
 
 ```
 
@@ -113,8 +121,7 @@ After we delete meaningless data like "Payroll.Number", "Last.Name", "First.Name
 
 
 ```{r}
-salary <- salary %>%
-      mutate(across(where(is.character), ~na_if(., ""))) 
+ 
 salary_cleaned = na.omit(salary)
 colSums(is.na(salary_cleaned)) |> sort(decreasing=TRUE)
 write.csv(salary_cleaned, "~/edav_lz_sm/Cleaned Dataset.csv", row.names=FALSE)
