@@ -102,7 +102,7 @@ print(count_by_columnB)
 ```{r Correlation Heatmap Plot for Categorical Variables}
 # library(dplyr)
 library(GGally)
-p <- salary_new[, c(2, 4:6, 8, 15)]
+p <- salary_new[, c(2, 4:6, 8,19, 15)]
 library(ggcorrplot)
 model.matrix(~0+., data=p) %>%
   cor(use="pairwise.complete.obs") %>%
@@ -221,7 +221,10 @@ ggplot(average_salary_title, aes(x = average_salary)) +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 ```
 
-
+## OverTime Hour and OverTime Pay
+# Correlation between OverTime Hour/Pay with other variables 
+Based on the related variables of base salary from part 1, we intend to explore the relationship between over time and them.
+Part 1. Correlation between OverTime Hour/Pay with category variables
 
 ```{r Box Plot}
 library(ggplot2)
@@ -246,8 +249,17 @@ ggplot(salary, aes(x = job_type, y = OT.Hours)) +
        x = "Job_type",
        y = "OT Hours")
 
+
+ggplot(salary, aes(x = Work.Location.Borough, y = OT.Hours)) +
+  geom_boxplot() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(title = "Box Plot of OT.Hours across Different Work Locations",
+       x = "Work Locations",
+       y = "OT Hours")
+
+
 salary_tep2<-salary
-salary_tep2<-salary_tep2[salary_tep2$pay_per_hour > 0 & salary_tep2$pay_per_hour <150, ]
+salary_tep2<-salary_tep2[salary_tep2$pay_per_hour > 0 & salary_tep2$pay_per_hour <200, ]
 
 
 
@@ -272,6 +284,13 @@ ggplot(salary_tep2, aes(x = job_type, y = pay_per_hour)) +
        x = "Job_type",
        y = "OT Pay per Hours")
 
+ggplot(salary_tep2, aes(x = Work.Location.Borough, y = pay_per_hour)) +
+  geom_boxplot() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(title = "Box Plot of pay_per_hour across Different Work Locations",
+       x = "Work_Location",
+       y = "OT Pay per Hours")
+
 
 # ANOVA for Agency.Name and OT.Hours
 anova_agency <- aov(OT.Hours ~ Agency.Name, data = salary)
@@ -282,8 +301,11 @@ anova_title <- aov(OT.Hours ~ Title.Description, data = salary)
 summary(anova_title)
 
 # ANOVA for job_type and OT.Hours
-anova_title <- aov(OT.Hours ~ job_type, data = salary)
-summary(anova_title)
+anova_job <- aov(OT.Hours ~ job_type, data = salary)
+summary(anova_job)
+
+anova_location <- aov(OT.Hours ~ Work.Location.Borough, data = salary)
+summary(anova_location)
 
 
 # ANOVA for Agency.Name and Total.OT.Paid
@@ -295,10 +317,17 @@ anova_title <- aov(pay_per_hour ~ Title.Description, data = salary_tep2)
 summary(anova_title)
 
 # ANOVA for job_title and Total.OT.Paid
-anova_title <- aov(pay_per_hour ~ job_type, data = salary_tep2)
+anova_job <- aov(pay_per_hour ~ job_type, data = salary_tep2)
 summary(anova_title)
-```
 
+anova_location <- aov(pay_per_hour ~ Work.Location.Borough, data = salary_tep2)
+summary(anova_location)
+```
+Here we use the ANOVA test to evaluate the correlation between Over Time Hour/Pay and Agency.Name, Title.Description, Job_type, Work.Location. The result shows that Agency.Name, Title.Description, Job_type, Work.Location have low P-value which indicates significant differences between them. Therefore, it proves that they have correlation. 
+To visualize the test, We use box plot to show the distribution or mean levels of the variable of interest Over Time Hour/Pay across different groups like Agency.Name, Title.Description, Job_type, Work.Location. Expect for Box Plot of pay_per_hour across Different Work Locations, the medium line inside the boxes has noticeably different levels for different categories. Second, for each graph, there exist varying box zizes which represents the significantly different interquartile ranges. Here we consider plot 1 as a reference. the agency like Children's SVCS, Sanitation, Fire Department, Social Services, NYC Housing, Police have more variability than the other groups. Third, there exist various symmetry of the boxes. The agencies like Children's SVCS, Social Service, Taxi & Limousine represent left-skewness distribution, while Sanitation, Fire Department, NYC Housing, Police shows zero-skewness distribution. Fourth, we observe the different numbers of outliers among groups. Info Tech Department has less outliers than other groups which suggests that this group has less extreme values.
+Considering Box Plot of pay_per_hour across Different Work Locations, it shows the similar medium line and box sizes and the different parts like symmetry and outliers are not obvious than other graphs. Based on the ANOVA test, we think that Over Time pay per hour is related to Work Locations.
+
+Part 1. correlation between OverTime Hour/Pay with numerical variables
 ```{r Parallell}
 library(GGally)
 ggparcoord(salary,
@@ -312,6 +341,10 @@ ggparcoord(salary,
            title = "Parallel Coordinate Plot for salary Data",
            alphaLines = 0.6)
 ```
+
+As for plot 1, 
+Noticeably, in terms of OT pay per hour, Police has more outliers(purple line) than the other jobs which indicates it has more high 'OT Paid' than other job titles.
+
 
 #police
 
@@ -364,6 +397,7 @@ ggplot(data = nyc_OTpay_perhour_map ) +
   labs(title = "Average pay per Hour by NYC Borough") +
   theme_minimal()
 ```
+Considering the plot Average Hour by NYC Borough, it is clear that Manhattan has lowest average OT hour than other regions and people in Richmond seems to work overtime commonly. In spite of it, Richmond has the highest overtime pay among all regions in New York. However, Bronx has the lowest overtime pay but a little high over time hours.
 
 ```{r Time Series}
 averageOThour_by_group  <- salary %>%
@@ -373,6 +407,13 @@ averageOThour_by_group |>
   ggplot(aes(x=Fiscal.Year, y=Average_hour, group=Agency.Name, color=Agency.Name)) +
     geom_line()
 
+averageOThour_by_group  <- salary %>%
+  group_by(Title.Description, Fiscal.Year) %>%
+  summarize(Average_hour = mean(OT.Hours, na.rm = TRUE))
+averageOThour_by_group |>
+  ggplot(aes(x=Fiscal.Year, y=Average_hour, group=Title.Description, color=Title.Description)) +
+    geom_line()
+
 
 averageOTpay_perhour_by_group  <- salary %>%
   group_by(Agency.Name, Fiscal.Year) %>%
@@ -380,8 +421,16 @@ averageOTpay_perhour_by_group  <- salary %>%
 averageOTpay_perhour_by_group |>
   ggplot(aes(x=Fiscal.Year, y=Average_OTpay, group=Agency.Name, color=Agency.Name)) +
     geom_line()
+
+averageOTpay_perhour_by_group  <- salary %>%
+  group_by(Title.Description, Fiscal.Year) %>%
+  summarize(Average_OTpay = mean(pay_per_hour, na.rm = TRUE))
+averageOTpay_perhour_by_group |>
+  ggplot(aes(x=Fiscal.Year, y=Average_OTpay, group=Title.Description, color=Title.Description)) +
+    geom_line()
 ```
 
+#Distribution of OT hour, OT PAY per hour, rate between overtime and regular time based on agency
 ```{r Ridgeline}
 library(ggridges)
 
@@ -397,11 +446,13 @@ ggplot(salary, aes(x = OT.Hours, y = Agency.Name, fill = Agency.Name)) +
   )
 
 
-####revise
-ggplot(salary, aes(x = Total.OT.Paid, y = Agency.Name, fill = Agency.Name)) +
+salary_tep3<-salary
+salary_tep3<-salary_tep2[salary_tep2$pay_per_hour > 0, ]
+
+ggplot(salary_tep3, aes(x = pay_per_hour, y = Agency.Name, fill = Agency.Name)) +
   stat_density_ridges() +
   theme_ridges() +
-  labs(title = "Ridgeline Plot of OT Hours Paid by Agency", x = "OT Hours Paid", y = "Agency Name")+
+  labs(title = "Ridgeline Plot of OT Paid per hour by Agency", x = "OT Hours Paid", y = "Agency Name")+
     theme(
     text = element_text(size = 8),
     axis.title = element_text(size = 10),
@@ -411,9 +462,9 @@ ggplot(salary, aes(x = Total.OT.Paid, y = Agency.Name, fill = Agency.Name)) +
 
 
 salary_tep<-salary
-salary_tep<-salary_tep[salary_tep$Regular.Hours != 0, ]
+salary_tep<-salary_tep[salary_tep$Regular.Hours > 0, ]
 salary_tep$OT_per_Regular_Time<-salary_tep$OT.Hours/salary_tep$Regular.Hours
-
+salary_tep<-salary_tep[salary_tep$OT_per_Regular_Time < 1, ]
 
 
 ggplot(salary_tep, aes(x = OT_per_Regular_Time, y = Agency.Name, fill = Agency.Name)) +
@@ -428,11 +479,20 @@ ggplot(salary_tep, aes(x = OT_per_Regular_Time, y = Agency.Name, fill = Agency.N
   )
 
 ```
+Considering the distribution of OT Hours by Agency, the police department,NYC Housing department, Fire department,Sanitation department,Children's SVCS department have long tail but low peak which means that there exists a certain amount of employees have long over time hours in these departments, while the over time distribution of other departments is more like a normal and OT hours are mostly 0.
+Considering the distributio of OT Paid per hour by Agency, some departments are multimodal like Police department, Fire department, Sanitation department, Finance department which indicates 
+
+
+Marks: The plot 2 and 3 don't include 'DEPT OF ED PEDAGOGICAL', since all the regular hour and OT hour of this apartment is 0 which will be shown later.
+
+
+
+
 
 ```{r Bubble}
 
 salary_tep2<-salary
-salary_tep2<-salary_tep2[salary_tep2$pay_per_hour > 0, ]
+salary_tep2<-salary_tep2[salary_tep2$pay_per_hour > 0 & salary_tep2$pay_per_hour <200, ]
 
 set.seed(123)
 sampled_indices <- sample(nrow(salary_tep2),150)
@@ -458,21 +518,33 @@ sampled_df %>%
 
 ```
 
-
+```{r}
+salary_OT<- salary |>
+  mutate(OTLevel = case_when(
+    OT.Hours == 0 ~ "None",
+    OT.Hours > 0 & OT.Hours <= 200  ~ "LOW",
+    OT.Hours > 200 & OT.Hours <= 400 ~ "MOD",
+    OT.Hours > 400 & OT.Hours <= 1000 ~ "HIGH",
+    OT.Hours > 1000  ~ "VHIGH"))
+```
 
 ```{r Ggalluvial}
 library(ggalluvial)
-frequency_df <- salary %>%
-  group_by(Agency.Name, Title.Description, job_type, Work.Location.Borough,SalaryLevel) %>%
+frequency_df <- salary_OT %>%
+  group_by(Agency.Name, Title.Description, job_type, Work.Location.Borough,SalaryLevel,OTLevel) %>%
   summarize(Frequency = n(), .groups = 'drop')
 frequency_df
 
+frequency_df$OTLevel <- factor(frequency_df$OTLevel, levels = c("VHIGH", "HIGH", "MOD", "LOW","None")) 
+frequency_df$SalaryLevel <- factor(frequency_df$SalaryLevel, levels = c("VHIGH", "HIGH", "MOD", "LOW"))
 
-ggplot(frequency_df, aes(axis1 = Agency.Name, axis2 = Title.Description, axis3 = job_type, axis4 = Work.Location.Borough, axis5 = SalaryLevel, y = Frequency)) +
-  geom_alluvium(aes(fill = Agency.Name)) +  # Using one variable for fill, you can change it as per your need
-  geom_stratum(aes(fill = Agency.Name)) +  # Optional: Add color to stratum
+
+
+ggplot(frequency_df, aes(axis1 = Agency.Name, axis2 = Title.Description, axis3 = job_type, axis4 = Work.Location.Borough, axis5 = SalaryLevel, axis6 = OTLevel, y = Frequency)) +
+  geom_alluvium(aes(fill = SalaryLevel)) +  
+  geom_stratum(aes(fill = SalaryLevel)) +  
   geom_text(stat = "stratum", aes(label = after_stat(stratum)),size=1.5) +
-  scale_x_discrete(limits = c("Agency.Name", "Title.Description", "job_type", "Work.Location.Borough", "SalaryLevel")) +
-  guides(fill = "none")  # If you want a legend for the colors, remove this line
+  scale_x_discrete(limits = c("Agency.Name", "Title.Description", "job_type", "Work.Location.Borough", "SalaryLevel", "OTLevel")) +
+  guides(fill = "none") 
 
 ```
