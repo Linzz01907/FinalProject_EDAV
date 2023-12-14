@@ -16,8 +16,8 @@ select_agency <- salary_df |>
 'DEPARTMENT OF FINANCE',
 'DEPT OF INFO TECH & TELECOMM',
 'TAXI & LIMOUSINE COMMISSION'))
-select_agency
 ```
+
 ```{r}
 select_title <- select_agency |>  
   filter(Title.Description %in% c("CHILD PROTECTIVE SPECIALIST",
@@ -64,11 +64,9 @@ salary_new <- salary_new |>
     AnnualSalary > 58692 & AnnualSalary <= 80788 ~ "MOD",
     AnnualSalary > 80788 & AnnualSalary <= 95105 ~ "HIGH",
     AnnualSalary > 95105 & AnnualSalary <= 143858 ~ "VHIGH"))
-
 ```
+
 ```{r Agency Start Time}
-
-
 salary_new$Agency.Start.Date <- trimws(salary_new$Agency.Start.Date)
 salary_new$Agency.Start.Date <- as.Date(salary_new$Agency.Start.Date, format="%m/%d/%Y")
 salary_new$CorrentDate <- as.Date("2023-12-01")
@@ -80,8 +78,6 @@ salary_new$days_difference <- as.numeric(salary_new$days_difference)
 ```
 
 ```{r total pay_per_hour and agency_size}
-
-# View(salary_new)
 salary_new$OT.Hours[salary_new$OT.Hours<0]<-0
 salary_new$Regular.Hours[salary_new$Regular.Hours<0]<-0
 
@@ -102,11 +98,8 @@ count_by_columnB <- salary %>%
   summarise(Count = n())
 print(count_by_columnB)
 ```
-  
-  
-  
-  
-```{r Correlation Heatmap Plot}
+
+```{r Correlation Heatmap Plot for Categorical Variables}
 # library(dplyr)
 library(GGally)
 p <- salary_new[, c(2, 4:6, 8, 15)]
@@ -118,6 +111,14 @@ model.matrix(~0+., data=p) %>%
         axis.text.y = element_text(size = 5))
 # p <- salary_new[, c(2, 4:6, 8, 15)]
 # ggparcoord(p, columns=1:6)
+```
+**Observation and Analysis:**
+We want to find the relationship between 
+
+```{r Scattor Pair Plot for Continous Variables}
+ggpairs(select(salary, Agency.Size, days_difference, AnnualSalary), 
+        mapping = ggplot2::aes(alpha = 0.5),
+        lower = list(continuous = wrap("points", size = 0.1)))
 ```
 
 ```{r Lollipop}
@@ -131,62 +132,18 @@ mean_salary_title <- q %>%
     group_by(Title.Description) %>%
     summarise(mean_value_title = mean(AnnualSalary, na.rm = TRUE))
 
-p1 <- ggplot(mean_salary_agency, aes(x=Agency.Name, y=mean_value_agency)) +
+ggplot(mean_salary_agency, aes(x=Agency.Name, y=mean_value_agency)) +
   geom_segment( aes(x=Agency.Name, xend=Agency.Name, y=0, yend=mean_value_agency)) +
   geom_point( size=5, color="red", fill=alpha("orange", 0.3), alpha=0.7, shape=21, stroke=2)+
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
-p2 <- ggplot(mean_salary_title, aes(x=Title.Description, y=mean_value_title)) +
+ggplot(mean_salary_title, aes(x=Title.Description, y=mean_value_title)) +
   geom_segment( aes(x=Title.Description, xend=Title.Description, y=0, yend=mean_value_title)) +
   geom_point( size=5, color="red", fill=alpha("orange", 0.3), alpha=0.7, shape=21, stroke=2)+
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
-
-if (!requireNamespace("gridExtra", quietly = TRUE)) {
-    install.packages("gridExtra")
-}
-grid.arrange(p1, p2, ncol = 2, widths = c(1, 1))
 ```
 
-
-```{r Scattor Pair Plot}
-ggpairs(select(salary, Agency.Size, days_difference, AnnualSalary), 
-        mapping = ggplot2::aes(alpha = 0.5),
-        lower = list(continuous = wrap("points", size = 0.1)))
-```
-
-
-```{r Time Series}
-average_salary_agency <- salary %>%
-  group_by(Agency.Name, Fiscal.Year) %>%
-  summarise(average_salary = mean(AnnualSalary, na.rm = TRUE), .groups = 'drop')
-
-average_salary_agency |>
-  ggplot(aes(x=Fiscal.Year, y=average_salary, group=Agency.Name, color=Agency.Name)) +
-    geom_line()
-
-average_salary_title <- salary %>%
-  group_by(Title.Description, Fiscal.Year) %>%
-  summarise(average_salary = mean(AnnualSalary, na.rm = TRUE), .groups = 'drop')
-
-average_salary_title |> 
-  ggplot(aes(x=Fiscal.Year, y=average_salary, group=Title.Description, color=Title.Description)) +
-    geom_line()
-```
-```{r Histogram}
-ggplot(average_salary_agency, aes(x = average_salary)) +
-  geom_histogram(binwidth = 5000, fill = "lightblue", color = "black") +
-  facet_wrap(~Agency.Name) + 
-  theme(strip.text.x = element_text(size = 7))+
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
-
-ggplot(average_salary_title, aes(x = average_salary)) +
-  geom_histogram(binwidth = 5000, fill = "lightblue", color = "black") +
-  facet_wrap(~Title.Description) + 
-  theme(strip.text.x = element_text(size = 7))+
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
-```
-
-```{r Map}
+```{r Map for Mean Salary}
 library(sf)
 library(tigris)
 
@@ -232,7 +189,41 @@ ggplot(df_merged, aes(x = x, y = y, size = AnnualSalary)) +
     labs(title = "Average Salary by NYC Borough")
 ```
 
-```{r box_plot}
+```{r Time Series for Mean Salary}
+average_salary_agency <- salary %>%
+  group_by(Agency.Name, Fiscal.Year) %>%
+  summarise(average_salary = mean(AnnualSalary, na.rm = TRUE), .groups = 'drop')
+
+average_salary_agency |>
+  ggplot(aes(x=Fiscal.Year, y=average_salary, group=Agency.Name, color=Agency.Name)) +
+    geom_line()
+
+average_salary_title <- salary %>%
+  group_by(Title.Description, Fiscal.Year) %>%
+  summarise(average_salary = mean(AnnualSalary, na.rm = TRUE), .groups = 'drop')
+
+average_salary_title |> 
+  ggplot(aes(x=Fiscal.Year, y=average_salary, group=Title.Description, color=Title.Description)) +
+    geom_line()
+```
+
+```{r Histogram for Mean Salary}
+ggplot(average_salary_agency, aes(x = average_salary)) +
+  geom_histogram(binwidth = 1000, fill = "lightblue", color = "black") +
+  facet_wrap(~Agency.Name) + 
+  theme(strip.text.x = element_text(size = 7))+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+ggplot(average_salary_title, aes(x = average_salary)) +
+  geom_histogram(binwidth = 2000, fill = "lightblue", color = "black") +
+  facet_wrap(~Title.Description) + 
+  theme(strip.text.x = element_text(size = 7))+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+```
+
+
+
+```{r Box Plot}
 library(ggplot2)
 ggplot(salary, aes(x = Agency.Name, y = OT.Hours)) +
   geom_boxplot() +
@@ -254,7 +245,6 @@ ggplot(salary, aes(x = job_type, y = OT.Hours)) +
   labs(title = "Box Plot of OT.Hours across Different Titles",
        x = "Job_type",
        y = "OT Hours")
-
 
 salary_tep2<-salary
 salary_tep2<-salary_tep2[salary_tep2$pay_per_hour > 0 & salary_tep2$pay_per_hour <150, ]
@@ -307,11 +297,9 @@ summary(anova_title)
 # ANOVA for job_title and Total.OT.Paid
 anova_title <- aov(pay_per_hour ~ job_type, data = salary_tep2)
 summary(anova_title)
-
 ```
 
-
-```{r parallell}
+```{r Parallell}
 library(GGally)
 ggparcoord(salary,
            columns = c(11,18,17),  groupColumn = 5,
@@ -324,105 +312,11 @@ ggparcoord(salary,
            title = "Parallel Coordinate Plot for salary Data",
            alphaLines = 0.6)
 ```
+
 #police
 
 
-```{r}
-library(ggridges)
-
-ggplot(salary, aes(x = OT.Hours, y = Agency.Name, fill = Agency.Name)) +
-  stat_density_ridges() +
-  theme_ridges() +
-  labs(title = "Ridgeline Plot of OT Hours by Agency", x = "OT Hours", y = "Agency Name")+
-    theme(
-    text = element_text(size = 8),
-    axis.title = element_text(size = 10),
-    axis.text = element_text(size = 8),
-    plot.title = element_text(size = 12)
-  )
-
-ggplot(salary, aes(x = Total.OT.Paid, y = Agency.Name, fill = Agency.Name)) +
-  stat_density_ridges() +
-  theme_ridges() +
-  labs(title = "Ridgeline Plot of OT Hours Paid by Agency", x = "OT Hours Paid", y = "Agency Name")+
-    theme(
-    text = element_text(size = 8),
-    axis.title = element_text(size = 10),
-    axis.text = element_text(size = 8),
-    plot.title = element_text(size = 12)
-  )
-
-
-salary_tep<-salary
-salary_tep<-salary_tep[salary_tep$Regular.Hours != 0, ]
-salary_tep$OT_per_Regular_Time<-salary_tep$OT.Hours/salary_tep$Regular.Hours
-
-
-
-ggplot(salary_tep, aes(x = OT_per_Regular_Time, y = Agency.Name, fill = Agency.Name)) +
-  stat_density_ridges() +
-  theme_ridges() +
-  labs(title = "Ridgeline Plot of OT Hours rate by Agency", x = "OT Hours rate", y = "Agency Name")+
-    theme(
-    text = element_text(size = 8),
-    axis.title = element_text(size = 10),
-    axis.text = element_text(size = 8),
-    plot.title = element_text(size = 12)
-  )
-
-```
-
-
-
-
-```{r time series}
-averageOThour_by_group  <- salary %>%
-  group_by(Agency.Name, Fiscal.Year) %>%
-  summarize(Average_hour = mean(OT.Hours, na.rm = TRUE))
-averageOThour_by_group |>
-  ggplot(aes(x=Fiscal.Year, y=Average_hour, group=Agency.Name, color=Agency.Name)) +
-    geom_line()
-
-
-averageOTpay_perhour_by_group  <- salary %>%
-  group_by(Agency.Name, Fiscal.Year) %>%
-  summarize(Average_OTpay = mean(pay_per_hour, na.rm = TRUE))
-averageOTpay_perhour_by_group |>
-  ggplot(aes(x=Fiscal.Year, y=Average_OTpay, group=Agency.Name, color=Agency.Name)) +
-    geom_line()
-
-```
-
-```{r bubble}
-
-salary_tep2<-salary
-salary_tep2<-salary_tep2[salary_tep2$pay_per_hour > 0 & salary_tep2$pay_per_hour <150, ]
-
-set.seed(123)
-sampled_indices <- sample(nrow(salary_tep2),150)
-sampled_df <- salary_tep2[sampled_indices, ]
-
-sampled_df %>%
-  arrange(desc(days_difference)) %>%
-  ggplot(aes(x=OT.Hours, y=pay_per_hour, size=days_difference, color=Title.Description)) +
-    geom_point(alpha=0.5) +
-    scale_size_continuous(range = c(.1, 10), name="days_difference")
-
-sampled_df %>%
-  arrange(desc(days_difference)) %>%
-  ggplot(aes(x=AnnualSalary, y=OT.Hours, size=days_difference, color=Title.Description)) +
-    geom_point(alpha=0.5) +
-    scale_size_continuous(range = c(.1, 10), name="days_difference")
-
-sampled_df %>%
-  arrange(desc(days_difference)) %>%
-  ggplot(aes(x=AnnualSalary, y=pay_per_hour, size=days_difference, color=Title.Description)) +
-    geom_point(alpha=0.5) +
-    scale_size_continuous(range = c(.1, 10), name="days_difference")
-
-```
-
-```{r map}
+```{r Map}
 
 library(sf)
 library(tigris)
@@ -471,8 +365,102 @@ ggplot(data = nyc_OTpay_perhour_map ) +
   theme_minimal()
 ```
 
+```{r Time Series}
+averageOThour_by_group  <- salary %>%
+  group_by(Agency.Name, Fiscal.Year) %>%
+  summarize(Average_hour = mean(OT.Hours, na.rm = TRUE))
+averageOThour_by_group |>
+  ggplot(aes(x=Fiscal.Year, y=Average_hour, group=Agency.Name, color=Agency.Name)) +
+    geom_line()
 
-```{r ggalluvial}
+
+averageOTpay_perhour_by_group  <- salary %>%
+  group_by(Agency.Name, Fiscal.Year) %>%
+  summarize(Average_OTpay = mean(pay_per_hour, na.rm = TRUE))
+averageOTpay_perhour_by_group |>
+  ggplot(aes(x=Fiscal.Year, y=Average_OTpay, group=Agency.Name, color=Agency.Name)) +
+    geom_line()
+```
+
+```{r Ridgeline}
+library(ggridges)
+
+ggplot(salary, aes(x = OT.Hours, y = Agency.Name, fill = Agency.Name)) +
+  stat_density_ridges() +
+  theme_ridges() +
+  labs(title = "Ridgeline Plot of OT Hours by Agency", x = "OT Hours", y = "Agency Name")+
+    theme(
+    text = element_text(size = 8),
+    axis.title = element_text(size = 10),
+    axis.text = element_text(size = 8),
+    plot.title = element_text(size = 12)
+  )
+
+
+####revise
+ggplot(salary, aes(x = Total.OT.Paid, y = Agency.Name, fill = Agency.Name)) +
+  stat_density_ridges() +
+  theme_ridges() +
+  labs(title = "Ridgeline Plot of OT Hours Paid by Agency", x = "OT Hours Paid", y = "Agency Name")+
+    theme(
+    text = element_text(size = 8),
+    axis.title = element_text(size = 10),
+    axis.text = element_text(size = 8),
+    plot.title = element_text(size = 12)
+  )
+
+
+salary_tep<-salary
+salary_tep<-salary_tep[salary_tep$Regular.Hours != 0, ]
+salary_tep$OT_per_Regular_Time<-salary_tep$OT.Hours/salary_tep$Regular.Hours
+
+
+
+ggplot(salary_tep, aes(x = OT_per_Regular_Time, y = Agency.Name, fill = Agency.Name)) +
+  stat_density_ridges() +
+  theme_ridges() +
+  labs(title = "Ridgeline Plot of OT Hours rate by Agency", x = "OT Hours rate", y = "Agency Name")+
+    theme(
+    text = element_text(size = 8),
+    axis.title = element_text(size = 10),
+    axis.text = element_text(size = 8),
+    plot.title = element_text(size = 12)
+  )
+
+```
+
+```{r Bubble}
+
+salary_tep2<-salary
+salary_tep2<-salary_tep2[salary_tep2$pay_per_hour > 0, ]
+
+set.seed(123)
+sampled_indices <- sample(nrow(salary_tep2),150)
+sampled_df <- salary_tep2[sampled_indices, ]
+
+sampled_df %>%
+  arrange(desc(days_difference)) %>%
+  ggplot(aes(x=OT.Hours, y=pay_per_hour, size=days_difference, color=Title.Description)) +
+    geom_point(alpha=0.5) +
+    scale_size_continuous(range = c(.1, 10), name="days_difference")
+
+sampled_df %>%
+  arrange(desc(days_difference)) %>%
+  ggplot(aes(x=AnnualSalary, y=OT.Hours, size=days_difference, color=Title.Description)) +
+    geom_point(alpha=0.5) +
+    scale_size_continuous(range = c(.1, 10), name="days_difference")
+
+sampled_df %>%
+  arrange(desc(days_difference)) %>%
+  ggplot(aes(x=AnnualSalary, y=pay_per_hour, size=days_difference, color=Title.Description)) +
+    geom_point(alpha=0.5) +
+    scale_size_continuous(range = c(.1, 10), name="days_difference")
+
+```
+
+
+
+```{r Ggalluvial}
 library(ggalluvial)
 frequency_df <- salary %>%
   group_by(Agency.Name, Title.Description, job_type, Work.Location.Borough,SalaryLevel) %>%
@@ -486,8 +474,5 @@ ggplot(frequency_df, aes(axis1 = Agency.Name, axis2 = Title.Description, axis3 =
   geom_text(stat = "stratum", aes(label = after_stat(stratum)),size=1.5) +
   scale_x_discrete(limits = c("Agency.Name", "Title.Description", "job_type", "Work.Location.Borough", "SalaryLevel")) +
   guides(fill = "none")  # If you want a legend for the colors, remove this line
-
-
-
 
 ```
