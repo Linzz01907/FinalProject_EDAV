@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -138,7 +172,25 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#correlation-heatmap-plot-for-categorical-variables" id="toc-correlation-heatmap-plot-for-categorical-variables" class="nav-link active" data-scroll-target="#correlation-heatmap-plot-for-categorical-variables"><span class="header-section-number">3.1</span> Correlation Heatmap Plot for Categorical Variables</a></li>
+  <li><a href="#scattor-pair-plot-for-continous-variables" id="toc-scattor-pair-plot-for-continous-variables" class="nav-link" data-scroll-target="#scattor-pair-plot-for-continous-variables"><span class="header-section-number">3.2</span> Scattor Pair Plot for Continous Variables</a></li>
+  <li><a href="#lollipop-of-salary-for-various-agencies-and-job-titles" id="toc-lollipop-of-salary-for-various-agencies-and-job-titles" class="nav-link" data-scroll-target="#lollipop-of-salary-for-various-agencies-and-job-titles"><span class="header-section-number">3.3</span> Lollipop of Salary for Various Agencies and Job Titles</a></li>
+  <li><a href="#map-of-salary-for-different-work-location" id="toc-map-of-salary-for-different-work-location" class="nav-link" data-scroll-target="#map-of-salary-for-different-work-location"><span class="header-section-number">3.4</span> Map of Salary for Different Work Location</a></li>
+  <li><a href="#time-series-of-salary-for-various-agencies-and-job-titles" id="toc-time-series-of-salary-for-various-agencies-and-job-titles" class="nav-link" data-scroll-target="#time-series-of-salary-for-various-agencies-and-job-titles"><span class="header-section-number">3.5</span> Time Series of Salary for Various Agencies and Job Titles</a></li>
+  <li><a href="#distribution-of-salary-of-various-agencies-and-job-titles" id="toc-distribution-of-salary-of-various-agencies-and-job-titles" class="nav-link" data-scroll-target="#distribution-of-salary-of-various-agencies-and-job-titles"><span class="header-section-number">3.6</span> Distribution of Salary of Various Agencies and Job Titles</a></li>
+  <li><a href="#correlation-between-overtime-hourpay-with-other-variables" id="toc-correlation-between-overtime-hourpay-with-other-variables" class="nav-link" data-scroll-target="#correlation-between-overtime-hourpay-with-other-variables"><span class="header-section-number">3.7</span> Correlation between OverTime Hour/Pay with other variables</a></li>
+  <li><a href="#intuitive-display-of-spatial-data" id="toc-intuitive-display-of-spatial-data" class="nav-link" data-scroll-target="#intuitive-display-of-spatial-data"><span class="header-section-number">3.8</span> Intuitive display of spatial data</a></li>
+  <li><a href="#part-2.-correlation-between-over-time-hourpay-with-numerical-variables" id="toc-part-2.-correlation-between-over-time-hourpay-with-numerical-variables" class="nav-link" data-scroll-target="#part-2.-correlation-between-over-time-hourpay-with-numerical-variables"><span class="header-section-number">3.9</span> Part 2. correlation between Over Time Hour/Pay with numerical variables</a></li>
+  <li><a href="#part-3-correlation-between-overtime-hourpay-with-year-time-series" id="toc-part-3-correlation-between-overtime-hourpay-with-year-time-series" class="nav-link" data-scroll-target="#part-3-correlation-between-overtime-hourpay-with-year-time-series"><span class="header-section-number">3.10</span> part 3 correlation between OverTime Hour/Pay with year-Time Series</a></li>
+  <li><a href="#distribution-of-ot-hour-ot-pay-per-hour-rate-between-overtime-and-regular-time-based-on-agency" id="toc-distribution-of-ot-hour-ot-pay-per-hour-rate-between-overtime-and-regular-time-based-on-agency" class="nav-link" data-scroll-target="#distribution-of-ot-hour-ot-pay-per-hour-rate-between-overtime-and-regular-time-based-on-agency"><span class="header-section-number">3.11</span> Distribution of OT hour, OT PAY per hour, rate between overtime and regular time based on agency</a></li>
+  <li><a href="#the-relationship-between-over-time-and-base-salary" id="toc-the-relationship-between-over-time-and-base-salary" class="nav-link" data-scroll-target="#the-relationship-between-over-time-and-base-salary"><span class="header-section-number">3.12</span> The relationship between over time and base salary</a></li>
+  <li><a href="#base-salary-and-over-time-summary" id="toc-base-salary-and-over-time-summary" class="nav-link" data-scroll-target="#base-salary-and-over-time-summary"><span class="header-section-number">3.13</span> Base salary and over time summary</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/linzz01907/FinalProject_EDAV/edit/main/results.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/linzz01907/FinalProject_EDAV/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -160,8 +212,985 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.3     ✔ tibble    3.2.1
+✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>salary_df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"Cleaned Dataset.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>select_agency <span class="ot">&lt;-</span> salary_df <span class="sc">|&gt;</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Agency.Name <span class="sc">==</span> <span class="fu">c</span>(<span class="st">'DEPT OF ED PEDAGOGICAL'</span>,<span class="st">'POLICE DEPARTMENT'</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="st">'FIRE DEPARTMENT'</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="st">'HRA/DEPT OF SOCIAL SERVICES'</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="st">'NYC HOUSING AUTHORITY'</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a> <span class="st">'DEPARTMENT OF SANITATION'</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="st">"ADMIN FOR CHILDREN'S SVCS"</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="st">'DEPARTMENT OF FINANCE'</span>,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="st">'DEPT OF INFO TECH &amp; TELECOMM'</span>,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="st">'TAXI &amp; LIMOUSINE COMMISSION'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>select_title <span class="ot">&lt;-</span> select_agency <span class="sc">|&gt;</span>  </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Title.Description <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"CHILD PROTECTIVE SPECIALIST"</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"CHILD PROTECTIVE SPECIALIST SUPERVISOR"</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"CITY TAX AUDITOR"</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"CLERICAL ASSOCIATE"</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"CALL CENTER REPRESENTATIVE"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"COMPUTER SPECIALIST"</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"TAXI AND LIMOUSINE INSPECTOR"</span>,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"COMMUNITY ASSOCIATE"</span>,</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"TEACHER"</span>,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"TEACHER SPECIAL EDUCATION"</span>,</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"POLICE OFFICER"</span>,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"SCHOOL SAFETY AGENT"</span>,</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"FIREFIGHTER"</span>,</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"EMERGENCY MEDICAL SPECIALIST-EMT"</span>,</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"ELIGIBILITY SPECIALIST"</span>,</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"JOB OPPORTUNITY SPECIALIST"</span>,</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"CARETAKER"</span>,</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"MAINTENANCE WORKER"</span>,</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"SANITATION WORKER"</span>,</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"CITY SEASONAL AIDE"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> select_title <span class="sc">|&gt;</span>  </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">AnnualSalary =</span> <span class="fu">case_when</span>(</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    Pay.Basis <span class="sc">==</span> <span class="st">"per Annum"</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    Pay.Basis <span class="sc">==</span> <span class="st">"per Day"</span> <span class="sc">~</span> <span class="dv">260</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    Pay.Basis <span class="sc">==</span> <span class="st">"per Hour"</span> <span class="sc">~</span> <span class="dv">260</span> <span class="sc">*</span> <span class="dv">8</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    Pay.Basis <span class="sc">==</span> <span class="st">"Prorated Annual"</span> <span class="sc">~</span> <span class="dv">1</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>salary_new <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> </span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">AnnualSalary =</span> AnnualSalary <span class="sc">*</span> Base.Salary)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">#fivenum(salary_new$AnnualSalary)</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 6461  58692  80788  95105 143858</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>salary_new <span class="ot">&lt;-</span> salary_new <span class="sc">|&gt;</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">SalaryLevel =</span> <span class="fu">case_when</span>(</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    AnnualSalary <span class="sc">&gt;=</span> <span class="dv">6461</span> <span class="sc">&amp;</span> AnnualSalary <span class="sc">&lt;=</span> <span class="dv">58692</span> <span class="sc">~</span> <span class="st">"LOW"</span>,</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    AnnualSalary <span class="sc">&gt;</span> <span class="dv">58692</span> <span class="sc">&amp;</span> AnnualSalary <span class="sc">&lt;=</span> <span class="dv">80788</span> <span class="sc">~</span> <span class="st">"MOD"</span>,</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    AnnualSalary <span class="sc">&gt;</span> <span class="dv">80788</span> <span class="sc">&amp;</span> AnnualSalary <span class="sc">&lt;=</span> <span class="dv">95105</span> <span class="sc">~</span> <span class="st">"HIGH"</span>,</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    AnnualSalary <span class="sc">&gt;</span> <span class="dv">95105</span> <span class="sc">&amp;</span> AnnualSalary <span class="sc">&lt;=</span> <span class="dv">143858</span> <span class="sc">~</span> <span class="st">"VHIGH"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>salary_new<span class="sc">$</span>Agency.Start.Date <span class="ot">&lt;-</span> <span class="fu">trimws</span>(salary_new<span class="sc">$</span>Agency.Start.Date)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>salary_new<span class="sc">$</span>Agency.Start.Date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(salary_new<span class="sc">$</span>Agency.Start.Date, <span class="at">format=</span><span class="st">"%m/%d/%Y"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>salary_new<span class="sc">$</span>CorrentDate <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">"2023-12-01"</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>salary_new<span class="sc">$</span>Agency.Start.Date[salary_new<span class="sc">$</span>Agency.Start.Date <span class="sc">==</span> <span class="fu">as.Date</span>(<span class="st">"9999-12-31"</span>)] <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">"1999-12-31"</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>salary_new<span class="sc">$</span>days_difference <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(salary_new<span class="sc">$</span>CorrentDate) <span class="sc">-</span> <span class="fu">as.Date</span>(salary_new<span class="sc">$</span>Agency.Start.Date)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>salary_new<span class="sc">$</span>days_difference <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(salary_new<span class="sc">$</span>days_difference)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>salary_new<span class="sc">$</span>OT.Hours[salary_new<span class="sc">$</span>OT.Hours<span class="sc">&lt;</span><span class="dv">0</span>]<span class="ot">&lt;-</span><span class="dv">0</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>salary_new<span class="sc">$</span>Regular.Hours[salary_new<span class="sc">$</span>Regular.Hours<span class="sc">&lt;</span><span class="dv">0</span>]<span class="ot">&lt;-</span><span class="dv">0</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>salary_new<span class="sc">$</span>pay_per_hour<span class="ot">&lt;-</span>salary_new<span class="sc">$</span>Total.OT.Paid<span class="sc">/</span>salary_new<span class="sc">$</span>OT.Hours</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>salary_new<span class="sc">$</span>pay_per_hour[<span class="fu">is.infinite</span>(salary_new<span class="sc">$</span>pay_per_hour)<span class="sc">|</span> <span class="fu">is.na</span>(salary_new<span class="sc">$</span>pay_per_hour) <span class="sc">|</span>salary_new<span class="sc">$</span>pay_per_hour<span class="sc">&lt;</span><span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="dv">0</span> </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>salary_new<span class="sc">$</span>job_type <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">as.numeric</span>(salary_new<span class="sc">$</span>Regular.Hours) <span class="sc">&lt;=</span> <span class="dv">1000</span> <span class="sc">&amp;</span> <span class="fu">as.numeric</span>(salary_new<span class="sc">$</span>Regular.Hours) <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">"part_time"</span>, <span class="st">"full_time"</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>agency_size <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">table</span>(salary_new<span class="sc">$</span>Agency.Name))</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(agency_size) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Agency.Name"</span>, <span class="st">"Agency.Size"</span>)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>salary <span class="ot">&lt;-</span> <span class="fu">left_join</span>(salary_new, agency_size, <span class="at">by =</span> <span class="fu">join_by</span>(Agency.Name))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="correlation-heatmap-plot-for-categorical-variables" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="correlation-heatmap-plot-for-categorical-variables"><span class="header-section-number">3.1</span> Correlation Heatmap Plot for Categorical Variables</h2>
+<p>We aim to explore the relationship between our target variable, salary, and several factors such as agency, job title, and agency size, among others. Given the mix of categorical and continuous variables, we employ two methods to assess correlations. Firstly, to analyze the correlation between categorical variables and salary, we utilize a heatmap. Specifically, we focus on the areas in the last three columns that lack any white sections, which would indicate a zero correlation. We notice that these columns, corresponding to agency name, job title, and work location, largely lack white areas. This observation leads us to conclude that there is a relationship between salary and these three categorical factors. Notably, the ‘salary low’ column features many red-like colors, suggesting a strong and positive correlation. The next two columns, representing ‘moderate salary’ and ‘very high salary’, appear to have a smaller impact on these factors, showing both weaker correlation and negative correlation. Therefore, our subsequent analysis will concentrate on examining the relationship between salary and these three categorical factors, in contrast to leave status and pay basis, which show weaker correlations.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GGally)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Registered S3 method overwritten by 'GGally':
+  method from   
+  +.gg   ggplot2</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> salary_new[, <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">15</span>)]</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggcorrplot)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">model.matrix</span>(<span class="sc">~</span><span class="dv">0</span><span class="sc">+</span>., <span class="at">data=</span>p) <span class="sc">%&gt;%</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>(<span class="at">use=</span><span class="st">"pairwise.complete.obs"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggcorrplot</span>(<span class="at">show.diag=</span><span class="cn">FALSE</span>, <span class="at">type=</span><span class="st">"lower"</span>, <span class="at">lab=</span><span class="cn">FALSE</span>, <span class="at">lab_size=</span><span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">5</span>),  <span class="co"># Adjust size as needed for x axis labels</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">5</span>))<span class="sc">+</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Correlation Heatmap Plot for Categorical Variables"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/Correlation Heatmap Plot for Categorical Variables-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="scattor-pair-plot-for-continous-variables" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="scattor-pair-plot-for-continous-variables"><span class="header-section-number">3.2</span> Scattor Pair Plot for Continous Variables</h2>
+<p>Then, we aim to explore the correlation between salary and continuous variables. From the scatter pair plot, we observed that the correlation coefficients between salary and two factors—the size of the agency and the length of time since the agency was established—are 0.595 and 0.56, respectively. Consequently, we infer that there is a positive correlation between salary and these two factors. Although the relationship is not exceptionally strong, it is evident that both the size of the agency and its established duration have a certain degree of positive influence on salary.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggpairs</span>(<span class="fu">select</span>(salary, Agency.Size, days_difference, AnnualSalary), </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">mapping =</span> ggplot2<span class="sc">::</span><span class="fu">aes</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>),</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">lower =</span> <span class="fu">list</span>(<span class="at">continuous =</span> <span class="fu">wrap</span>(<span class="st">"points"</span>, <span class="at">size =</span> <span class="fl">0.1</span>)))<span class="sc">+</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Scattor Pair Plot for Continous Variables"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/Scattor Pair Plot for Continous Variables-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="lollipop-of-salary-for-various-agencies-and-job-titles" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="lollipop-of-salary-for-various-agencies-and-job-titles"><span class="header-section-number">3.3</span> Lollipop of Salary for Various Agencies and Job Titles</h2>
+<p>Next, we will analyze three factors that demonstrate a strong correlation with salary: agency, job title, and work location. Beginning with the factors of agency and job title, we found that among the ten agencies we examined, the Education Department has the highest average salary, followed by the Fire Department and Police Department. On the other hand, agencies like the Housing Authority, Department of Social Service, and Taxi &amp; Limousine Commission are associated with lower average salaries.</p>
+<p>Interestingly, despite initial expectations, the Tech &amp; Telecommunications Department ranked lower in terms of average salary. However, when analyzing job titles, we discovered that Computer Specialist positions hold the highest average salary. This suggests that within the Tech &amp; Telecommunications Department, there may be roles with comparatively lower salaries, such as those of Call Center Representatives, as indicated in the title analysis. In addition to Computer Specialists, other job titles with relatively high average salaries include Teachers, Special Education Teachers, and Child Protective Specialists. This aligns with our earlier findings, given that the Education Department has the highest average salary. Conversely, positions like City Seasonal Aide and Caretaker are associated with lower salaries, mirroring the trend observed in the lower-paying agencies.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'gridExtra'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:dplyr':
+
+    combine</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>q <span class="ot">&lt;-</span> salary_new[, <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">14</span>)]</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>mean_salary_agency <span class="ot">&lt;-</span> q <span class="sc">%&gt;%</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Agency.Name) <span class="sc">%&gt;%</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">mean_value_agency =</span> <span class="fu">mean</span>(AnnualSalary, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>mean_salary_title <span class="ot">&lt;-</span> q <span class="sc">%&gt;%</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Title.Description) <span class="sc">%&gt;%</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">mean_value_title =</span> <span class="fu">mean</span>(AnnualSalary, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mean_salary_agency, <span class="fu">aes</span>(<span class="at">x=</span>Agency.Name, <span class="at">y=</span>mean_value_agency)) <span class="sc">+</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>( <span class="fu">aes</span>(<span class="at">x=</span>Agency.Name, <span class="at">xend=</span>Agency.Name, <span class="at">y=</span><span class="dv">0</span>, <span class="at">yend=</span>mean_value_agency)) <span class="sc">+</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>( <span class="at">size=</span><span class="dv">5</span>, <span class="at">color=</span><span class="st">"red"</span>, <span class="at">fill=</span><span class="fu">alpha</span>(<span class="st">"orange"</span>, <span class="fl">0.3</span>), <span class="at">alpha=</span><span class="fl">0.7</span>, <span class="at">shape=</span><span class="dv">21</span>, <span class="at">stroke=</span><span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))<span class="sc">+</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Average Salary for Each Agency"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/Lollipop-1.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mean_salary_title, <span class="fu">aes</span>(<span class="at">x=</span>Title.Description, <span class="at">y=</span>mean_value_title)) <span class="sc">+</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>( <span class="fu">aes</span>(<span class="at">x=</span>Title.Description, <span class="at">xend=</span>Title.Description, <span class="at">y=</span><span class="dv">0</span>, <span class="at">yend=</span>mean_value_title)) <span class="sc">+</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>( <span class="at">size=</span><span class="dv">5</span>, <span class="at">color=</span><span class="st">"red"</span>, <span class="at">fill=</span><span class="fu">alpha</span>(<span class="st">"orange"</span>, <span class="fl">0.3</span>), <span class="at">alpha=</span><span class="fl">0.7</span>, <span class="at">shape=</span><span class="dv">21</span>, <span class="at">stroke=</span><span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))<span class="sc">+</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Average Salary for Each Title"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/Lollipop-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="map-of-salary-for-different-work-location" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="map-of-salary-for-different-work-location"><span class="header-section-number">3.4</span> Map of Salary for Different Work Location</h2>
+<p>Secondly, we analyzed the impact of work location on salary. We utilized both a map and a bubble plot to illustrate the distribution of average salaries across New York City. In the map, lighter shades indicate higher salaries. Our findings show that Manhattan has the highest average annual salary at 80,000 dollars. This figure might seem modest, considering that the ten agencies we selected primarily consist of essential yet typically lower-wage agencies. Richmond follows with an average salary of around 70,000 dollars per year. The salary gap is relatively small in the other three boroughs—Brooklyn, Queens, and the Bronx—where the average is around 65,000 dollars.</p>
+<p>The bubble plot further highlights salary distributions in other areas of New York. Plotted according to longitude and latitude for precise location mapping, the size of each circle on the plot corresponds to the salary amount; larger circles represent higher salaries. Interestingly, we found that salaries in areas outside the five boroughs we focused on are on average 100,000 dollars higher than those within these boroughs.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tigris)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">tigris_use_cache =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">tigris_class =</span> <span class="st">"sf"</span>)</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>nyc_counties <span class="ot">&lt;-</span> tigris<span class="sc">::</span><span class="fu">counties</span>(<span class="at">state =</span> <span class="st">"NY"</span>, <span class="at">cb =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(COUNTYFP <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"005"</span>, <span class="st">"047"</span>, <span class="st">"061"</span>, <span class="st">"081"</span>, <span class="st">"085"</span>))  <span class="co"># FIPS codes for NYC boroughs</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>(nyc_counties)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 5 features and 12 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: -74.25609 ymin: 40.4961 xmax: -73.70036 ymax: 40.91771
+Geodetic CRS:  NAD83
+  STATEFP COUNTYFP COUNTYNS       AFFGEOID GEOID     NAME        NAMELSAD
+1      36      061 00974129 0500000US36061 36061 New York New York County
+2      36      081 00974139 0500000US36081 36081   Queens   Queens County
+3      36      047 00974122 0500000US36047 36047    Kings    Kings County
+4      36      085 00974141 0500000US36085 36085 Richmond Richmond County
+5      36      005 00974101 0500000US36005 36005    Bronx    Bronx County
+  STUSPS STATE_NAME LSAD     ALAND    AWATER                       geometry
+1     NY   New York   06  58683562  29010735 MULTIPOLYGON (((-73.9995 40...
+2     NY   New York   06 281594049 188444349 MULTIPOLYGON (((-73.96262 4...
+3     NY   New York   06 179684484  71158757 MULTIPOLYGON (((-74.04201 4...
+4     NY   New York   06 148982680 117441533 MULTIPOLYGON (((-74.1617 40...
+5     NY   New York   06 109233466  39353304 MULTIPOLYGON (((-73.77336 4...</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>nyc_counties<span class="sc">$</span>BoroName <span class="ot">&lt;-</span> <span class="fu">factor</span>(nyc_counties<span class="sc">$</span>NAME,</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>                                <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Bronx"</span>, <span class="st">"Kings"</span>, <span class="st">"New York"</span>, <span class="st">"Queens"</span>, <span class="st">"Richmond"</span>),</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"BRONX"</span>, <span class="st">"BROOKLYN"</span>, <span class="st">"MANHATTAN"</span>, <span class="st">"QUEENS"</span>, <span class="st">"RICHMOND"</span>))</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>ave_salary <span class="ot">&lt;-</span> salary <span class="sc">%&gt;%</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Work.Location.Borough) <span class="sc">%&gt;%</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Average_salary =</span> <span class="fu">mean</span>(AnnualSalary, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>salary_map <span class="ot">&lt;-</span> <span class="fu">merge</span>(nyc_counties, ave_salary, <span class="at">by.x =</span> <span class="st">"BoroName"</span>, <span class="at">by.y =</span> <span class="st">"Work.Location.Borough"</span>)</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the map visualization</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> salary_map) <span class="sc">+</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> Average_salary), <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> BoroName), <span class="at">size =</span> <span class="dv">3</span>, <span class="at">check_overlap =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">name =</span> <span class="st">"Average Salary"</span>) <span class="sc">+</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Average Salary by NYC Borough"</span>) <span class="sc">+</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>df_aggregated <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(AnnualSalary <span class="sc">~</span> Work.Location.Borough, <span class="at">data =</span> salary, mean)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>coordinates <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Work.Location.Borough =</span> <span class="fu">c</span>(<span class="st">"MANHATTAN"</span>, <span class="st">"BROOKLYN"</span>, <span class="st">"BRONX"</span>, <span class="st">"QUEENS"</span>, <span class="st">"RICHMOND"</span>, <span class="st">"OTHER"</span>),</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">73.9712</span>, <span class="sc">-</span><span class="fl">73.9442</span>, <span class="sc">-</span><span class="fl">73.8648</span>, <span class="sc">-</span><span class="fl">73.7949</span>, <span class="sc">-</span><span class="fl">74.1502</span>, <span class="sc">-</span><span class="fl">74.0060</span>),  <span class="co"># Longitude</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">c</span>(<span class="fl">40.7831</span>, <span class="fl">40.6782</span>, <span class="fl">40.8448</span>, <span class="fl">40.7282</span>, <span class="fl">40.5795</span>, <span class="fl">40.7128</span>)         <span class="co"># Latitude</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>df_merged <span class="ot">&lt;-</span> <span class="fu">merge</span>(df_aggregated, coordinates, <span class="at">by =</span> <span class="st">"Work.Location.Borough"</span>)</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_merged, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">size =</span> AnnualSalary)) <span class="sc">+</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">"pink"</span>) <span class="sc">+</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> Work.Location.Borough), <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">1.5</span>, <span class="at">size =</span> <span class="fl">3.5</span>) <span class="sc">+</span>  <span class="co"># Place text above the circles</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">35</span>)) <span class="sc">+</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Average Salary by NYC Borough"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="time-series-of-salary-for-various-agencies-and-job-titles" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="time-series-of-salary-for-various-agencies-and-job-titles"><span class="header-section-number">3.5</span> Time Series of Salary for Various Agencies and Job Titles</h2>
+<p>We aimed to examine salary changes across different agencies and job titles over time. Our findings indicate a general upward trend in salaries, regardless of agency or title, over the past ten years. However, we noted a unique pattern with the Department of Information Technology &amp; Telecommunications. Its salaries experienced a sharp increase in 2015, followed by minor fluctuations and then a significant drop in 2021. This decline or stagnation in salaries in 2021 and 2022 was observed across many agencies, likely due to the economic downturn caused by the pandemic. However, regarding the Education Department and Department of Social Services, we observed a steady growth in salaries, indicating resilience amid economic challenges.</p>
+<p>For job titles, the overall trend mirrors that of the agencies with an upward trajectory. However, the salary data across different titles shows considerable variation, as indicated by the scattered lines in our analysis. Notably, the position of City Seasonal Aide, despite having the lowest salary, exhibited unstable changes over the past decade. Its salary increased between 2015 and 2017, then declined, but began to rise steadily again starting from 2019.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>average_salary_agency <span class="ot">&lt;-</span> salary <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Agency.Name, Fiscal.Year) <span class="sc">%&gt;%</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">average_salary =</span> <span class="fu">mean</span>(AnnualSalary, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">'drop'</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>average_salary_agency <span class="sc">|&gt;</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Fiscal.Year, <span class="at">y=</span>average_salary, <span class="at">group=</span>Agency.Name, <span class="at">color=</span>Agency.Name)) <span class="sc">+</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Evolution of Salaries Across Different Agencies Over Time"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/Time Series for Mean Salary-1.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>average_salary_title <span class="ot">&lt;-</span> salary <span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Title.Description, Fiscal.Year) <span class="sc">%&gt;%</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">average_salary =</span> <span class="fu">mean</span>(AnnualSalary, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">'drop'</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>average_salary_title <span class="sc">|&gt;</span> </span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Fiscal.Year, <span class="at">y=</span>average_salary, <span class="at">group=</span>Title.Description, <span class="at">color=</span>Title.Description)) <span class="sc">+</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Evolution of Salaries Across Different Titles Over Time"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/Time Series for Mean Salary-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="distribution-of-salary-of-various-agencies-and-job-titles" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="distribution-of-salary-of-various-agencies-and-job-titles"><span class="header-section-number">3.6</span> Distribution of Salary of Various Agencies and Job Titles</h2>
+<p>The salary distributions across various agencies display a range of patterns, indicating the diversity in pay scales within the public sector. Agencies like the Department of Finance, HRA/Dept of Social Services, and Fire Department show a concentration in the lower to mid salary ranges, suggesting that a significant portion of their employees earn between 40,000 dollars to 80,000 dollars. In contrast, the Dept of Ed Pedagogical stands out with a considerable number of positions at the higher end of the salary spectrum, nearing 100,000 dollars, which could reflect specialized roles or higher education requirements. The Police Department displays a distinct peak at around 60,000 dollars, hinting at a standard salary level for a common rank or step in the department. The Dept of Info Tech &amp; Telecomm, NYC Housing Authority, and Taxi &amp; Limousine Commission show a more distributed salary range, pointing to a variety of pay grades and positions. Finally, the Admin for Children’s Svcs and the Department of Sanitation have the most diverse spread, with salaries spanning from the lower to upper ends, indicating a broad array of roles and corresponding salaries within these agencies.</p>
+<p>The second graph displays a collection of histograms that represent the salary distribution for various job titles across a city’s public service roles. The histograms show a wide range of salary distributions, with certain positions like ‘Police Officer’, ‘Teacher’, and ‘Teacher Special Education’ demonstrating higher salary ranges, often peaking around 100,000 dollars. On the other hand, roles like ‘Call Center Representative’, ‘Caretaker’, and ‘City Seasonal Aide’ show a concentration of salaries in the lower range, possibly around 25,000 dollars to 50,000 dollars, suggesting entry-level or part-time positions. Positions such as ‘Clerical Associate’, ‘Community Associate’, and ‘Eligibility Specialist’ have salary distributions that span a medium range, with concentrations not as high as specialized roles like ‘Emergency Medical Specialist-EMT’ or ‘Firefighter’, which also show a wider range of salaries. This pattern underscores the variation in compensation that correlates with the nature of the job, required qualifications, and the level of responsibility inherent to each role.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(average_salary_agency, <span class="fu">aes</span>(<span class="at">x =</span> average_salary)) <span class="sc">+</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1000</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Agency.Name) <span class="sc">+</span> </span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">strip.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">7</span>))<span class="sc">+</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>))<span class="sc">+</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Salary Distribution Across Different Agencies"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/Histogram for Mean Salary-1.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(average_salary_title, <span class="fu">aes</span>(<span class="at">x =</span> average_salary)) <span class="sc">+</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">2000</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Title.Description) <span class="sc">+</span> </span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">strip.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">7</span>))<span class="sc">+</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>))<span class="sc">+</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Salary Distribution Across Different Titles"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/Histogram for Mean Salary-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="correlation-between-overtime-hourpay-with-other-variables" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="correlation-between-overtime-hourpay-with-other-variables"><span class="header-section-number">3.7</span> Correlation between OverTime Hour/Pay with other variables</h2>
+<p>Based on the related variables of base salary from part 1, we intend to explore the relationship between over time and them. Part 1. Correlation between OverTime Hour/Pay with category variables. Here we use the ANOVA test to evaluate the correlation between Over Time Hour/Pay and Agency.Name, Title.Description, Job_type, Work.Location. The result shows that Agency.Name, Title.Description, Job_type, Work.Location have low P-value which indicates significant differences between them. Therefore, it proves that they have correlation. To visualize the test, We use box plot to show the distribution or mean levels of the variable of interest Over Time Hour/Pay across different groups like Agency.Name, Title.Description, Job_type, Work.Location. Expect for Box Plot of pay_per_hour across Different Work Locations, the medium line inside the boxes has noticeably different levels for different categories. Second, for each graph, there exist varying box zizes which represents the significantly different interquartile ranges. Here we consider plot 1 as a reference. the agency like Children’s SVCS, Sanitation, Fire Department, Social Services, NYC Housing, Police have more variability than the other groups. Third, there exist various symmetry of the boxes. The agencies like Children’s SVCS, Social Service, Taxi &amp; Limousine represent left-skewness distribution, while Sanitation, Fire Department, NYC Housing, Police shows zero-skewness distribution. Fourth, we observe the different numbers of outliers among groups. Info Tech Department has less outliers than other groups which suggests that this group has less extreme values. Considering Box Plot of pay_per_hour across Different Work Locations, it shows the similar medium line and box sizes and the different parts like symmetry and outliers are not obvious than other graphs. Based on the ANOVA test, we think that Over Time pay per hour is related to Work Locations.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(salary, <span class="fu">aes</span>(<span class="at">x =</span> Agency.Name, <span class="at">y =</span> OT.Hours)) <span class="sc">+</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Box Plot of OT.Hours across Different Agencies"</span>,</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Agency Name"</span>,</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"OT Hours"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/Box Plot-1.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(salary, <span class="fu">aes</span>(<span class="at">x =</span> Title.Description, <span class="at">y =</span> OT.Hours)) <span class="sc">+</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Box Plot of OT.Hours across Different Titles"</span>,</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Title Description"</span>,</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"OT Hours"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/Box Plot-2.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(salary, <span class="fu">aes</span>(<span class="at">x =</span> job_type, <span class="at">y =</span> OT.Hours)) <span class="sc">+</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Box Plot of OT.Hours across Different Titles"</span>,</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Job_type"</span>,</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"OT Hours"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/Box Plot-3.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(salary, <span class="fu">aes</span>(<span class="at">x =</span> Work.Location.Borough, <span class="at">y =</span> OT.Hours)) <span class="sc">+</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Box Plot of OT.Hours across Different Work Locations"</span>,</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Work Locations"</span>,</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"OT Hours"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/Box Plot-4.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>salary_tep2<span class="ot">&lt;-</span>salary</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>salary_tep2<span class="ot">&lt;-</span>salary_tep2[salary_tep2<span class="sc">$</span>pay_per_hour <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> salary_tep2<span class="sc">$</span>pay_per_hour <span class="sc">&lt;</span><span class="dv">200</span>, ]</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(salary_tep2, <span class="fu">aes</span>(<span class="at">x =</span> Agency.Name, <span class="at">y =</span> pay_per_hour)) <span class="sc">+</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Box Plot of pay_per_hour across Different Agencies"</span>,</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Agency Name"</span>,</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"OT Pay per Hours"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/Box Plot-5.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(salary_tep2, <span class="fu">aes</span>(<span class="at">x =</span> Title.Description, <span class="at">y =</span> pay_per_hour)) <span class="sc">+</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Box Plot of pay_per_hour across Different Titles"</span>,</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Title Description"</span>,</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"OT Pay per Hours"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/Box Plot-6.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(salary_tep2, <span class="fu">aes</span>(<span class="at">x =</span> job_type, <span class="at">y =</span> pay_per_hour)) <span class="sc">+</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Box Plot of pay_per_hour across Different Titles"</span>,</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Job_type"</span>,</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"OT Pay per Hours"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/Box Plot-7.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(salary_tep2, <span class="fu">aes</span>(<span class="at">x =</span> Work.Location.Borough, <span class="at">y =</span> pay_per_hour)) <span class="sc">+</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Box Plot of pay_per_hour across Different Work Locations"</span>,</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Work_Location"</span>,</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"OT Pay per Hours"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/Box Plot-8.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ANOVA for Agency.Name and OT.Hours</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>anova_agency <span class="ot">&lt;-</span> <span class="fu">aov</span>(OT.Hours <span class="sc">~</span> Agency.Name, <span class="at">data =</span> salary)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(anova_agency)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                Df    Sum Sq   Mean Sq F value Pr(&gt;F)    
+Agency.Name      9 2.364e+09 262698944   12645 &lt;2e-16 ***
+Residuals   143371 2.979e+09     20776                   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ANOVA for Title.Description and OT.Hours</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>anova_title <span class="ot">&lt;-</span> <span class="fu">aov</span>(OT.Hours <span class="sc">~</span> Title.Description, <span class="at">data =</span> salary)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(anova_title)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                      Df    Sum Sq   Mean Sq F value Pr(&gt;F)    
+Title.Description     19 2.666e+09 140335630    7517 &lt;2e-16 ***
+Residuals         143361 2.677e+09     18670                   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ANOVA for job_type and OT.Hours</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>anova_job <span class="ot">&lt;-</span> <span class="fu">aov</span>(OT.Hours <span class="sc">~</span> job_type, <span class="at">data =</span> salary)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(anova_job)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                Df    Sum Sq  Mean Sq F value Pr(&gt;F)    
+job_type         1 4.554e+07 45541727    1233 &lt;2e-16 ***
+Residuals   143379 5.297e+09    36947                   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>anova_location <span class="ot">&lt;-</span> <span class="fu">aov</span>(OT.Hours <span class="sc">~</span> Work.Location.Borough, <span class="at">data =</span> salary)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(anova_location)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                          Df    Sum Sq   Mean Sq F value Pr(&gt;F)    
+Work.Location.Borough      5 1.306e+09 261291964    9281 &lt;2e-16 ***
+Residuals             143375 4.036e+09     28153                   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ANOVA for Agency.Name and Total.OT.Paid</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>anova_agency <span class="ot">&lt;-</span> <span class="fu">aov</span>(pay_per_hour <span class="sc">~</span> Agency.Name, <span class="at">data =</span> salary_tep2)</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(anova_agency)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>               Df   Sum Sq Mean Sq F value Pr(&gt;F)    
+Agency.Name     8  1735678  216960   571.8 &lt;2e-16 ***
+Residuals   50676 19228534     379                   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ANOVA for Title.Description and Total.OT.Paid</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>anova_title <span class="ot">&lt;-</span> <span class="fu">aov</span>(pay_per_hour <span class="sc">~</span> Title.Description, <span class="at">data =</span> salary_tep2)</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(anova_title)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                     Df   Sum Sq Mean Sq F value Pr(&gt;F)    
+Title.Description    17  5034827  296166     942 &lt;2e-16 ***
+Residuals         50667 15929385     314                   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ANOVA for job_title and Total.OT.Paid</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>anova_job <span class="ot">&lt;-</span> <span class="fu">aov</span>(pay_per_hour <span class="sc">~</span> job_type, <span class="at">data =</span> salary_tep2)</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(anova_title)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                     Df   Sum Sq Mean Sq F value Pr(&gt;F)    
+Title.Description    17  5034827  296166     942 &lt;2e-16 ***
+Residuals         50667 15929385     314                   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>anova_location <span class="ot">&lt;-</span> <span class="fu">aov</span>(pay_per_hour <span class="sc">~</span> Work.Location.Borough, <span class="at">data =</span> salary_tep2)</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(anova_location)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                         Df   Sum Sq Mean Sq F value Pr(&gt;F)    
+Work.Location.Borough     4   111866   27966   67.97 &lt;2e-16 ***
+Residuals             50680 20852346     411                   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</section>
+<section id="intuitive-display-of-spatial-data" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="intuitive-display-of-spatial-data"><span class="header-section-number">3.8</span> Intuitive display of spatial data</h2>
+<p>Considering the plot Average Hour by NYC Borough, it is clear that Manhattan has lowest average OT hour than other regions and people in Richmond seems to work overtime commonly. In spite of it, Richmond has the highest overtime pay among all regions in New York which shows in figure 2. Attentionally, Bronx has the lowest overtime pay but a little high over time hours.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tigris)</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">tigris_use_cache =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">tigris_class =</span> <span class="st">"sf"</span>)</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Obtain geospatial data for New York counties</span></span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>nyc_counties <span class="ot">&lt;-</span> tigris<span class="sc">::</span><span class="fu">counties</span>(<span class="at">state =</span> <span class="st">"NY"</span>, <span class="at">cb =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(COUNTYFP <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"005"</span>, <span class="st">"047"</span>, <span class="st">"061"</span>, <span class="st">"081"</span>, <span class="st">"085"</span>))  <span class="co"># FIPS codes for NYC boroughs</span></span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>(nyc_counties)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 5 features and 12 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: -74.25609 ymin: 40.4961 xmax: -73.70036 ymax: 40.91771
+Geodetic CRS:  NAD83
+  STATEFP COUNTYFP COUNTYNS       AFFGEOID GEOID     NAME        NAMELSAD
+1      36      061 00974129 0500000US36061 36061 New York New York County
+2      36      081 00974139 0500000US36081 36081   Queens   Queens County
+3      36      047 00974122 0500000US36047 36047    Kings    Kings County
+4      36      085 00974141 0500000US36085 36085 Richmond Richmond County
+5      36      005 00974101 0500000US36005 36005    Bronx    Bronx County
+  STUSPS STATE_NAME LSAD     ALAND    AWATER                       geometry
+1     NY   New York   06  58683562  29010735 MULTIPOLYGON (((-73.9995 40...
+2     NY   New York   06 281594049 188444349 MULTIPOLYGON (((-73.96262 4...
+3     NY   New York   06 179684484  71158757 MULTIPOLYGON (((-74.04201 4...
+4     NY   New York   06 148982680 117441533 MULTIPOLYGON (((-74.1617 40...
+5     NY   New York   06 109233466  39353304 MULTIPOLYGON (((-73.77336 4...</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>nyc_counties<span class="sc">$</span>BoroName <span class="ot">&lt;-</span> <span class="fu">factor</span>(nyc_counties<span class="sc">$</span>NAME,</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>                                <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Bronx"</span>, <span class="st">"Kings"</span>, <span class="st">"New York"</span>, <span class="st">"Queens"</span>, <span class="st">"Richmond"</span>),</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"BRONX"</span>, <span class="st">"BROOKLYN"</span>, <span class="st">"MANHATTAN"</span>, <span class="st">"QUEENS"</span>, <span class="st">"RICHMOND"</span>))</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>OThour_data <span class="ot">&lt;-</span> salary <span class="sc">%&gt;%</span></span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Work.Location.Borough) <span class="sc">%&gt;%</span></span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Average_hour =</span> <span class="fu">mean</span>(OT.Hours, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a>nyc_OThour_map <span class="ot">&lt;-</span> <span class="fu">merge</span>(nyc_counties, OThour_data, <span class="at">by.x =</span> <span class="st">"BoroName"</span>, <span class="at">by.y =</span> <span class="st">"Work.Location.Borough"</span>)</span>
+<span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a><span class="co">#View(nyc_OThour_map) </span></span>
+<span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-13"><a href="#cb52-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the map visualization</span></span>
+<span id="cb52-14"><a href="#cb52-14" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> nyc_OThour_map) <span class="sc">+</span></span>
+<span id="cb52-15"><a href="#cb52-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> Average_hour), <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb52-16"><a href="#cb52-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> BoroName), <span class="at">size =</span> <span class="dv">3</span>, <span class="at">check_overlap =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb52-17"><a href="#cb52-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">name =</span> <span class="st">"Average Hour"</span>) <span class="sc">+</span></span>
+<span id="cb52-18"><a href="#cb52-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Average Hour by NYC Borough"</span>) <span class="sc">+</span></span>
+<span id="cb52-19"><a href="#cb52-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>OTpay_perhour <span class="ot">&lt;-</span> salary_tep2 <span class="sc">%&gt;%</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Work.Location.Borough) <span class="sc">%&gt;%</span></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Averagepay_perhour =</span> <span class="fu">mean</span>(pay_per_hour, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>nyc_OTpay_perhour_map <span class="ot">&lt;-</span> <span class="fu">merge</span>(nyc_counties, OTpay_perhour, <span class="at">by.x =</span> <span class="st">"BoroName"</span>, <span class="at">by.y =</span> <span class="st">"Work.Location.Borough"</span>)</span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a><span class="co">#View(nyc_OThour_map) </span></span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the map visualization</span></span>
+<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> nyc_OTpay_perhour_map ) <span class="sc">+</span></span>
+<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> Averagepay_perhour), <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb53-12"><a href="#cb53-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> BoroName), <span class="at">size =</span> <span class="dv">3</span>, <span class="at">check_overlap =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb53-13"><a href="#cb53-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">name =</span> <span class="st">"Average pay per Hour"</span>) <span class="sc">+</span></span>
+<span id="cb53-14"><a href="#cb53-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Average pay per Hour by NYC Borough"</span>) <span class="sc">+</span></span>
+<span id="cb53-15"><a href="#cb53-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="part-2.-correlation-between-over-time-hourpay-with-numerical-variables" class="level2" data-number="3.9">
+<h2 data-number="3.9" class="anchored" data-anchor-id="part-2.-correlation-between-over-time-hourpay-with-numerical-variables"><span class="header-section-number">3.9</span> Part 2. correlation between Over Time Hour/Pay with numerical variables</h2>
+<p>As for figure 1, we can see that in terms of OT pay per hour, police has more outliers(purple line) than the other jobs which indicates it has more extreme value(high ‘OT Paid’) than other job titles. Since the difference of orders of magnitude between different factors is too large, we use sample the data set and also use ‘std’ as the scale for figure 2 and 3. As for figure 2 and 3, except that DEPT OF ED PEDAGOGICAL(green lines in agency groups and pinks lines in job title groups)doesn’t show a clear relationship between over time hours and total time of company establishment, the other department show a positve relationship between over time hours and total time of company establishment and also a positive relationship over time pay and total time of company establishment.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GGally)</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggparcoord</span>(salary,</span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">columns =</span> <span class="fu">c</span>(<span class="dv">11</span>,<span class="dv">18</span>,<span class="dv">17</span>),  <span class="at">groupColumn =</span> <span class="dv">2</span>,</span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">scale=</span><span class="st">'globalminmax'</span>,</span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">title =</span> <span class="st">"Parallel Coordinate Plot for salary Data"</span>,</span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">alphaLines =</span> <span class="fl">0.6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/Parallell-1.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>sampled_indices <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">nrow</span>(salary),<span class="dv">200</span>)</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>sampled_df <span class="ot">&lt;-</span> salary[sampled_indices, ]</span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggparcoord</span>(sampled_df,</span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">columns =</span> <span class="fu">c</span>(<span class="dv">11</span>,<span class="dv">17</span>,<span class="dv">18</span>),  <span class="at">groupColumn =</span> <span class="dv">2</span>,</span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">scale=</span><span class="st">'std'</span>,</span>
+<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">title =</span> <span class="st">"Parallel Coordinate Plot for salary Data"</span>,</span>
+<span id="cb55-10"><a href="#cb55-10" aria-hidden="true" tabindex="-1"></a>           <span class="at">alphaLines =</span> <span class="fl">0.6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/Parallell-2.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggparcoord</span>(sampled_df,</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">columns =</span> <span class="fu">c</span>(<span class="dv">11</span>,<span class="dv">17</span>,<span class="dv">18</span>),  <span class="at">groupColumn =</span> <span class="dv">5</span>,</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">scale=</span><span class="st">'std'</span>,</span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">title =</span> <span class="st">"Parallel Coordinate Plot for salary Data"</span>,</span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">alphaLines =</span> <span class="fl">0.6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/Parallell-3.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="part-3-correlation-between-overtime-hourpay-with-year-time-series" class="level2" data-number="3.10">
+<h2 data-number="3.10" class="anchored" data-anchor-id="part-3-correlation-between-overtime-hourpay-with-year-time-series"><span class="header-section-number">3.10</span> part 3 correlation between OverTime Hour/Pay with year-Time Series</h2>
+<p>In terms of over time hours, Fire,Sanitation department present an obvious decrease trend in 2022 and they all have a dramatic growth from 2019 to 2022. The Fire Department is consistently the top in overtime hours in the whole period. Police, Social Service, NYC housing department fluctuate during the period and the OT hours in recent year is higher than the beginning year. The other departments show a stable pattern. Combining with the figure, the high OT hours is because some job titles in these apartment lead among all job titles like firefighter, sanitation worker. In terms of over time pay, some lines show an upward trend in recent years such as department of sanitation, fire department, police department and the job title called sanitation worker has the most pay of over time in 2023. The OT pay of taxi &amp; limousine commission has a obvious drop in 2023, but the over time hours remain unchanged. Noticeably, the over time hours of ‘DEPT OF ED PEDAGOGICAL’ is close to 0 all the time. In conclusion, some departments like sanitation, fire, police have high over time hours but also gain high over time pay, while some department like taxi &amp; limousine commission, social service, dept of INFO Tech have low over time hours but also gain low over time pay, among which OT pay of taxi &amp; limousine commission decrease recently.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>averageOThour_by_group  <span class="ot">&lt;-</span> salary <span class="sc">%&gt;%</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Agency.Name, Fiscal.Year) <span class="sc">%&gt;%</span></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Average_hour =</span> <span class="fu">mean</span>(OT.Hours, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'Agency.Name'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>averageOThour_by_group <span class="sc">|&gt;</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Fiscal.Year, <span class="at">y=</span>Average_hour, <span class="at">group=</span>Agency.Name, <span class="at">color=</span>Agency.Name)) <span class="sc">+</span></span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/Time Series-1.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>averageOThour_by_group  <span class="ot">&lt;-</span> salary <span class="sc">%&gt;%</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Title.Description, Fiscal.Year) <span class="sc">%&gt;%</span></span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Average_hour =</span> <span class="fu">mean</span>(OT.Hours, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'Title.Description'. You can override using
+the `.groups` argument.</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>averageOThour_by_group <span class="sc">|&gt;</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Fiscal.Year, <span class="at">y=</span>Average_hour, <span class="at">group=</span>Title.Description, <span class="at">color=</span>Title.Description)) <span class="sc">+</span></span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/Time Series-2.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>averageOTpay_perhour_by_group  <span class="ot">&lt;-</span> salary <span class="sc">%&gt;%</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Agency.Name, Fiscal.Year) <span class="sc">%&gt;%</span></span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Average_OTpay =</span> <span class="fu">mean</span>(pay_per_hour, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'Agency.Name'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>averageOTpay_perhour_by_group <span class="sc">|&gt;</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Fiscal.Year, <span class="at">y=</span>Average_OTpay, <span class="at">group=</span>Agency.Name, <span class="at">color=</span>Agency.Name)) <span class="sc">+</span></span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/Time Series-3.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>averageOTpay_perhour_by_group  <span class="ot">&lt;-</span> salary <span class="sc">%&gt;%</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Title.Description, Fiscal.Year) <span class="sc">%&gt;%</span></span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Average_OTpay =</span> <span class="fu">mean</span>(pay_per_hour, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'Title.Description'. You can override using
+the `.groups` argument.</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>averageOTpay_perhour_by_group <span class="sc">|&gt;</span></span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Fiscal.Year, <span class="at">y=</span>Average_OTpay, <span class="at">group=</span>Title.Description, <span class="at">color=</span>Title.Description)) <span class="sc">+</span></span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/Time Series-4.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="distribution-of-ot-hour-ot-pay-per-hour-rate-between-overtime-and-regular-time-based-on-agency" class="level2" data-number="3.11">
+<h2 data-number="3.11" class="anchored" data-anchor-id="distribution-of-ot-hour-ot-pay-per-hour-rate-between-overtime-and-regular-time-based-on-agency"><span class="header-section-number">3.11</span> Distribution of OT hour, OT PAY per hour, rate between overtime and regular time based on agency</h2>
+<p>Considering the distribution of OT Hours by Agency, the police department,NYC Housing department, Fire department,Sanitation department,Children’s SVCS department have long tail but low peak which means that there exists a certain amount of employees have long over time hours in these departments, while the over time distribution of other departments is more like a normal and OT hours are mostly 0. Considering the proportion of OT hours and regular hours, it has the similar pattern with the distribution of OT Hours by Agency. Thus, we don’t need to worry about the influence of big gap of regular hours. Considering the distribution of OT Paid per hour by Agency, some departments are multimodal like Police department, Fire department, Sanitation department, Finance department which indicates different job titles in these agencies present different performance of OT paid per hour, while the different job title in Taxi, NYC Housing, Social Service,Children’s SVCS department present consistent distribution.</p>
+<p>Marks: The figure 2 and 3 don’t include ‘DEPT OF ED PEDAGOGICAL’, since all the regular hour and OT hour of this apartment is 0 which has be shown in part 3.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggridges)</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(salary, <span class="fu">aes</span>(<span class="at">x =</span> OT.Hours, <span class="at">y =</span> Agency.Name, <span class="at">fill =</span> Agency.Name)) <span class="sc">+</span></span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_density_ridges</span>() <span class="sc">+</span></span>
+<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_ridges</span>() <span class="sc">+</span></span>
+<span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Ridgeline Plot of OT Hours by Agency"</span>, <span class="at">x =</span> <span class="st">"OT Hours"</span>, <span class="at">y =</span> <span class="st">"Agency Name"</span>)<span class="sc">+</span></span>
+<span id="cb69-7"><a href="#cb69-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb69-8"><a href="#cb69-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb69-9"><a href="#cb69-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb69-10"><a href="#cb69-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb69-11"><a href="#cb69-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>)</span>
+<span id="cb69-12"><a href="#cb69-12" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Picking joint bandwidth of 19.5</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/Ridgeline-1.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>salary_tep<span class="ot">&lt;-</span>salary</span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>salary_tep<span class="ot">&lt;-</span>salary_tep[salary_tep<span class="sc">$</span>Regular.Hours <span class="sc">&gt;</span> <span class="dv">0</span>, ]</span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>salary_tep<span class="sc">$</span>OT_per_Regular_Time<span class="ot">&lt;-</span>salary_tep<span class="sc">$</span>OT.Hours<span class="sc">/</span>salary_tep<span class="sc">$</span>Regular.Hours</span>
+<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>salary_tep<span class="ot">&lt;-</span>salary_tep[salary_tep<span class="sc">$</span>OT_per_Regular_Time <span class="sc">&lt;</span> <span class="dv">1</span>, ]</span>
+<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-6"><a href="#cb71-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-7"><a href="#cb71-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(salary_tep, <span class="fu">aes</span>(<span class="at">x =</span> OT_per_Regular_Time, <span class="at">y =</span> Agency.Name, <span class="at">fill =</span> Agency.Name)) <span class="sc">+</span></span>
+<span id="cb71-8"><a href="#cb71-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_density_ridges</span>() <span class="sc">+</span></span>
+<span id="cb71-9"><a href="#cb71-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_ridges</span>() <span class="sc">+</span></span>
+<span id="cb71-10"><a href="#cb71-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Ridgeline Plot of OT Hours rate by Agency"</span>, <span class="at">x =</span> <span class="st">"OT Hours rate"</span>, <span class="at">y =</span> <span class="st">"Agency Name"</span>)<span class="sc">+</span></span>
+<span id="cb71-11"><a href="#cb71-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb71-12"><a href="#cb71-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb71-13"><a href="#cb71-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb71-14"><a href="#cb71-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb71-15"><a href="#cb71-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>)</span>
+<span id="cb71-16"><a href="#cb71-16" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Picking joint bandwidth of 0.0114</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/Ridgeline-2.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>salary_tep3<span class="ot">&lt;-</span>salary</span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>salary_tep3<span class="ot">&lt;-</span>salary_tep2[salary_tep2<span class="sc">$</span>pay_per_hour <span class="sc">&gt;</span> <span class="dv">0</span>, ]</span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(salary_tep3, <span class="fu">aes</span>(<span class="at">x =</span> pay_per_hour, <span class="at">y =</span> Agency.Name, <span class="at">fill =</span> Agency.Name)) <span class="sc">+</span></span>
+<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_density_ridges</span>() <span class="sc">+</span></span>
+<span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_ridges</span>() <span class="sc">+</span></span>
+<span id="cb73-7"><a href="#cb73-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Ridgeline Plot of OT Paid per hour by Agency"</span>, <span class="at">x =</span> <span class="st">"OT Hours Paid"</span>, <span class="at">y =</span> <span class="st">"Agency Name"</span>)<span class="sc">+</span></span>
+<span id="cb73-8"><a href="#cb73-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb73-9"><a href="#cb73-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb73-10"><a href="#cb73-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb73-11"><a href="#cb73-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb73-12"><a href="#cb73-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>)</span>
+<span id="cb73-13"><a href="#cb73-13" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Picking joint bandwidth of 3.46</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/Ridgeline-3.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="the-relationship-between-over-time-and-base-salary" class="level2" data-number="3.12">
+<h2 data-number="3.12" class="anchored" data-anchor-id="the-relationship-between-over-time-and-base-salary"><span class="header-section-number">3.12</span> The relationship between over time and base salary</h2>
+<p>About figure 1(the relationship between OT pay and OT hours), the job title like police officer, firefighter mostly gather in the top corner which shows a high over time pay and some fighter has high over time hours. This graph doesn’t have a clear cluster because of the limitation of chosen employees but we can use the conclusions from part 3 as a reference. About figure 2(the relationship between OT hours and base salary), it has a clear cluster. Considering the right part of the graph, most of people with job titles emergency medical specialist and firefighters, if they have high salary and also high OT hours. The employees like sanitation worker gather in the bottom right corner which means if they have a high salary, then they will have a short over time hours. Considering the left part of the graph, the police officers has medium salary but low over time hours and school safety agent gather in the place with low salary and uncertain over time hours. About figure 3(the relationship between OT pay and base salary), it shows that if the employees as clerical associate and community associate have low annual salary, then they will get low over time pay. If the employees work as police or firefighter, the similar salary doesn’t mean the similar over time pay. As for the total time of company establishment, the small size of days gather in the low annual salary and low over time pay, but it exists low annual salary and high over time hours. We remark that since the number of employees is too large, it is not clear if we show all the employees in this bubble graph. Thus, we choose 150 people randomly and it may not show all clusters.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>salary_tep2<span class="ot">&lt;-</span>salary</span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>salary_tep2<span class="ot">&lt;-</span>salary_tep2[salary_tep2<span class="sc">$</span>pay_per_hour <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> salary_tep2<span class="sc">$</span>pay_per_hour <span class="sc">&lt;</span><span class="dv">200</span>, ]</span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">99</span>)</span>
+<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a>sampled_indices <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">nrow</span>(salary_tep2),<span class="dv">150</span>)</span>
+<span id="cb75-6"><a href="#cb75-6" aria-hidden="true" tabindex="-1"></a>sampled_df <span class="ot">&lt;-</span> salary_tep2[sampled_indices, ]</span>
+<span id="cb75-7"><a href="#cb75-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-8"><a href="#cb75-8" aria-hidden="true" tabindex="-1"></a>sampled_df <span class="sc">%&gt;%</span></span>
+<span id="cb75-9"><a href="#cb75-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(days_difference)) <span class="sc">%&gt;%</span></span>
+<span id="cb75-10"><a href="#cb75-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>OT.Hours, <span class="at">y=</span>pay_per_hour, <span class="at">size=</span>days_difference, <span class="at">color=</span>Title.Description)) <span class="sc">+</span></span>
+<span id="cb75-11"><a href="#cb75-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb75-12"><a href="#cb75-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_size_continuous</span>(<span class="at">range =</span> <span class="fu">c</span>(.<span class="dv">1</span>, <span class="dv">10</span>), <span class="at">name=</span><span class="st">"days_difference"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/Bubble-1.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>sampled_df <span class="sc">%&gt;%</span></span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(days_difference)) <span class="sc">%&gt;%</span></span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>AnnualSalary, <span class="at">y=</span>OT.Hours, <span class="at">size=</span>days_difference, <span class="at">color=</span>Title.Description)) <span class="sc">+</span></span>
+<span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb76-5"><a href="#cb76-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_size_continuous</span>(<span class="at">range =</span> <span class="fu">c</span>(.<span class="dv">1</span>, <span class="dv">10</span>), <span class="at">name=</span><span class="st">"days_difference"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/Bubble-2.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>sampled_df <span class="sc">%&gt;%</span></span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(days_difference)) <span class="sc">%&gt;%</span></span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>AnnualSalary, <span class="at">y=</span>pay_per_hour, <span class="at">size=</span>days_difference, <span class="at">color=</span>Title.Description)) <span class="sc">+</span></span>
+<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb77-5"><a href="#cb77-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_size_continuous</span>(<span class="at">range =</span> <span class="fu">c</span>(.<span class="dv">1</span>, <span class="dv">10</span>), <span class="at">name=</span><span class="st">"days_difference"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/Bubble-3.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>salary_OT<span class="ot">&lt;-</span> salary <span class="sc">|&gt;</span></span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">OTLevel =</span> <span class="fu">case_when</span>(</span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a>    OT.Hours <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"None"</span>,</span>
+<span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a>    OT.Hours <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> OT.Hours <span class="sc">&lt;=</span> <span class="dv">200</span>  <span class="sc">~</span> <span class="st">"LOW"</span>,</span>
+<span id="cb78-5"><a href="#cb78-5" aria-hidden="true" tabindex="-1"></a>    OT.Hours <span class="sc">&gt;</span> <span class="dv">200</span> <span class="sc">&amp;</span> OT.Hours <span class="sc">&lt;=</span> <span class="dv">400</span> <span class="sc">~</span> <span class="st">"MOD"</span>,</span>
+<span id="cb78-6"><a href="#cb78-6" aria-hidden="true" tabindex="-1"></a>    OT.Hours <span class="sc">&gt;</span> <span class="dv">400</span> <span class="sc">&amp;</span> OT.Hours <span class="sc">&lt;=</span> <span class="dv">1000</span> <span class="sc">~</span> <span class="st">"HIGH"</span>,</span>
+<span id="cb78-7"><a href="#cb78-7" aria-hidden="true" tabindex="-1"></a>    OT.Hours <span class="sc">&gt;</span> <span class="dv">1000</span>  <span class="sc">~</span> <span class="st">"VHIGH"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="base-salary-and-over-time-summary" class="level2" data-number="3.13">
+<h2 data-number="3.13" class="anchored" data-anchor-id="base-salary-and-over-time-summary"><span class="header-section-number">3.13</span> Base salary and over time summary</h2>
+<p>The most people with very high salary flow to department of Ed Pedagogical including job title teacher and teacher special education and they even have no over time hours. Some people with general high and mod salary has uncertain overtime module which means all overtime levels are included but ‘none overtime’ level has high proportion. The people with low salary mostly flow to school safety agent and call center representative and they also have 4 overtime level modules. It is also clear that almost all people with high salary work in Manhattan and some of them work in the other cities. Additionally, part-time job is corresponding to the low salary which fits our perception and could indicate the accuracy of our data analysis indirectly.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggalluvial)</span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>frequency_df <span class="ot">&lt;-</span> salary_OT <span class="sc">%&gt;%</span></span>
+<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Agency.Name, Title.Description, job_type, Work.Location.Borough,SalaryLevel,OTLevel) <span class="sc">%&gt;%</span></span>
+<span id="cb79-4"><a href="#cb79-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Frequency =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">'drop'</span>)</span>
+<span id="cb79-5"><a href="#cb79-5" aria-hidden="true" tabindex="-1"></a>frequency_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,144 × 7
+   Agency.Name      Title.Description job_type Work.Location.Borough SalaryLevel
+   &lt;chr&gt;            &lt;chr&gt;             &lt;chr&gt;    &lt;chr&gt;                 &lt;chr&gt;      
+ 1 ADMIN FOR CHILD… CHILD PROTECTIVE… full_ti… BRONX                 LOW        
+ 2 ADMIN FOR CHILD… CHILD PROTECTIVE… full_ti… BRONX                 LOW        
+ 3 ADMIN FOR CHILD… CHILD PROTECTIVE… full_ti… BRONX                 LOW        
+ 4 ADMIN FOR CHILD… CHILD PROTECTIVE… full_ti… BRONX                 LOW        
+ 5 ADMIN FOR CHILD… CHILD PROTECTIVE… full_ti… BRONX                 LOW        
+ 6 ADMIN FOR CHILD… CHILD PROTECTIVE… full_ti… BRONX                 MOD        
+ 7 ADMIN FOR CHILD… CHILD PROTECTIVE… full_ti… BRONX                 MOD        
+ 8 ADMIN FOR CHILD… CHILD PROTECTIVE… full_ti… BRONX                 MOD        
+ 9 ADMIN FOR CHILD… CHILD PROTECTIVE… full_ti… BRONX                 MOD        
+10 ADMIN FOR CHILD… CHILD PROTECTIVE… full_ti… BRONX                 MOD        
+# ℹ 1,134 more rows
+# ℹ 2 more variables: OTLevel &lt;chr&gt;, Frequency &lt;int&gt;</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>frequency_df<span class="sc">$</span>OTLevel <span class="ot">&lt;-</span> <span class="fu">factor</span>(frequency_df<span class="sc">$</span>OTLevel, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"VHIGH"</span>, <span class="st">"HIGH"</span>, <span class="st">"MOD"</span>, <span class="st">"LOW"</span>,<span class="st">"None"</span>)) </span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>frequency_df<span class="sc">$</span>SalaryLevel <span class="ot">&lt;-</span> <span class="fu">factor</span>(frequency_df<span class="sc">$</span>SalaryLevel, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"VHIGH"</span>, <span class="st">"HIGH"</span>, <span class="st">"MOD"</span>, <span class="st">"LOW"</span>))</span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-5"><a href="#cb81-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-6"><a href="#cb81-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(frequency_df, <span class="fu">aes</span>(<span class="at">axis1 =</span> Agency.Name, <span class="at">axis2 =</span> Title.Description, <span class="at">axis3 =</span> job_type, <span class="at">axis4 =</span> Work.Location.Borough, <span class="at">axis5 =</span> SalaryLevel, <span class="at">axis6 =</span> OTLevel, <span class="at">y =</span> Frequency)) <span class="sc">+</span></span>
+<span id="cb81-7"><a href="#cb81-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_alluvium</span>(<span class="fu">aes</span>(<span class="at">fill =</span> SalaryLevel)) <span class="sc">+</span>  </span>
+<span id="cb81-8"><a href="#cb81-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_stratum</span>(<span class="fu">aes</span>(<span class="at">fill =</span> SalaryLevel)) <span class="sc">+</span>  </span>
+<span id="cb81-9"><a href="#cb81-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">stat =</span> <span class="st">"stratum"</span>, <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">after_stat</span>(stratum)),<span class="at">size=</span><span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb81-10"><a href="#cb81-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="st">"Agency.Name"</span>, <span class="st">"Title.Description"</span>, <span class="st">"job_type"</span>, <span class="st">"Work.Location.Borough"</span>, <span class="st">"SalaryLevel"</span>, <span class="st">"OTLevel"</span>)) <span class="sc">+</span></span>
+<span id="cb81-11"><a href="#cb81-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="st">"none"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in to_lodes_form(data = data, axes = axis_ind, discern =
+params$discern): Some strata appear at multiple axes.
+
+Warning in to_lodes_form(data = data, axes = axis_ind, discern =
+params$discern): Some strata appear at multiple axes.
+
+Warning in to_lodes_form(data = data, axes = axis_ind, discern =
+params$discern): Some strata appear at multiple axes.</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="results_files/figure-html/Ggalluvial-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -417,7 +1446,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/linzz01907/FinalProject_EDAV/edit/main/results.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/linzz01907/FinalProject_EDAV/issues/new" class="toc-action">Report an issue</a></p></div></div></div>
+    </div>
     <div class="nav-footer-right">This book was built with <a href="https://quarto.org/">Quarto</a>.</div>
   </div>
 </footer>

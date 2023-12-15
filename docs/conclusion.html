@@ -137,7 +137,16 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#main-takeaways" id="toc-main-takeaways" class="nav-link active" data-scroll-target="#main-takeaways"><span class="header-section-number">5.1</span> Main Takeaways</a></li>
+  <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations"><span class="header-section-number">5.2</span> Limitations</a></li>
+  <li><a href="#future-directions" id="toc-future-directions" class="nav-link" data-scroll-target="#future-directions"><span class="header-section-number">5.3</span> Future Directions</a></li>
+  <li><a href="#lessons-learned" id="toc-lessons-learned" class="nav-link" data-scroll-target="#lessons-learned"><span class="header-section-number">5.4</span> Lessons Learned</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/linzz01907/FinalProject_EDAV/edit/main/conclusion.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/linzz01907/FinalProject_EDAV/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -159,8 +168,27 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<section id="main-takeaways" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="main-takeaways"><span class="header-section-number">5.1</span> Main Takeaways</h2>
+<p>Our Exploratory Data Analysis revealed significant correlations between salary levels and factors like agency name, job title, work location, agency size, job type and overtime hours &amp; overtime pay. We highlighted how different agencies and job titles influence salary levels, how different salary performance in different regions in New York with particular attention to overtime payments and duration.</p>
+<p>In our project, we divide the analysis into 2 parts. Here we summarize the important conclusions. In terms of part 1 - Base Salary, we gain the top 3 agencies with high annual salaries which are the department of ED Pedagogical, Fire Department, Police Department where teacher, teacher special education are also in the top 3 base salary among all job titles. It’s worth noting that the computer specialist does not belong to agencies with a high salary, but this job has the highest salary among all job titles. Moreover, in the last 10 years, the salary of all agencies and job titles show an upward trend but the salary data across different titles shows remarkable variation. Additionally, Manhattan has the highest annual salary among all other regions in New York.</p>
+<p>In terms of part 2 - Overtime hours and salary, we discover that the agencies like department of finance, department of Info Tech, Taxi commission have low overtime hours and department of pedagogical even doesn’t have overtime, while fire department has the most overtime hours especially for firefighters. Besides, the department of sanitation, fire department, and police department have high overtime pay and the job title police dominates, while the department of finance has lowest overtime pay. Job titles like police officers and firefighters often correlate with higher overtime pay and hours, and they vary significantly with each other, whereas departments like Social Service, and Children’s Services show more uniform OT pay distributions. From 2022 to the present, the overtime hours show a downward trend and overtime pay shows an upward trend, except the decreasing overtime pay in the Taxi &amp; Limousine Commission. It indicates that the government is paying attention to the quality of life of the people. Additionally, Manhattan has the lowest overtime rate.</p>
+<p>When we consider both base salary and overtime pay, there are distinct patterns, with some roles like emergency medical specialists showing high values in both, while others like sanitation workers have high salaries but shorter overtime hours. Conversely, roles like sanitation workers, despite high salaries, often see fewer overtime hours, suggesting a different compensation structure in these positions.</p>
+</section>
+<section id="limitations" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="limitations"><span class="header-section-number">5.2</span> Limitations</h2>
+<p>This study faced some limitations. First, we only use one dataset as our source which may lead to potential biases. Second, the factors impacting salary are not enough and we lack the data related to the personal informationn, so it may hide some relationship between Salary &amp; Overtime and factors like leave status, regular gross paid in our original data set. Third, our data exploratory has limited generalizability because it only focuses on the agencies and job titles with higher employees in New York, so our conclusion may not be proper for all employees in New York. Fourth, due to the large number of dataset, some graphs may not include all the employees in order to have a clear graph and our method of random sample is default, which may lead to missing patterns.</p>
+</section>
+<section id="future-directions" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="future-directions"><span class="header-section-number">5.3</span> Future Directions</h2>
+<p>Future research directions include a deeper exploration of causal relationships between salary &amp; overtime and other factors which are not included in our analysis including. It will be better if we add more quantitative analysis to our numerical data visualization like more accurate distribution based on histogram. Besides, we intend to expand the variable scope and incorporate more diverse and comprehensive datasets related to salary from other sources where we can make comparisons with each other such as using national standard salary based on different people as a reference.</p>
+</section>
+<section id="lessons-learned" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="lessons-learned"><span class="header-section-number">5.4</span> Lessons Learned</h2>
+<p>Our data set has the complexity of salary structures and influence of multifaceted factors. Due to its complexity, it is more important for us to have data preprocessing, interpretation, and comprehensive statistical analysis in understanding compensation trends. Considering data preparation, we should realize that blank space cannot be recognized by missing value detection. Besides, it will be easier if we finish all new column establishment in the beginning. As for data interpretation, we should pay attention that some data has representativeness, but these data may also have limitations. Furthermore, when we analyze the data by visualization, we should not only analyze the numbers but also understand the context, the underlying trends, and what they signify in the broader spectrum.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -413,7 +441,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/linzz01907/FinalProject_EDAV/edit/main/conclusion.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/linzz01907/FinalProject_EDAV/issues/new" class="toc-action">Report an issue</a></p></div></div></div>
+    </div>
     <div class="nav-footer-right">This book was built with <a href="https://quarto.org/">Quarto</a>.</div>
   </div>
 </footer>

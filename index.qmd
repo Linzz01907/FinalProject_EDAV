@@ -1,14 +1,13 @@
 # Introduction
 
 ## Reason for Choosing Salary Topic
-Choosing a job involves considering various factors such as the job title, salary, and other attributes. I've noticed that many students in our class have been actively engaged in submitting resumes and participating in interviews. The process of seeking job opportunities seems to be a frequent activity, one that most people undertake almost daily over the past four months. 
+The process of job selection necessitates a comprehensive evaluation of multiple determinants, including but not limited to job titles, compensation packages, and various associated attributes. It has come to my attention that a considerable number of our peers within the class have been actively engrossed in the endeavor of submitting their curricula vitae and participating in interviews. This pursuit of employment opportunities appears to have evolved into a recurring and pervasive activity, with a majority of individuals consistently engaging in it on an almost daily basis over the preceding four months.
 
-This observation has led us to consider the possibility of conducting research related to work. Through this, I've learned that not all students are interested in interning at Internet companies. Some are drawn to working in city government, attracted by its career stability, benefits, opportunities for career development, and competitive salary levels.
+This observation has sparked our interest in exploring potential avenues for research pertaining to the realm of employment. As a result, we have discerned that not all students within our cohort exhibit a singular penchant for interning at technology-oriented firms. Some are, in fact, inclined towards pursuing opportunities within municipal government entities, enticed by the prospect of career stability, attractive benefits packages, avenues for professional growth, and competitive compensation levels.
 
 ## Questions intertested in Salary Topic
-In our discussion about career choices, we discovered that salary is often the primary concern for most people. Therefore, we decided to explore the various factors that influence salary levels. We aim to identify the key factors influencing job choices, with a particular emphasis on how different elements affect salary levels, for instance, work location, title and work hours. 
+In our discussion about career choices, we discovered that salary is often the primary concern for most people. Therefore, we decided to explore the various factors that influence salary levels. We aim to identify the key factors influencing job choices, with a particular emphasis on how different elements affect salary levels, for instance, work location, title and work hours. Subsequently, we shall undertake a systematic analysis, dissecting the influence of each of these pivotal factors on salary individually.
 
 Additionally, the issue of overtime is something everyone will likely encounter at some point, despite it being a challenge many prefer to avoid. However, certain jobs necessitate extra hours to complete the work. Understanding how overtime pay is calculated and its impact on total salary also merits investigation in our study. 
 
 By examining these factors, we hope to provide valuable insights that can guide individuals in choosing a job that not only meets their financial needs but also aligns with their broader career goals and expectations.
-
