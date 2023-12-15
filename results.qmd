@@ -1,5 +1,8 @@
 # Results
 
+## Preparation for Data before Analysis
+Given the extensive scope of the dataset, which includes over a hundred agencies and thousands of job titles, it is impractical to analyze every agency and position. Therefore, we have selected 10 agencies and 20 job titles of particular interest for focused analysis. To facilitate our future studies, we have categorized salaries into four groups - low, medium, high, and very high - based on a five-number summary. Additionally, we have examined factors such as the length of time since each agency's establishment and the size of the agency, which are pertinent to our upcoming analyses.
+
 ```{r}
 library(tidyverse)
 salary_df <- read.csv("Cleaned Dataset.csv")
