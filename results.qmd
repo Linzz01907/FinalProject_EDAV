@@ -416,7 +416,7 @@ ggplot(data = nyc_OTpay_perhour_map ) +
 
 
 
-## Part 2. correlation between Over Time Hour/Pay with numerical variables
+## Correlation between Over Time Hour/Pay with numerical variables
 As for figure 1, we can see that in terms of OT pay per hour, police has more outliers(purple line) than the other jobs which indicates it has more extreme value(high 'OT Paid') than other job titles.
 Since the difference of orders of magnitude between different factors is too large, we use sample the data set and also use 'std' as the scale for figure 2 and 3.
 As for figure 2 and 3, except that DEPT OF ED PEDAGOGICAL(green lines in agency groups and pinks lines in job title groups)doesn't show a clear relationship between over time hours and total time of company establishment, the other department show a positve relationship between over time hours and total time of company establishment and also a positive relationship over time pay and total time of company establishment.
@@ -451,13 +451,13 @@ ggparcoord(sampled_df,
 
 
 
-## part 3 correlation between OverTime Hour/Pay with year-Time Series
+## Correlation between OverTime Hour/Pay with year-Time Series
 In terms of over time hours, Fire,Sanitation department present an obvious decrease trend in 2022 and they all have a dramatic growth from 2019 to 2022. The Fire Department is consistently the top in overtime hours in the whole period. Police, Social Service, NYC housing department fluctuate during the period and the OT hours in recent year is higher than the beginning year. The other departments show a stable pattern. Combining with the figure, the high OT hours is because some job titles in these apartment lead among all job titles like firefighter, sanitation worker.
 In terms of over time pay, some lines show an upward trend in recent years such as department of sanitation, fire department, police department and the job title called sanitation worker has the most pay of over time in 2023. The OT pay of taxi & limousine commission has a obvious drop in 2023, but the over time hours remain unchanged.
 Noticeably, the over time hours of 'DEPT OF ED PEDAGOGICAL' is close to 0 all the time.
 In conclusion, some departments like sanitation, fire, police have high over time hours but also gain high over time pay, while some department like taxi & limousine commission, social service, dept of INFO Tech have low over time hours but also gain low over time pay, among which OT pay of taxi & limousine commission decrease recently. 
 
-```{r Time Series}
+```{r message=FALSE, warning=FALSE}
 averageOThour_by_group  <- salary %>%
   group_by(Agency.Name, Fiscal.Year) %>%
   summarize(Average_hour = mean(OT.Hours, na.rm = TRUE))
@@ -596,12 +596,12 @@ salary_OT<- salary |>
 
 ## Base salary and over time summary
 The most people with very high salary flow to department of Ed Pedagogical including job title teacher and teacher special education and they even have no over time hours. Some people with general high and mod salary has uncertain overtime module which means all overtime levels are included but 'none overtime' level has high proportion. The people with low salary mostly flow to school safety agent and call center representative and they also have 4 overtime level modules. It is also clear that almost all people with high salary work in Manhattan and some of them work in the other cities. Additionally, part-time job is corresponding to the low salary which fits our perception and could indicate the accuracy of our data analysis indirectly.
-```{r Ggalluvial}
+```{r message=FALSE, warning=FALSE}
 library(ggalluvial)
 frequency_df <- salary_OT %>%
   group_by(Agency.Name, Title.Description, job_type, Work.Location.Borough,SalaryLevel,OTLevel) %>%
   summarize(Frequency = n(), .groups = 'drop')
-frequency_df
+
 
 frequency_df$OTLevel <- factor(frequency_df$OTLevel, levels = c("VHIGH", "HIGH", "MOD", "LOW","None")) 
 frequency_df$SalaryLevel <- factor(frequency_df$SalaryLevel, levels = c("VHIGH", "HIGH", "MOD", "LOW"))

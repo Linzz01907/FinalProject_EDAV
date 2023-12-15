@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.1.189">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,9 +17,72 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -57,8 +120,7 @@ ul.task-list li input[type="checkbox"] {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-submit-button-title": "Submit"
   }
 }</script>
 
@@ -69,16 +131,11 @@ ul.task-list li input[type="checkbox"] {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
-        <i class="bi bi-search"></i>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
       </button>
     </div>
   </nav>
@@ -86,65 +143,72 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Impact on Salary</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/linzz01907/FinalProject_EDAV" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/linzz01907/FinalProject_EDAV" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
 </div>
     </div>
       </div>
-        <div class="mt-2 flex-shrink-0 align-items-center">
+      <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-        </div>
+      </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data</span></span></a>
+  <a href="./data.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./results.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Results</span></span></a>
+  <a href="./results.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Results</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./d3graph.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Interactive graph</span></span></a>
+  <a href="./d3graph.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Interactive graph</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./conclusion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Conclusion</span></span></a>
+  <a href="./conclusion.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Conclusion</span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#description" id="toc-description" class="nav-link active" data-scroll-target="#description"><span class="header-section-number">2.1</span> Description</a></li>
-  <li><a href="#research-plan" id="toc-research-plan" class="nav-link" data-scroll-target="#research-plan"><span class="header-section-number">2.2</span> Research Plan</a></li>
-  <li><a href="#missing-value-analysis" id="toc-missing-value-analysis" class="nav-link" data-scroll-target="#missing-value-analysis"><span class="header-section-number">2.3</span> Missing value analysis</a></li>
+  <li><a href="#description" id="toc-description" class="nav-link active" data-scroll-target="#description"><span class="toc-section-number">2.1</span>  Description</a>
+  <ul class="collapse">
+  <li><a href="#data-format" id="toc-data-format" class="nav-link" data-scroll-target="#data-format"><span class="toc-section-number">2.1.1</span>  Data Format</a></li>
+  <li><a href="#frequency-of-updates" id="toc-frequency-of-updates" class="nav-link" data-scroll-target="#frequency-of-updates"><span class="toc-section-number">2.1.2</span>  Frequency of updates</a></li>
+  <li><a href="#dimension" id="toc-dimension" class="nav-link" data-scroll-target="#dimension"><span class="toc-section-number">2.1.3</span>  Dimension</a></li>
+  <li><a href="#data-range" id="toc-data-range" class="nav-link" data-scroll-target="#data-range"><span class="toc-section-number">2.1.4</span>  Data range</a></li>
+  <li><a href="#issuesproblems-with-the-data" id="toc-issuesproblems-with-the-data" class="nav-link" data-scroll-target="#issuesproblems-with-the-data"><span class="toc-section-number">2.1.5</span>  Issues/problems with the data</a></li>
+  <li><a href="#how-to-impute-data" id="toc-how-to-impute-data" class="nav-link" data-scroll-target="#how-to-impute-data"><span class="toc-section-number">2.1.6</span>  How to impute data</a></li>
+  </ul></li>
+  <li><a href="#research-plan" id="toc-research-plan" class="nav-link" data-scroll-target="#research-plan"><span class="toc-section-number">2.2</span>  Research Plan</a>
+  <ul class="collapse">
+  <li><a href="#individual-factor-analysis" id="toc-individual-factor-analysis" class="nav-link" data-scroll-target="#individual-factor-analysis"><span class="toc-section-number">2.2.1</span>  Individual Factor Analysis</a></li>
+  <li><a href="#multi-factor-mixed-analysis" id="toc-multi-factor-mixed-analysis" class="nav-link" data-scroll-target="#multi-factor-mixed-analysis"><span class="toc-section-number">2.2.2</span>  Multi-Factor Mixed Analysis</a></li>
+  <li><a href="#overtime-analysis" id="toc-overtime-analysis" class="nav-link" data-scroll-target="#overtime-analysis"><span class="toc-section-number">2.2.3</span>  Overtime Analysis</a></li>
+  </ul></li>
+  <li><a href="#missing-value-analysis" id="toc-missing-value-analysis" class="nav-link" data-scroll-target="#missing-value-analysis"><span class="toc-section-number">2.3</span>  Missing value analysis</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/linzz01907/FinalProject_EDAV/edit/main/data.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/linzz01907/FinalProject_EDAV/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -153,7 +217,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data</span></h1>
 </div>
 
 
@@ -161,21 +225,338 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-title-meta">
 
     
-  
     
   </div>
   
 
 </header>
 
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(heatmaply)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+
+</div>
 <section id="description" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="description"><span class="header-section-number">2.1</span> Description</h2>
+<p>Data sources: The Citywide Payroll dataset is from NYC OpenData website. https://data.cityofnewyork.us/City-Government/Citywide-Payroll-Data-Fiscal-Year-/k397-673e/data</p>
+<p>Data collection: Data Provided by Office of Payroll Administration (OPA). Data is input into the City’s Personnel Management System (“PMS”) by the respective user Agencies. It includes the agency information, salary and overtimepay for all municipal employees in New York.</p>
+<p>Data description: Data is collected because of public interest in how the City’s budget is being spent on salary and overtime pay for all municipal employees. We will describe it in 6 parts.</p>
+<section id="data-format" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="data-format"><span class="header-section-number">2.1.1</span> Data Format</h3>
+<p>We summarize it by a csv file.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>description<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">'data_description.csv'</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(description)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 22%">
+<col style="width: 60%">
+<col style="width: 17%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Column Name</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Fiscal Year</td>
+<td style="text-align: left;">Fiscal Year</td>
+<td style="text-align: left;">Discrete variable</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Payroll Number</td>
+<td style="text-align: left;">Payroll Number</td>
+<td style="text-align: left;">Discrete variable</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Agency Name</td>
+<td style="text-align: left;">The Payroll agency that the employee works for</td>
+<td style="text-align: left;">Categorical variable</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Last Name</td>
+<td style="text-align: left;">Last name of employee</td>
+<td style="text-align: left;">Plain Text</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">First Name</td>
+<td style="text-align: left;">First name of employee</td>
+<td style="text-align: left;">Plain Text</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mid Init</td>
+<td style="text-align: left;">Middle initial of employee</td>
+<td style="text-align: left;">Plain Text</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Agency Start Date</td>
+<td style="text-align: left;">Date which employee began working for their current agency</td>
+<td style="text-align: left;">Date &amp; Time</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Work Location Borough</td>
+<td style="text-align: left;">Borough of employee’s primary work location</td>
+<td style="text-align: left;">Categorical variable</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Title Description</td>
+<td style="text-align: left;">Civil service title description of the employee</td>
+<td style="text-align: left;">Categorical variable</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Leave Status as of June 30</td>
+<td style="text-align: left;">Status of employee as of the close of the relevant fiscal year</td>
+<td style="text-align: left;">Categorical variable</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Base Salary</td>
+<td style="text-align: left;">Base Salary assigned to the employee</td>
+<td style="text-align: left;">Continuous variable</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Pay Basis</td>
+<td style="text-align: left;">Lists whether the employee is paid on an hourly, per diem or annual basis</td>
+<td style="text-align: left;">Plain Text</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Regular Hours</td>
+<td style="text-align: left;">Number of regular hours employee worked in the fiscal year</td>
+<td style="text-align: left;">Continuous variable</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Regular Gross Paid</td>
+<td style="text-align: left;">The amount paid to the employee for base salary during the fiscal year</td>
+<td style="text-align: left;">Continuous variable</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">OT Hours</td>
+<td style="text-align: left;">Overtime Hours worked by employee in the fiscal year</td>
+<td style="text-align: left;">Continuous variable</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Total OT Paid</td>
+<td style="text-align: left;">Total overtime pay paid to the employee in the fiscal year</td>
+<td style="text-align: left;">Continuous variable</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Total Other Pay</td>
+<td style="text-align: left;">Includes any compensation in addition to gross salary and overtime pay</td>
+<td style="text-align: left;">Continuous variable</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="frequency-of-updates" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="frequency-of-updates"><span class="header-section-number">2.1.2</span> Frequency of updates</h3>
+<p>It is updated annually.</p>
+</section>
+<section id="dimension" class="level3" data-number="2.1.3">
+<h3 data-number="2.1.3" class="anchored" data-anchor-id="dimension"><span class="header-section-number">2.1.3</span> Dimension</h3>
+<p>5662713*13</p>
+</section>
+<section id="data-range" class="level3" data-number="2.1.4">
+<h3 data-number="2.1.4" class="anchored" data-anchor-id="data-range"><span class="header-section-number">2.1.4</span> Data range</h3>
+<p>For numerical data, we will show the upper bound and lower bound.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>max_values <span class="ot">&lt;-</span> <span class="fu">apply</span>(salary[<span class="fu">c</span>(<span class="st">"Fiscal.Year"</span>,<span class="st">"Base.Salary"</span>,<span class="st">"Regular.Hours"</span>,<span class="st">"Regular.Gross.Paid"</span>,<span class="st">"OT.Hours"</span>,<span class="st">"Total.OT.Paid"</span>)], <span class="dv">2</span>, max)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>min_values <span class="ot">&lt;-</span> <span class="fu">apply</span>(salary[<span class="fu">c</span>(<span class="st">"Fiscal.Year"</span>,<span class="st">"Base.Salary"</span>,<span class="st">"Regular.Hours"</span>,<span class="st">"Regular.Gross.Paid"</span>,<span class="st">"OT.Hours"</span>,<span class="st">"Total.OT.Paid"</span>)], <span class="dv">2</span>, min)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'upper bound'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "upper bound"</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(max_values)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>       Fiscal.Year        Base.Salary      Regular.Hours Regular.Gross.Paid 
+            2023.0           414707.0             6666.0           672308.9 
+          OT.Hours      Total.OT.Paid 
+            3692.9           255999.9 </code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'lower bound'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "lower bound"</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(min_values)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>       Fiscal.Year        Base.Salary      Regular.Hours Regular.Gross.Paid 
+           2014.00               0.01           -1872.77         -205451.85 
+          OT.Hours      Total.OT.Paid 
+           -209.00          -26493.88 </code></pre>
+</div>
+</div>
+<p>For categorical data, we will show all labels and counts.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#table(salary[c("Agency.Name")])</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>salary<span class="sc">$</span>Work.Location.Borough <span class="ot">&lt;-</span> <span class="fu">toupper</span>(salary<span class="sc">$</span>Work.Location.Borough)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(salary[<span class="fu">c</span>(<span class="st">"Work.Location.Borough"</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Work.Location.Borough
+                     ALBANY         BRONX      BROOKLYN      DELAWARE 
+       506233           143        261021        473638           802 
+     DUTCHESS        GREENE     MANHATTAN        NASSAU        ORANGE 
+          231            89       3665561           361            25 
+        OTHER        PUTNAM        QUEENS      RICHMOND     SCHOHARIE 
+       112598           360        562748         69368           262 
+     SULLIVAN        ULSTER WASHINGTON DC   WESTCHESTER 
+         1214          2925            64          5070 </code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#table(salary[c("Title.Description")])</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(salary[<span class="fu">c</span>(<span class="st">"Leave.Status.as.of.June.30"</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Leave.Status.as.of.June.30
+             ACTIVE              CEASED            ON LEAVE ON SEPARATION LEAVE 
+            4783700              756163               65722               10284 
+           SEASONAL 
+              46844 </code></pre>
+</div>
+</div>
+</section>
+<section id="issuesproblems-with-the-data" class="level3" data-number="2.1.5">
+<h3 data-number="2.1.5" class="anchored" data-anchor-id="issuesproblems-with-the-data"><span class="header-section-number">2.1.5</span> Issues/problems with the data</h3>
+<p>There exists negative regular hours and OT hours and agency start date exists 12/31/9999.</p>
+</section>
+<section id="how-to-impute-data" class="level3" data-number="2.1.6">
+<h3 data-number="2.1.6" class="anchored" data-anchor-id="how-to-impute-data"><span class="header-section-number">2.1.6</span> How to impute data</h3>
+<p>We download Citywide Payroll dataset on NYC OpenData website in ‘csv’ format and impute it by read.csv function directly and the link of our data source is https://data.cityofnewyork.us/City-Government/Citywide-Payroll-Data-Fiscal-Year-/k397-673e/data</p>
+</section>
 </section>
 <section id="research-plan" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="research-plan"><span class="header-section-number">2.2</span> Research Plan</h2>
+<p>Based on our research questions regarding various factors influencing salary levels and overtime situations in the workplace, we will divide our project into three parts, including individual factor analysis, multi-factor mixed analysis and overtime analysis.</p>
+<section id="individual-factor-analysis" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="individual-factor-analysis"><span class="header-section-number">2.2.1</span> Individual Factor Analysis</h3>
+<p>First, we aim to examine the factors that influence salary. These factors encompass year, agency, agency start date, work location, job title, pay basis, and leave status at the end of the fiscal year. Additionally, base salary, and regular gross paid are considered. Altogether, we have nine influencing factors. Our goal is to understand not only the impact of each individual factor on salary but also the combined effect of multiple factors on salary.</p>
+<p>We begin by analyzing the individual factors affecting salary. Concerning year trends and patterns, we aim to understand how salaries have evolved over the past ten years and identify any noticeable trends in employee compensation during specific periods, such as economic downturns or budget cuts. The ‘Year’ field allows for a temporal analysis, facilitating year-over-year comparisons of salaries, thereby revealing trends and patterns over time. Next, we will conduct an agency-specific analysis. Given the potential for significant salary differences across agencies, we seek to determine which agencies have the highest and lowest salaries and understand the reasons behind these disparities. Here, we need to pay attention that low salary accompanied by fewer regular work hours may be indicative by a part-time job. The ‘Agency Name’ field will be used to group data by agency, enabling comparisons of salaries across different departments or units. Regarding the impact of agency start time, we will explore whether the length of time an agency has been operational affects its employees’ salaries. Analysis of the ‘Agency Start Date’ will help investigate if newer agencies offer different pay scales compared to well-established ones.</p>
+<p>We will also examine geographical disparities, job title, and compensation analysis, as well as the impact of leave status and pay basis on compensation. We will explore how factors like work location, job title, leave status, and pay basis affect salaries. The ‘Work Location Borough’ field will assist in examining if geographic factors influence compensation, considering cost-of-living variations across different boroughs. ‘Job Title Description’ allows for an analysis of salary and overtime payments by role, identifying positions with higher compensation and the reasons behind it. ‘Leave Status’ at the fiscal year’s end will be correlated with total compensation to understand how leave impacts an employee’s overall earnings. ‘Pay Basis’ (monthly, yearly, hourly) will be correlated with overall compensation to understand how different payment structures affect total earnings.</p>
+</section>
+<section id="multi-factor-mixed-analysis" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="multi-factor-mixed-analysis"><span class="header-section-number">2.2.2</span> Multi-Factor Mixed Analysis</h3>
+<p>Finally, we will conduct an analysis of salary encompassing multiple elements. Concerning base salary and other factors, we aim to explore trends in base salaries across various job titles and agencies. Key questions include how the base salary relates to the total amount paid during the fiscal year and how it correlates with total compensation. To investigate this, we will employ data from multiple columns using methods such as group by. The ‘Base Salary’ field is essential for analyzing salary trends across different roles and agencies and understanding its relationship with total compensation. By examining both ‘Base Salary’ and ‘Total Gross Paid’, we can discern the proportion of earnings derived from base pay as opposed to overtime and other forms of compensation. Here we plan to choose mosaic and slope graph as analysis tool.</p>
+</section>
+<section id="overtime-analysis" class="level3" data-number="2.2.3">
+<h3 data-number="2.2.3" class="anchored" data-anchor-id="overtime-analysis"><span class="header-section-number">2.2.3</span> Overtime Analysis</h3>
+<p>In this part, we are curious that this overtime work module in different work field or work year. Here we will create a new column called ‘agency size’ based on calculating the number of staffs in different agencies and we will add it into our influence factor test as well. To solve it, we identify patterns and causes of overtime across agencies and job titles by aggregating overtime hours and salaries by job title and agency(agency field, agency start time,year,Work location, agency size), we can highlight where overtime is most common. As for trends in overtime hours and overtime paid: By analyzing ‘OT Hours’ and ‘OT Paid’ across different fiscal years, we can detect any increasing or decreasing trends in overtime. Line graph for overtime hours&amp;salaries is the optimal method to identify their trends over time.</p>
+<p>We also explore the ratio of regular to overtime hours&amp;salaries across different agencies. We can calculate this ratio for each agency by aggregating ‘Regular Hours’&amp;‘Base Salary’ and ‘OT Hours’&amp;‘OT Paid’ and then compare across agencies. Heatmap is one of our methods to demonstrate the distribution and prevalence of overtime across different job titles and agencies, identifying hotspots. After finishing it, we can compare the consistence of high ration and high overtime hours&amp;salaries by bubble chart where the position on the x-axis can represent overtime hours, the y-axis for the overtime ratio, and the bubble size for agencies or job titles.</p>
+</section>
 </section>
 <section id="missing-value-analysis" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="missing-value-analysis"><span class="header-section-number">2.3</span> Missing value analysis</h2>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>salary <span class="ot">&lt;-</span> salary <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), <span class="sc">~</span><span class="fu">na_if</span>(., <span class="st">""</span>)))</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>missing_values <span class="ot">&lt;-</span> <span class="fu">sapply</span>(salary, <span class="cf">function</span>(x) <span class="fu">sum</span>(<span class="fu">is.na</span>(x)))</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(missing_values)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>               Fiscal.Year                Agency.Name 
+                         0                          0 
+         Agency.Start.Date      Work.Location.Borough 
+                        63                     506233 
+         Title.Description Leave.Status.as.of.June.30 
+                        96                          0 
+               Base.Salary                  Pay.Basis 
+                         0                          0 
+             Regular.Hours         Regular.Gross.Paid 
+                         0                          0 
+                  OT.Hours              Total.OT.Paid 
+                         0                          0 
+           Total.Other.Pay 
+                         0 </code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating the bar chart</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">Column =</span> <span class="fu">names</span>(missing_values), <span class="at">MissingValues =</span> missing_values),</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> Column, <span class="at">y =</span> MissingValues)) <span class="sc">+</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Column Name"</span>, <span class="at">y =</span> <span class="st">"Number of Missing Values"</span>, <span class="at">title =</span> <span class="st">"Missing Values per Column"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="data_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(redav)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>df<span class="ot">&lt;-</span>salary</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(df) <span class="ot">&lt;-</span> <span class="fu">substr</span>(<span class="fu">colnames</span>(df), <span class="dv">1</span>, <span class="dv">4</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_missing</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Scale for y is already present.
+Adding another scale for y, which will replace the existing scale.
+Scale for y is already present.
+Adding another scale for y, which will replace the existing scale.</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="data_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>After we delete meaningless data like “Payroll.Number”, “Last.Name”, “First.Name”, “Mid.Init”, Agency.Start.Date has 63 missing data and Work.Location.Borough has 506233 missing data.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>salary_cleaned <span class="ot">=</span> <span class="fu">na.omit</span>(salary)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colSums</span>(<span class="fu">is.na</span>(salary_cleaned)) <span class="sc">|&gt;</span> <span class="fu">sort</span>(<span class="at">decreasing=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>               Fiscal.Year                Agency.Name 
+                         0                          0 
+         Agency.Start.Date      Work.Location.Borough 
+                         0                          0 
+         Title.Description Leave.Status.as.of.June.30 
+                         0                          0 
+               Base.Salary                  Pay.Basis 
+                         0                          0 
+             Regular.Hours         Regular.Gross.Paid 
+                         0                          0 
+                  OT.Hours              Total.OT.Paid 
+                         0                          0 
+           Total.Other.Pay 
+                         0 </code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#write.csv(salary_cleaned, "~/edav_lz_sm/Cleaned Dataset.csv", row.names=FALSE)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 
 
 </section>
@@ -208,23 +589,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
+    target: function(trigger) {
+      return trigger.previousElementSibling;
     }
   });
   clipboard.on('success', function(e) {
@@ -236,24 +603,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
     setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
@@ -289,128 +639,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
       });
-    }
+      return popup.innerHTML;
+    });
   }
 });
 </script>
@@ -429,12 +675,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">
-      &nbsp;
-    </div>   
-    <div class="nav-footer-center">
-      &nbsp;
-    </div>
     <div class="nav-footer-right">This book was built with <a href="https://quarto.org/">Quarto</a>.</div>
   </div>
 </footer>

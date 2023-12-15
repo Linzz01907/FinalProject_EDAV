@@ -119,13 +119,13 @@ plot_missing(df)
 
 
 
-After we delete meaningless data like "Payroll.Number", "Last.Name", "First.Name", "Mid.Init", there is no missing data in our data set.
+After we delete meaningless data like "Payroll.Number", "Last.Name", "First.Name", "Mid.Init", Agency.Start.Date has 63 missing data and Work.Location.Borough has 506233 missing data.
 
 
 ```{r}
  
 salary_cleaned = na.omit(salary)
 colSums(is.na(salary_cleaned)) |> sort(decreasing=TRUE)
-write.csv(salary_cleaned, "~/edav_lz_sm/Cleaned Dataset.csv", row.names=FALSE)
+#write.csv(salary_cleaned, "~/edav_lz_sm/Cleaned Dataset.csv", row.names=FALSE)
 ```
 
