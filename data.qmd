@@ -92,7 +92,7 @@ We also explore the ratio of regular to overtime hours&salaries across different
 
 ## Missing value analysis
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 salary <- salary %>%
       mutate(across(where(is.character), ~na_if(., "")))
 missing_values <- sapply(salary, function(x) sum(is.na(x)))
@@ -115,7 +115,7 @@ plot_missing(df)
 
 
 
-After we delete meaningless data like "Payroll.Number", "Last.Name", "First.Name", "Mid.Init", there is still one column for work location have missing values and we will delete the rows with missing values.
+After we delete meaningless data like "Payroll.Number", "Last.Name", "First.Name", "Mid.Init", there are columns for work location have missing values which are Agency.Start.Date and Work.Location.Borough respectively. We will delete the rows with missing values.
 
 
 ```{r}
