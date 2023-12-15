@@ -55,7 +55,7 @@ df <- select_title |>
 salary_new <- df |> 
   mutate(AnnualSalary = AnnualSalary * Base.Salary)
 
-fivenum(salary_new$AnnualSalary)
+#fivenum(salary_new$AnnualSalary)
 # 6461  58692  80788  95105 143858
 
 salary_new <- salary_new |>
@@ -92,12 +92,6 @@ colnames(agency_size) <- c("Agency.Name", "Agency.Size")
 salary <- left_join(salary_new, agency_size, by = join_by(Agency.Name))
 ```
 
-```{r}
-count_by_columnB <- salary %>%
-  group_by(job_type) %>%
-  summarise(Count = n())
-print(count_by_columnB)
-```
 ## Correlation Heatmap Plot for Categorical Variables
 
 We aim to explore the relationship between our target variable, salary, and several factors such as agency, job title, and agency size, among others. Given the mix of categorical and continuous variables, we employ two methods to assess correlations. Firstly, to analyze the correlation between categorical variables and salary, we utilize a heatmap. Specifically, we focus on the areas in the last three columns that lack any white sections, which would indicate a zero correlation. We notice that these columns, corresponding to agency name, job title, and work location, largely lack white areas. This observation leads us to conclude that there is a relationship between salary and these three categorical factors. Notably, the 'salary low' column features many red-like colors, suggesting a strong and positive correlation. The next two columns, representing 'moderate salary' and 'very high salary', appear to have a smaller impact on these factors, showing both weaker correlation and negative correlation. Therefore, our subsequent analysis will concentrate on examining the relationship between salary and these three categorical factors, in contrast to leave status and pay basis, which show weaker correlations.
@@ -164,9 +158,11 @@ The bubble plot further highlights salary distributions in other areas of New Yo
 ```{r message=FALSE, warning=FALSE}
 library(sf)
 library(tigris)
-
+options(tigris_use_cache = TRUE)
+options(tigris_class = "sf")
 nyc_counties <- tigris::counties(state = "NY", cb = TRUE) %>% 
   filter(COUNTYFP %in% c("005", "047", "061", "081", "085"))  # FIPS codes for NYC boroughs
+suppressMessages(nyc_counties)
 
 
 nyc_counties$BoroName <- factor(nyc_counties$NAME,
@@ -256,10 +252,14 @@ ggplot(average_salary_title, aes(x = average_salary)) +
 ```
 
 
-## OverTime Hour and OverTime Pay
+
 ## Correlation between OverTime Hour/Pay with other variables 
 Based on the related variables of base salary from part 1, we intend to explore the relationship between over time and them.
-Part 1. Correlation between OverTime Hour/Pay with category variables
+Part 1. Correlation between OverTime Hour/Pay with category variables.
+Here we use the ANOVA test to evaluate the correlation between Over Time Hour/Pay and Agency.Name, Title.Description, Job_type, Work.Location. The result shows that Agency.Name, Title.Description, Job_type, Work.Location have low P-value which indicates significant differences between them. Therefore, it proves that they have correlation. 
+To visualize the test, We use box plot to show the distribution or mean levels of the variable of interest Over Time Hour/Pay across different groups like Agency.Name, Title.Description, Job_type, Work.Location. Expect for Box Plot of pay_per_hour across Different Work Locations, the medium line inside the boxes has noticeably different levels for different categories. Second, for each graph, there exist varying box zizes which represents the significantly different interquartile ranges. Here we consider plot 1 as a reference. the agency like Children's SVCS, Sanitation, Fire Department, Social Services, NYC Housing, Police have more variability than the other groups. Third, there exist various symmetry of the boxes. The agencies like Children's SVCS, Social Service, Taxi & Limousine represent left-skewness distribution, while Sanitation, Fire Department, NYC Housing, Police shows zero-skewness distribution. Fourth, we observe the different numbers of outliers among groups. Info Tech Department has less outliers than other groups which suggests that this group has less extreme values.
+Considering Box Plot of pay_per_hour across Different Work Locations, it shows the similar medium line and box sizes and the different parts like symmetry and outliers are not obvious than other graphs. Based on the ANOVA test, we think that Over Time pay per hour is related to Work Locations.
+
 
 ```{r Box Plot}
 library(ggplot2)
@@ -358,22 +358,23 @@ summary(anova_title)
 anova_location <- aov(pay_per_hour ~ Work.Location.Borough, data = salary_tep2)
 summary(anova_location)
 ```
-Here we use the ANOVA test to evaluate the correlation between Over Time Hour/Pay and Agency.Name, Title.Description, Job_type, Work.Location. The result shows that Agency.Name, Title.Description, Job_type, Work.Location have low P-value which indicates significant differences between them. Therefore, it proves that they have correlation. 
-To visualize the test, We use box plot to show the distribution or mean levels of the variable of interest Over Time Hour/Pay across different groups like Agency.Name, Title.Description, Job_type, Work.Location. Expect for Box Plot of pay_per_hour across Different Work Locations, the medium line inside the boxes has noticeably different levels for different categories. Second, for each graph, there exist varying box zizes which represents the significantly different interquartile ranges. Here we consider plot 1 as a reference. the agency like Children's SVCS, Sanitation, Fire Department, Social Services, NYC Housing, Police have more variability than the other groups. Third, there exist various symmetry of the boxes. The agencies like Children's SVCS, Social Service, Taxi & Limousine represent left-skewness distribution, while Sanitation, Fire Department, NYC Housing, Police shows zero-skewness distribution. Fourth, we observe the different numbers of outliers among groups. Info Tech Department has less outliers than other groups which suggests that this group has less extreme values.
-Considering Box Plot of pay_per_hour across Different Work Locations, it shows the similar medium line and box sizes and the different parts like symmetry and outliers are not obvious than other graphs. Based on the ANOVA test, we think that Over Time pay per hour is related to Work Locations.
 
 
 ## Intuitive display of spatial data
+Considering the plot Average Hour by NYC Borough, it is clear that Manhattan has lowest average OT hour than other regions and people in Richmond seems to work overtime commonly. In spite of it, Richmond has the highest overtime pay among all regions in New York which shows in figure 2. Attentionally, Bronx has the lowest overtime pay but a little high over time hours.
+
 ```{r message=FALSE, warning=FALSE}
 
 library(sf)
 library(tigris)
 
-
+options(tigris_use_cache = TRUE)
+options(tigris_class = "sf")
 # Obtain geospatial data for New York counties
 nyc_counties <- tigris::counties(state = "NY", cb = TRUE) %>% 
   filter(COUNTYFP %in% c("005", "047", "061", "081", "085"))  # FIPS codes for NYC boroughs
 
+suppressMessages(nyc_counties)
 
 nyc_counties$BoroName <- factor(nyc_counties$NAME,
                                 levels = c("Bronx", "Kings", "New York", "Queens", "Richmond"),
@@ -412,11 +413,14 @@ ggplot(data = nyc_OTpay_perhour_map ) +
   labs(title = "Average pay per Hour by NYC Borough") +
   theme_minimal()
 ```
-Considering the plot Average Hour by NYC Borough, it is clear that Manhattan has lowest average OT hour than other regions and people in Richmond seems to work overtime commonly. In spite of it, Richmond has the highest overtime pay among all regions in New York which shows in figure 2. Attentionally, Bronx has the lowest overtime pay but a little high over time hours.
 
 
 
 ## Part 2. correlation between Over Time Hour/Pay with numerical variables
+As for figure 1, we can see that in terms of OT pay per hour, police has more outliers(purple line) than the other jobs which indicates it has more extreme value(high 'OT Paid') than other job titles.
+Since the difference of orders of magnitude between different factors is too large, we use sample the data set and also use 'std' as the scale for figure 2 and 3.
+As for figure 2 and 3, except that DEPT OF ED PEDAGOGICAL(green lines in agency groups and pinks lines in job title groups)doesn't show a clear relationship between over time hours and total time of company establishment, the other department show a positve relationship between over time hours and total time of company establishment and also a positive relationship over time pay and total time of company establishment.
+
 ```{r Parallell}
 library(GGally)
 
@@ -445,12 +449,14 @@ ggparcoord(sampled_df,
 ```
 
 
-As for figure 1, we can see that in terms of OT pay per hour, police has more outliers(purple line) than the other jobs which indicates it has more extreme value(high 'OT Paid') than other job titles.
-Since the difference of orders of magnitude between different factors is too large, we use sample the data set and also use 'std' as the scale for figure 2 and 3.
-As for figure 2 and 3, except that DEPT OF ED PEDAGOGICAL(green lines in agency groups and pinks lines in job title groups)doesn't show a clear relationship between over time hours and total time of company establishment, the other department show a positve relationship between over time hours and total time of company establishment and also a positive relationship over time pay and total time of company establishment.
 
 
 ## part 3 correlation between OverTime Hour/Pay with year-Time Series
+In terms of over time hours, Fire,Sanitation department present an obvious decrease trend in 2022 and they all have a dramatic growth from 2019 to 2022. The Fire Department is consistently the top in overtime hours in the whole period. Police, Social Service, NYC housing department fluctuate during the period and the OT hours in recent year is higher than the beginning year. The other departments show a stable pattern. Combining with the figure, the high OT hours is because some job titles in these apartment lead among all job titles like firefighter, sanitation worker.
+In terms of over time pay, some lines show an upward trend in recent years such as department of sanitation, fire department, police department and the job title called sanitation worker has the most pay of over time in 2023. The OT pay of taxi & limousine commission has a obvious drop in 2023, but the over time hours remain unchanged.
+Noticeably, the over time hours of 'DEPT OF ED PEDAGOGICAL' is close to 0 all the time.
+In conclusion, some departments like sanitation, fire, police have high over time hours but also gain high over time pay, while some department like taxi & limousine commission, social service, dept of INFO Tech have low over time hours but also gain low over time pay, among which OT pay of taxi & limousine commission decrease recently. 
+
 ```{r Time Series}
 averageOThour_by_group  <- salary %>%
   group_by(Agency.Name, Fiscal.Year) %>%
@@ -481,13 +487,15 @@ averageOTpay_perhour_by_group |>
   ggplot(aes(x=Fiscal.Year, y=Average_OTpay, group=Title.Description, color=Title.Description)) +
     geom_line()
 ```
-In terms of over time hours, Fire,Sanitation department present an obvious decrease trend in 2022 and they all have a dramatic growth from 2019 to 2022. The Fire Department is consistently the top in overtime hours in the whole period. Police, Social Service, NYC housing department fluctuate during the period and the OT hours in recent year is higher than the beginning year. The other departments show a stable pattern. Combining with the figure, the high OT hours is because some job titles in these apartment lead among all job titles like firefighter, sanitation worker.
-In terms of over time pay, some lines show an upward trend in recent years such as department of sanitation, fire department, police department and the job title called sanitation worker has the most pay of over time in 2023. The OT pay of taxi & limousine commission has a obvious drop in 2023, but the over time hours remain unchanged.
-Noticeably, the over time hours of 'DEPT OF ED PEDAGOGICAL' is close to 0 all the time.
-In conclusion, some departments like sanitation, fire, police have high over time hours but also gain high over time pay, while some department like taxi & limousine commission, social service, dept of INFO Tech have low over time hours but also gain low over time pay, among which OT pay of taxi & limousine commission decrease recently. 
 
 
 ## Distribution of OT hour, OT PAY per hour, rate between overtime and regular time based on agency
+Considering the distribution of OT Hours by Agency, the police department,NYC Housing department, Fire department,Sanitation department,Children's SVCS department have long tail but low peak which means that there exists a certain amount of employees have long over time hours in these departments, while the over time distribution of other departments is more like a normal and OT hours are mostly 0.
+Considering the proportion of OT hours and regular hours, it has the similar pattern with the distribution of OT Hours by Agency. Thus, we don't need to worry about the influence of big gap of regular hours.
+Considering the distribution of OT Paid per hour by Agency, some departments are multimodal like Police department, Fire department, Sanitation department, Finance department which indicates different job titles in these agencies present different performance of OT paid per hour, while the different job title in Taxi, NYC Housing, Social Service,Children's SVCS department present consistent distribution.
+
+Marks: The figure 2 and 3 don't include 'DEPT OF ED PEDAGOGICAL', since all the regular hour and OT hour of this apartment is 0 which has be shown in part 3.
+
 ```{r Ridgeline}
 library(ggridges)
 
@@ -537,14 +545,14 @@ ggplot(salary_tep3, aes(x = pay_per_hour, y = Agency.Name, fill = Agency.Name)) 
 
 
 ```
-Considering the distribution of OT Hours by Agency, the police department,NYC Housing department, Fire department,Sanitation department,Children's SVCS department have long tail but low peak which means that there exists a certain amount of employees have long over time hours in these departments, while the over time distribution of other departments is more like a normal and OT hours are mostly 0.
-Considering the proportion of OT hours and regular hours, it has the similar pattern with the distribution of OT Hours by Agency. Thus, we don't need to worry about the influence of big gap of regular hours.
-Considering the distributio of OT Paid per hour by Agency, some departments are multimodal like Police department, Fire department, Sanitation department, Finance department which indicates different job titles in these agencies present different performance of OT paid per hour, while the different job title in Taxi, NYC Housing, Social Service,Children's SVCS department present consistent distribution.
-
-Marks: The figure 2 and 3 don't include 'DEPT OF ED PEDAGOGICAL', since all the regular hour and OT hour of this apartment is 0 which has be shown in part 3.
 
 
 ## The relationship between over time and base salary
+About figure 1(the relationship between OT pay and OT hours), the job title like police officer, firefighter mostly gather in the top corner which shows a high over time pay and some fighter has high over time hours. This graph doesn't have a clear cluster because of the limitation of chosen employees but we can use the conclusions from part 3 as a reference.
+About figure 2(the relationship between OT hours and base salary), it has a clear cluster. Considering the right part of the graph, most of people with job titles emergency medical specialist and firefighters, if they have high salary and also high OT hours. The employees like sanitation worker gather in the bottom right corner which means if they have a high salary, then they will have a short over time hours. Considering the left part of the graph, the police officers has medium salary but low over time hours and school safety agent gather in the place with low salary and uncertain over time hours.
+About figure 3(the relationship between OT pay and base salary), it shows that if the employees as clerical associate and community associate have low annual salary, then they will get low over time pay. If the employees work as police or firefighter, the similar salary doesn't mean the similar over time pay. 
+As for the total time of company establishment, the small size of days gather in the low annual salary and low over time pay, but it exists low annual salary and high over time hours.
+We remark that since the number of employees is too large, it is not clear if we show all the employees in this bubble graph. Thus, we choose 150 people randomly and it may not show all clusters.
 ```{r Bubble}
 
 salary_tep2<-salary
@@ -573,11 +581,7 @@ sampled_df %>%
     scale_size_continuous(range = c(.1, 10), name="days_difference")
 
 ```
-About figure 1(the relationship between OT pay and OT hours), the job title like police officer, firefighter mostly gather in the top corner which shows a high over time pay and some fighter has high over time hours. This graph doesn't have a clear cluster because of the limitation of chosen employees but we can use the conclusions from part 3 as a reference.
-About figure 2(the relationship between OT hours and base salary), it has a clear cluster. Considering the right part of the graph, most of people with job titles emergency medical specialist and firefighters, if they have high salary and also high OT hours. The employees like sanitation worker gather in the bottom right corner which means if they have a high salary, then they will have a short over time hours. Considering the left part of the graph, the police officers has medium salary but low over time hours and school safety agent gather in the place with low salary and uncertain over time hours.
-About figure 3(the relationship between OT pay and base salary), it shows that if the employees as clerical associate and community associate have low annual salary, then they will get low over time pay. If the employees work as police or firefighter, the similar salary doesn't mean the similar over time pay. 
-As for the total time of company establishment, the small size of days gather in the low annual salary and low over time pay, but it exists low annual salary and high over time hours.
-We need to remark that since the number of employees is too large, it is not clear if we show all the employees in this bubble graph. Thus, we choose 150 people randomly and it may not show all clusters.
+
 
 ```{r}
 salary_OT<- salary |>
@@ -591,6 +595,7 @@ salary_OT<- salary |>
 
 
 ## Base salary and over time summary
+The most people with very high salary flow to department of Ed Pedagogical including job title teacher and teacher special education and they even have no over time hours. Some people with general high and mod salary has uncertain overtime module which means all overtime levels are included but 'none overtime' level has high proportion. The people with low salary mostly flow to school safety agent and call center representative and they also have 4 overtime level modules. It is also clear that almost all people with high salary work in Manhattan and some of them work in the other cities. Additionally, part-time job is corresponding to the low salary which fits our perception and could indicate the accuracy of our data analysis indirectly.
 ```{r Ggalluvial}
 library(ggalluvial)
 frequency_df <- salary_OT %>%
